@@ -67,5 +67,8 @@ class LogoutView(View):
         
         return JsonResponse({'message': '로그아웃되었습니다.'}, status = 200)
 
-
+class MypageView(View) :
+    def get(self, request):
+        myuser = User.objects.filter(user_name = request.session.get('username')).values()
+        return JsonResponse({'user':list(myuser)}, status = 200)
 
