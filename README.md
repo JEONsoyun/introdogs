@@ -31,7 +31,7 @@
  🙋 **Kim Chaeun**
  - Github : @fairy037
 
- 💁 **Seu Senghee**
+ 💁 **Seo Seughee**
  - Github : @pucca94
 
  🙆 **Jeon Soyun**
