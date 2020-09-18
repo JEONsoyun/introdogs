@@ -17,8 +17,8 @@
  - 내 주변 멍멍이 보기 
  - 나와 닯은 멍멍이 찾기
 
-# FRONTEND🐾
+# FRONTEND�
 
-# BACKEND🐾
+# BACKEND�
 
-# DATA🐾
+# DATA�
