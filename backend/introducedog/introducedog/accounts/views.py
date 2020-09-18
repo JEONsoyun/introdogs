@@ -11,6 +11,7 @@ from django.views import View
 from django.http import HttpResponse, JsonResponse
 
 from .models import User
+from likes.models import Like
 
 class SignupView(View):
     def post(self, request):
@@ -60,7 +61,7 @@ class LoginView(View):
                     token = jwt.encode({'user_email' : data['user_email']}, SECRET_KEY, algorithm = "HS256")
                     token = token.decode('utf-8')                          # 유니코드 문자열로 디코딩
                     request.session['username'] = user.user_name
-                    print(request.session.get('username'))
+                    # print(request.session.get('username'))
                     return JsonResponse({"token" : token }, status=200)
                 else:
                     return HttpResponse(status = 401)
@@ -100,6 +101,9 @@ class LogoutView(View):
 class MypageView(View) :
     def get(self, request):
         myuser = User.objects.filter(user_name = request.session.get('username')).values()
+        # print(myuser)
+        userid = myuser[0]['user_id']
+        # doglike = Like.objects.filter(user_id = userid).values()
         return JsonResponse({'user':list(myuser)}, status = 200)
 
 class ApicheckView(View):
