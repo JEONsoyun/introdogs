@@ -22,8 +22,8 @@
 
 # 기술 설명 
 
- ## ERD 
-    ![ERD](https://cdn.discordapp.com/attachments/749825922936602695/755349369066094672/unknown.png)
+## ERD 
+![ERD](https://cdn.discordapp.com/attachments/749825922936602695/755349369066094672/unknown.png)
 
 # FRONTEND
 
