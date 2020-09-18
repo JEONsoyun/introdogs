@@ -27,7 +27,7 @@
 # DATA
 
 # Author 
-    # 🙋 Kim Chaeun
-    # 🙍 Seu Senghee
-    # 🙆 Jeon Soyun
-    # 🙎 Choi Jin
+## 🙋 Kim Chaeun
+## 🙍 Seu Senghee
+## 🙆 Jeon Soyun
+## 🙎 Choi Jin
