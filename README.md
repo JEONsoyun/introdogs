@@ -22,10 +22,26 @@
 
 ## 기술 설명 
 
- ### ERD 
+### ERD 
 ![ERD](https://cdn.discordapp.com/attachments/749825922936602695/755349369066094672/unknown.png)
- ### API Document
+### API Document
+ - 회원
 
+|METHOD	|RESOURCE	|DESCRIPTION	|예상 INPUT|
+|-------|-----------|---------------|----------| 
+|POST	|/accounts/signup	|회원가입	|"사용자 이름 이메일 패스워드"|
+|POST	|/accounts/profile	|회원가입할 때 사용자 사진 업로드 받기|	사용자 사진|
+|POST	|/accounts/login	|로그인	|"이메일 패스워드"|
+|POST	|/accounts/logout	|로그아웃	|-|
+|GET	|/accounts/islogin	|백에서 세션 있는지 확인|-|
+|GET	|/accounts/mypage	|유저 프로필 보기|-|
+ - 메인화면
+ - 나와 어울리는 멍멍이 찾기
+ - 잃어버린 멍멍이 찾기
+ - 내 주변 멍멍이 찾기
+ - 나와 닮은 멍멍이 찾기
+ - 관심 있는 멍멍쓰
+ - 공통화면 
 # FRONTEND
 
 # BACKEND
