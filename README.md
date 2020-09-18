@@ -28,6 +28,6 @@
 
 # Author 
 ## 🙋 Kim Chaeun
-## 🙍 Seu Senghee
+## 💁 Seu Senghee
 ## 🙆 Jeon Soyun
 ## 🙎 Choi Jin
