@@ -28,6 +28,13 @@
 
 # Author 
 ## 🙋 Kim Chaeun
+ - Github : @fairy037
+
 ## 💁 Seu Senghee
+ - Github : @pucca94
+
 ## 🙆 Jeon Soyun
+ - Github :  @twoposition 
+
 ## 🙎 Choi Jin
+ - Github :  @choi_jin
