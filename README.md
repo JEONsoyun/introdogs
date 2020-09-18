@@ -1,5 +1,5 @@
-# FRONT-END
+# FRONTEND
 
-# BACK-END
+# BACKEND
 
 # DATA
