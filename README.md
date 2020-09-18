@@ -51,7 +51,7 @@
 ## Author 
 
  🙋 **Kim Chaeun**
- - Github : @fairy037
+ - Github : @chaeeun037
 
  💁 **Seo Seughee**
  - Github : @pucca94
