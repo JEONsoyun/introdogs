@@ -90,7 +90,21 @@
 
 # FRONTEND
 
+```sh
+cd sub2/frontend
+npm install
+npm run serve
+```
+
 # BACKEND
+
+```sh
+cd backend/introducedog/introducedog
+python manage.py makemigrations
+python manage.py migrate
+python manage.py initialize
+python manage.py runserver
+```
 
 # DATA
 
