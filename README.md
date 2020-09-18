@@ -27,14 +27,14 @@
 # DATA
 
 # Author 
-## 🙋 Kim Chaeun
+ 🙋 ** Kim Chaeun **
  - Github : @fairy037
 
-## 💁 Seu Senghee
+ 💁 ** Seu Senghee **
  - Github : @pucca94
 
-## 🙆 Jeon Soyun
+ 🙆 ** Jeon Soyun **
  - Github :  @twoposition 
 
-## 🙎 Choi Jin
+ 🙎 ** Choi Jin **
  - Github :  @choi_jin
