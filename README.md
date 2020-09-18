@@ -51,13 +51,13 @@
 ## Author 
 
  🙋 **Kim Chaeun**
- - Github : @chaeeun037
+ - Gitlab : @fairy037
 
  💁 **Seo Seughee**
- - Github : @pucca94
+ - Gitlab : @pucca94
 
  🙆 **Jeon Soyun**
- - Github :  @twoposition 
+ - Gitlab :  @twoposition 
 
  🙎 **Choi Jin**
- - Github :  @choi_jin
+ - Gitlab :  @choi_jin
