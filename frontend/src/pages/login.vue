@@ -32,17 +32,8 @@
             ></v-text-field>
           </div>
         </div>
-        <div class="login-btns">
-          <div @click="onLoginClick" class="login-button">로그인</div>
-          <div class="login-create" @click="onSignupClick">회원가입</div>
-        </div>
-        <!-- 
-        <div class="login-find">
-          <div class="login-findid" onclick="location.href='findId'">아이디 찾기</div>
-          <div class="login-findline"></div>
-          <div class="login-findpwd" onclick="location.href='findPw'">비밀번호 찾기</div>
-        </div>
-        -->
+        <s-button style="margin-top: 24px;" @click="onLoginClick">로그인</s-button>
+        <s-button style="margin-top: 8px;" type="white" @click="onSignupClick">회원가입</s-button>
       </div>
     </div>
   </s-main-layout>
@@ -64,7 +55,7 @@ export default {
       }
     },
     onSignupClick() {
-      this.$router.push('/signUp');
+      this.$router.push('/signup');
     },
   },
 };
