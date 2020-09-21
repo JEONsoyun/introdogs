@@ -17,39 +17,54 @@
       <div class="d-flex">
         <div
           @click="onMenuClick(1)"
-          class="d-flex s-navigation-drawer-menu"
+          class="d-flex align-center s-navigation-drawer-menu"
           :class="{'s-navigation-drawer-menu--selected': selectedMenuId == 1}"
-        >내 주변 멍멍이 찾기</div>
+        >
+          <v-icon size="24" style="margin-right:8px;">location_on</v-icon>
+          <div>내 주변 멍멍이 찾기</div>
+        </div>
       </div>
       <div class="d-flex">
         <div
           @click="onMenuClick(1)"
-          class="d-flex s-navigation-drawer-menu"
+          class="d-flex align-center s-navigation-drawer-menu"
           :class="{'s-navigation-drawer-menu--selected': selectedMenuId == 1}"
-        >나와 닮은 멍멍이 찾기</div>
+        >
+          <v-icon size="24" style="margin-right:8px;">face</v-icon>
+          <div>나와 닮은 멍멍이 찾기</div>
+        </div>
       </div>
       <div class="s-navigation-drawer-bar" />
       <div class="d-flex">
         <div
           @click="onMenuClick(1)"
-          class="d-flex s-navigation-drawer-menu"
+          class="d-flex align-center s-navigation-drawer-menu"
           :class="{'s-navigation-drawer-menu--selected': selectedMenuId == 1}"
-        >나와 어울리는 멍멍이 매칭</div>
+        >
+          <v-icon size="24" style="margin-right:8px;">accessibility_new</v-icon>
+          <div>나와 어울리는 멍멍이 매칭</div>
+        </div>
       </div>
       <div class="d-flex">
         <div
           @click="onMenuClick(1)"
-          class="d-flex s-navigation-drawer-menu"
+          class="d-flex align-center s-navigation-drawer-menu"
           :class="{'s-navigation-drawer-menu--selected': selectedMenuId == 1}"
-        >잃어버린 멍멍이 찾기</div>
+        >
+          <v-icon size="24" style="margin-right:8px;">search</v-icon>
+          <div>잃어버린 멍멍이 찾기</div>
+        </div>
       </div>
       <div class="s-navigation-drawer-bar" />
       <div class="d-flex">
         <div
           @click="onMenuClick(0)"
-          class="d-flex s-navigation-drawer-menu"
+          class="d-flex align-center s-navigation-drawer-menu"
           :class="{'s-navigation-drawer-menu--selected': selectedMenuId == 0}"
-        >ABOUT</div>
+        >
+          <v-icon size="24" style="margin-right:8px;">pets</v-icon>
+          <div>ABOUT</div>
+        </div>
       </div>
     </div>
   </v-navigation-drawer>

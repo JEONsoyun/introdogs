@@ -13,7 +13,7 @@
       <div class="s-main-layout-header-container">
         <div class="d-flex justify-center align-center s-main-layout-header" v-if="title != ''">
           <div v-if="!noArrow" @click="$router.go(-1)" class="d-flex justify-center align-center s-main-layout-header-arrow">
-            <v-icon size="28" color="#61c5ff">keyboard_arrow_left</v-icon>
+            <v-icon size="28" color="#ffd501">keyboard_arrow_left</v-icon>
           </div>
           <div>{{title}}</div>
         </div>
@@ -47,8 +47,6 @@ export default {
 .s-main-layout {
   padding-top: 48px;
 }
-
-
 
 .s-main-layout-content {
   position: relative;
