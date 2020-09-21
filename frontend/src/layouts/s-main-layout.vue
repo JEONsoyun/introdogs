@@ -45,12 +45,12 @@ export default {
 
 <style>
 .s-main-layout {
-  padding-top: 48px;
+  padding-top: 40px;
 }
 
 .s-main-layout-content {
   position: relative;
-  padding-top: 40px;
+  padding-top: 48px;
   min-height: 100vh;
   background-color: #fbfbfb;
 }
