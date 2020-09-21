@@ -36,7 +36,7 @@
           <div @click="onLoginClick" class="login-button">로그인</div>
           <div class="login-create" @click="onSignupClick">회원가입</div>
         </div>
-        <!-- SYJ 1차 배포 주석 
+        <!-- 
         <div class="login-find">
           <div class="login-findid" onclick="location.href='findId'">아이디 찾기</div>
           <div class="login-findline"></div>
@@ -57,8 +57,8 @@ export default {
   methods: {
     async onLoginClick() {
       try {
-        await this.$api.login(this.data);
-        location.href = '/tour';
+        // await this.$api.login(this.data);
+        location.href = '/';
       } catch (e) {
         alert('아이디 또는 비밀번호를 확인해주세요.');
       }
@@ -106,7 +106,7 @@ export default {
   width: 100%;
   height: 604px;
   padding: 0 16px;
-  background-color: #fbfbfb;
+  background-color: bfbfb;
 }
 
 .login-enter {
@@ -173,7 +173,7 @@ export default {
   font-size: 16px;
   font-weight: 700;
   letter-spacing: -0.45px;
-  color: #0d0d0d;
+  color: #fff;
 }
 
 .login-create {
@@ -188,7 +188,7 @@ export default {
   font-size: 16px;
   font-weight: 700;
   letter-spacing: -0.45px;
-  color: #0d0d0d;
+  color: #ffd501;
 }
 
 .login-find {
