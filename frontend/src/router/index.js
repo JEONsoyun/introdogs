@@ -6,6 +6,7 @@ Vue.use(Router)
 import index from '@/pages/index'
 import login from '@/pages/login'
 import signup from '@/pages/signup'
+import first from '@/pages/first'
 
 const router = new Router({
   mode: 'history',
@@ -21,6 +22,10 @@ const router = new Router({
     {
       path: '/signup',
       component: signup
+    },
+    {
+      path: '/first',
+      component: first
     },
   ]
 })

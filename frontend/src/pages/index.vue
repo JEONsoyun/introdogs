@@ -3,13 +3,13 @@
     <v-expansion-panels class="index-filter-container">
       <v-expansion-panel>
         <v-expansion-panel-header>
-          <div class="d-flex" />
+          <div class="d-flex"/>
           <template v-slot:actions>
-            <v-icon>search</v-icon>
+            <v-icon>expand_more</v-icon>
           </template>
         </v-expansion-panel-header>
         <v-expansion-panel-content>
-          <div class="d-flex align-center" style="margin-bottom:8px;">
+          <div class="d-flex align-center" style="margin-bottom:12px;">
             <div
               v-for="(color, ci) in colors"
               :key="`color-${ci}`"
@@ -18,47 +18,42 @@
             ></div>
           </div>
           <div class="d-flex align-center" style="margin-bottom:8px;">
-            <img class="index-filter-gender" src="/static/images/male.png" />
-            <img class="index-filter-gender" src="/static/images/female.png" />
+            <img class="d-flex flex-grow-0 index-filter-gender" src="/static/images/male.png" />
+            <img class="d-flex flex-grow-0 index-filter-gender" src="/static/images/female.png" />
+            <div class="d-flex" />
+            <div class="d-flex flex-grow-0">
+              <s-button type="small">확인</s-button>
+            </div>
           </div>
         </v-expansion-panel-content>
       </v-expansion-panel>
     </v-expansion-panels>
-    <!-- <div class="d-flex flex-column justify-center index-filter-container">
-      <div class="d-flex">
-        <div class="d-flex" />
-        <div @click="onFilterClick">
-          <v-icon v-if="!isFilterVisible">search</v-icon>
-          <v-icon v-if="isFilterVisible">keyboard_arrow_up</v-icon>
-        </div>
-      </div>
-      <template v-if="isFilterVisible">
-        <div class="d-flex align-center" style="margin-bottom:8px;">
-          <div
-            v-for="(color, ci) in colors"
-            :key="`color-${ci}`"
-            class="d-flex flex-grow-0 index-filter-color"
-            :style="`background: ${color.code}`"
-          ></div>
-        </div>
-        <div class="d-flex align-center" style="margin-bottom:8px;">
-          <img class="index-filter-gender" src="/static/images/male.png" />
-          <img class="index-filter-gender" src="/static/images/female.png" />
-        </div>
-      </template>
-    </div>-->
 
     <div class="index-item-container">
       <div class="d-flex" style="flex-wrap: wrap;">
         <div v-for="(dog, di) in dogs" class="d-flex" :key="`dog-${di}`">
-          <div class="d-flex flex-column index-item">
-            <div class="index-item-image" :style="`background-image:url(${dog.thumnail})`" />
-            <div class="index-item-content">
-              <div>{{dog.dog_id}}</div>
-              <div>{{dog.age}}</div>
-              <div>{{dog.sex}}</div>
+          <div class="d-flex flex-column flex-grow-1 index-item">
+            <div class="d-flex index-item-image" :style="`background-image:url(${dog.thumnail})`" />
+            <div class="d-flex index-item-content">
+              <div>
+                <div>{{dog.dog_id}}</div>
+                <div>{{dog.age}}</div>
+              </div>
+              <div class="d-flex">
+                <div class="d-flex" />
+                <img
+                  v-if="dog.sex == 'M'"
+                  src="/static/images/male.png"
+                  style="width: 30px;height:30px"
+                />
+                <img v-else src="/static/images/female.png" style="width: 30px;height:30px" />
+              </div>
             </div>
           </div>
+        </div>
+        <div class="d-flex align-center justify-center index-more">
+          더 보기
+          <v-icon color="#616161">expand_more</v-icon>
         </div>
       </div>
     </div>
@@ -192,7 +187,6 @@ export default {
   width: 100%;
   z-index: 2;
   background: #fbfbfb;
-  transition: all 0.5s;
   border-radius: 0;
 }
 
@@ -219,22 +213,32 @@ export default {
 
 .index-item {
   width: 33vw;
-  background: #eee;
-  /* background: linear-gradient(rgb(255, 255, 255),rgb(138, 85, 49),rgb(48, 18, 6)); */
 }
 
 .index-item-image {
-  width: 33vw;
+  width: 100%;
   height: 33vw;
   background-size: cover;
   background-position: center center;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 .index-item-content {
+  padding: 4px;
   width: 100%;
-  height: 40px;
   font-size: 10px;
+  font-weight: bold;
+  background: #fff9dc;
+  border: solid 1px #fff;
+}
+
+.index-more {
+  border-top: solid 1px #eee;
+  font-size: 14px;
+  font-weight: bold;
+  height: 70px;
+  color: #616161;
+  padding-bottom: 8px;
 }
 </style>
 
