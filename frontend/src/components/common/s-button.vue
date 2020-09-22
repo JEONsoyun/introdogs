@@ -5,7 +5,7 @@
     :class="{
       's-button__white': type == 'white',
       's-button__gray': type == 'gray',
-      's-button__small': type =='small'
+      's-button__small': size =='small'
     }"
   >
     <slot />
@@ -17,6 +17,7 @@ export default {
   props: {
     text: '',
     type: '',
+    size: '',
   },
   methods: {
     onButtonClick() {
@@ -63,11 +64,6 @@ export default {
 
 .s-button__small {
   height: 30px;
-  border-radius: 6px;
-  background: #ffd501;
-  color: #fff;
-  font-weight: bold;
-  letter-spacing: -0.16px;
   font-size: 12px;
   padding: 0 12px;
 }
