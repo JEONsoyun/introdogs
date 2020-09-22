@@ -1,17 +1,63 @@
 <template>
   <s-main-layout>
-    <div class="index-filter-container">filter area</div>
+    <v-expansion-panels class="index-filter-container">
+      <v-expansion-panel>
+        <v-expansion-panel-header>
+          <div class="d-flex" />
+          <template v-slot:actions>
+            <v-icon>search</v-icon>
+          </template>
+        </v-expansion-panel-header>
+        <v-expansion-panel-content>
+          <div class="d-flex align-center" style="margin-bottom:8px;">
+            <div
+              v-for="(color, ci) in colors"
+              :key="`color-${ci}`"
+              class="d-flex flex-grow-0 index-filter-color"
+              :style="`background: ${color.code}`"
+            ></div>
+          </div>
+          <div class="d-flex align-center" style="margin-bottom:8px;">
+            <img class="index-filter-gender" src="/static/images/male.png" />
+            <img class="index-filter-gender" src="/static/images/female.png" />
+          </div>
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+    </v-expansion-panels>
+    <!-- <div class="d-flex flex-column justify-center index-filter-container">
+      <div class="d-flex">
+        <div class="d-flex" />
+        <div @click="onFilterClick">
+          <v-icon v-if="!isFilterVisible">search</v-icon>
+          <v-icon v-if="isFilterVisible">keyboard_arrow_up</v-icon>
+        </div>
+      </div>
+      <template v-if="isFilterVisible">
+        <div class="d-flex align-center" style="margin-bottom:8px;">
+          <div
+            v-for="(color, ci) in colors"
+            :key="`color-${ci}`"
+            class="d-flex flex-grow-0 index-filter-color"
+            :style="`background: ${color.code}`"
+          ></div>
+        </div>
+        <div class="d-flex align-center" style="margin-bottom:8px;">
+          <img class="index-filter-gender" src="/static/images/male.png" />
+          <img class="index-filter-gender" src="/static/images/female.png" />
+        </div>
+      </template>
+    </div>-->
+
     <div class="index-item-container">
       <div class="d-flex" style="flex-wrap: wrap;">
         <div v-for="(dog, di) in dogs" class="d-flex" :key="`dog-${di}`">
           <div class="d-flex flex-column index-item">
-            <div class="index-item-image" :style="`background-image:url(${dog.thumnail})`"/>
+            <div class="index-item-image" :style="`background-image:url(${dog.thumnail})`" />
             <div class="index-item-content">
               <div>{{dog.dog_id}}</div>
               <div>{{dog.age}}</div>
               <div>{{dog.sex}}</div>
             </div>
-            
           </div>
         </div>
       </div>
@@ -23,6 +69,29 @@
 export default {
   name: 'index',
   data: () => ({
+    colors: {
+      white: { tag: ['흰', '하양', '백'], code: '#fff' },
+      cream: { tag: ['크림', '아이보리', '미'], code: 'rgb(255, 249, 223)' },
+      beige: {
+        tag: ['베이지', '황백', '살구', '연갈'],
+        code: 'rgb(197, 181, 146)',
+      },
+      yellow: {
+        tag: ['황', '노', '주황', '금', '골드', '누렁'],
+        code: 'rgb(163, 120, 26)',
+      },
+      brown: {
+        tag: ['갈', '초코', '고동', '밤', '레드'],
+        code: 'rgb(59, 28, 3)',
+      },
+      black: { tag: ['검', '블랙', '흑', '탄'], code: '#000' },
+      gray: { tag: ['회', '실버', '잿빛'], code: 'rgb(68, 68, 68)' },
+      spotted: {
+        tag: ['얼룩', '점박이', '호피', ' 바둑'],
+        code:
+          'linear-gradient(rgb(255, 255, 255),rgb(138, 85, 49),rgb(0, 0, 0))',
+      },
+    },
     dogs: [
       {
         dog_id: 'N448548202000333',
@@ -85,6 +154,7 @@ export default {
         end_date: '20200924',
       },
     ],
+    isFilterVisible: false,
   }),
   methods: {
     // async getBest(cnt) {
@@ -99,6 +169,9 @@ export default {
     //     console.error(e);
     //   }
     // }
+    onFilterClick() {
+      this.isFilterVisible = !this.isFilterVisible;
+    },
   },
   async created() {
     // this.getBest(0);
@@ -113,15 +186,41 @@ export default {
 
 <style>
 .index-filter-container {
-  height: 120px;
+  position: fixed;
+  top: 48px;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+  background: #fbfbfb;
+  transition: all 0.5s;
+  border-radius: 0;
 }
+
+.index-filter-color {
+  margin-right: 2px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: solid 2px #ffd501;
+}
+
+.index-filter-gender {
+  margin-right: 2px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: solid 2px #ffd501;
+}
+
 .index-item-container {
   width: 100%;
+  padding-top: 48px;
 }
 
 .index-item {
   width: 33vw;
   background: #eee;
+  /* background: linear-gradient(rgb(255, 255, 255),rgb(138, 85, 49),rgb(48, 18, 6)); */
 }
 
 .index-item-image {
