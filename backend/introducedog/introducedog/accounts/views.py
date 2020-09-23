@@ -117,7 +117,7 @@ class MypageView(View) :
 
         print(ret)
         # doglike = Like.objects.filter(user_id = userid).values()
-        return JsonResponse({'user':list(myuser)}, status = 200)
+        # return JsonResponse({'user':list(myuser)}, status = 200)
 
 class ApicheckView(View):
     def get(self, request):

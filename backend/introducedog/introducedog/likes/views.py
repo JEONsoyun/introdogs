@@ -7,6 +7,7 @@ from django.http import HttpResponse, JsonResponse
 
 from .models import Like
 from accounts.models import User
+from dogs.models import Dog
 
 import json
 
@@ -31,15 +32,18 @@ class MakelikeView(View):
         # like_dog_list = Like.objects.filter(user_id = userid).values()
         # print(like_dog_list)
         ret = []
-        for now_user in myuser:
-            now_user_id = now_user['user_id']
-            like_dog_list = Like.objects.filter(user_id = now_user_id).values()
-            # for now_dog in like_dog_list
-            #     now_dog_info = 
+        userid = myuser[0]['user_id']
+        like_dog_list = Like.objects.filter(user_id = userid).values()
+        ret.append(myuser)
+        for now_dog in like_dog_list:
+            dogid = now_dog['dog_id']
+            doginfo = Dog.objects.filter(dog_id = dogid).values()
+            myuser['dog_info'] = doginfo
+        
 
 
 
-        return JsonResponse({'message':'테스트다다다'}, status =200)
+        return JsonResponse({'user':list(myuser)}, status = 200)
 
 class DeletelikeView(View):
     def delete(self, request, dog_id):

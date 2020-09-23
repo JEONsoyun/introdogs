@@ -77,8 +77,8 @@ def main():
     s = query_sender()
     res = xml_to_item_list(s)
     
-    f = open('dog.csv', "w")
-    f.write("dog_id, age, weight, sex, kind, color, neuter, thumnail, profile, careAddr, careNm	, special, find_place , find_date , end_date\n")
+    f = open('dog2.csv', "w", encoding='utf-8')
+    f.write("dog_id,age,weight,sex,kind,color,neuter,thumnail,profile,careAddr,careNm,special,find_place,find_date,end_date\n")
 
     for items in res:
         input =""
