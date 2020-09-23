@@ -81,12 +81,12 @@ DATABASES = {
         "NAME": 'dog',
         "USER": 'root',
         "PASSWORD": 'throgoebro123',
-        "HOST":'j3a307.p.ssafy.io',
-        "PORT":'3306',
+        "HOST": 'j3a307.p.ssafy.io',
+        "PORT": '3306',
         "OPTIONS": {
             'init_command': 'SET sql_mode="STRICT_TRANS_TABLES"'
         }
-        
+
     }
 }
 
