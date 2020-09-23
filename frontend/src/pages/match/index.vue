@@ -1,5 +1,5 @@
 <template>
-  <s-first-layout>
+  <s-first-layout title="나와 어울리는 멍멍이 매칭">
     <div class="match-container">
       <div class="match-box">
         <div>1. 더 귀엽다고 생각하는 멍멍이를 선택해주세요.</div>
@@ -57,23 +57,24 @@
 
 <script>
 export default {
-    name: 'match',
-    data:() => ({
-      check1: false,
-      check2: false,
-      check3: false,
-    }),
-    methods: {
-        onResultClick() {
-            this.$router.push('/match/result')
-        }
-    }
+  name: 'match',
+  data: () => ({
+    check1: false,
+    check2: false,
+    check3: false,
+  }),
+  methods: {
+    onResultClick() {
+      this.$router.push('/match/result');
+    },
+  },
 };
 </script>
 
 <style>
 .match-container {
   padding: 24px 12px;
+  padding-top: 64px;
 }
 
 .match-box {
@@ -89,15 +90,15 @@ export default {
 }
 
 .match-number {
-    margin-left: 2px;
-    margin-bottom: 8px;
-    width: 28px;
-    height: 28px;
-    background: #ffd501;
-    color: #fff;
-    font-size: 18px;
-    font-weight: bold;
-    border-radius: 50%;
+  margin-left: 2px;
+  margin-bottom: 8px;
+  width: 28px;
+  height: 28px;
+  background: #ffd501;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 50%;
 }
 
 .match-item {
@@ -116,6 +117,6 @@ export default {
 }
 
 .match-box .v-label {
-    font-size: 12px;
+  font-size: 12px;
 }
 </style>

@@ -4,6 +4,14 @@
       <div @click="$router.push('/')" class="d-flex align-center s-first-layout-header">LOGO</div>
     </div>
     <div class="s-first-layout-content">
+      <div class="s-first-layout-sub-container">
+        <div class="d-flex justify-center align-center s-first-layout-sub" v-if="title != ''">
+          <div v-if="!noArrow" @click="$router.go(-1)" class="d-flex justify-center align-center s-first-layout-sub-arrow">
+            <v-icon size="28" color="#ffd501">keyboard_arrow_left</v-icon>
+          </div>
+          <div>{{title}}</div>
+        </div>
+      </div>
       <slot />
     </div>
   </div>
@@ -12,6 +20,10 @@
 <script>
 export default {
   name: 's-first-layout',
+  props: {
+    title: { type: String, default: '' },
+    noArrow: Boolean
+  },
   data: () => ({}),
   methods: {},
 };
@@ -46,4 +58,30 @@ export default {
   min-height: 100vh;
   background-color: #fbfbfb;
 }
+
+.s-first-layout-sub-container {
+  position: fixed;
+  top: 48px;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+
+.s-first-layout-sub {
+  position: relative;
+  height: 40px;
+  background: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  color: #585858;
+  border-bottom: solid 1px #e9e9e9;
+}
+
+.s-first-layout-sub-arrow {
+  position: absolute;
+  top: 6px;
+  left: 10px;
+}
+
 </style>

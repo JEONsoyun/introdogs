@@ -1,6 +1,10 @@
 <template>
-  <s-first-layout>
-    <s-dog-profile :data="dog" />
+  <s-first-layout title="멍멍이 매칭 결과">
+    <div class="match-result">
+      <s-dog-profile :data="dog" />
+      <s-button style="margin-top: 24px;">더 자세히 보기</s-button>
+      <s-button type="white" style="margin-top: 8px;">다른 멍멍이들 보러 가기</s-button>
+    </div>
   </s-first-layout>
 </template>
 
@@ -33,4 +37,8 @@ export default {
 </script>
 
 <style>
+.match-result {
+    padding: 24px 12px;
+    padding-top: 64px;
+}
 </style>
