@@ -44,8 +44,8 @@ export default {
   data() {
     return {
       items: [
-        { title: '관심 멍멍이 목록', path: '/' },
-        { title: '나와 닮은 멍멍이', path: '/' },
+        { title: '관심 멍멍이 목록', path: '/scrap' },
+        { title: '나와 닮은 멍멍이', path: '/similar' },
       ],
       mDrawer: this.drawer,
     };

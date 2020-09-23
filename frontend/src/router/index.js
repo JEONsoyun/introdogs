@@ -9,6 +9,8 @@ import signup from '@/pages/signup'
 import first from '@/pages/first'
 import match from '@/pages/match/index'
 import matchResult from '@/pages/match/result'
+import scrap from '@/pages/scrap'
+import similar from '@/pages/similar'
 
 const router = new Router({
   mode: 'history',
@@ -36,6 +38,14 @@ const router = new Router({
     {
       path: '/match/result',
       component: matchResult
+    },
+    {
+      path: '/scrap',
+      component: scrap
+    },
+    {
+      path: '/similar',
+      component: similar
     },
   ]
 })
