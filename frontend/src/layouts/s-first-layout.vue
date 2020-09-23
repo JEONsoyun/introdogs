@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex flex-column">
     <div class="s-first-layout-header-container">
-      <div class="d-flex align-center s-first-layout-header">LOGO</div>
+      <div @click="$router.push('/')" class="d-flex align-center s-first-layout-header">LOGO</div>
     </div>
     <div class="s-first-layout-content">
       <slot />

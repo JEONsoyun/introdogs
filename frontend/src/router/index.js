@@ -7,6 +7,8 @@ import index from '@/pages/index'
 import login from '@/pages/login'
 import signup from '@/pages/signup'
 import first from '@/pages/first'
+import match from '@/pages/match/index'
+import matchResult from '@/pages/match/result'
 
 const router = new Router({
   mode: 'history',
@@ -26,6 +28,14 @@ const router = new Router({
     {
       path: '/first',
       component: first
+    },
+    {
+      path: '/match',
+      component: match
+    },
+    {
+      path: '/match/result',
+      component: matchResult
     },
   ]
 })

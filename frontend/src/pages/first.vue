@@ -1,7 +1,7 @@
 <template>
   <s-first-layout>
     <div class="d-flex flex-column justify-center first-container">
-      <div class="d-flex flex-column align-center justify-center first-item">
+      <div @click="$router.push('/match')" class="d-flex flex-column align-center justify-center first-item">
         <img style="max-width: 50%;" src="/static/images/adopt_me.png" />
         <s-button style="margin-top:-8px;">나와 어울리는 멍멍이 매칭</s-button>
       </div>
@@ -14,7 +14,7 @@
           <div class="d-flex" />
           <v-checkbox v-model="check" color="#ffd501" label="이 페이지 다시 안 보기" />
           <div class="d-flex flex-grow-0" style="margin-left: 12px;">
-            <s-button type="white" size="small">Skip</s-button>
+            <s-button @click="$router.push('/')" type="white" size="small">Skip</s-button>
           </div>
         </div>
       </div>

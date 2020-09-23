@@ -3,7 +3,7 @@
     <v-expansion-panels class="index-filter-container">
       <v-expansion-panel>
         <v-expansion-panel-header>
-          <div class="d-flex"/>
+          <div class="d-flex" />
           <template v-slot:actions>
             <v-icon>expand_more</v-icon>
           </template>
@@ -22,7 +22,7 @@
             <img class="d-flex flex-grow-0 index-filter-gender" src="/static/images/female.png" />
             <div class="d-flex" />
             <div class="d-flex flex-grow-0">
-              <s-button type="small">확인</s-button>
+              <s-button size="small">확인</s-button>
             </div>
           </div>
         </v-expansion-panel-content>
@@ -33,18 +33,22 @@
       <div class="d-flex" style="flex-wrap: wrap;">
         <div v-for="(dog, di) in dogs" class="d-flex" :key="`dog-${di}`">
           <div class="d-flex flex-column flex-grow-1 index-item">
-            <div class="d-flex index-item-image" :style="`background-image:url(${dog.thumnail})`" />
-            <div class="d-flex index-item-content">
+            <div class="d-flex index-item-image" :style="`background-image:url(${dog.thumnail})`" >
+              <div v-if="Math.random() > 0.7" class="d-flex justify-center align-center index-item-scrap">
+                <v-icon color="red">favorite</v-icon>
+              </div>
+            </div>
+            <div class="index-item-content">
               <div>
                 <div>{{dog.dog_id}}</div>
-                <div>{{dog.age}}</div>
               </div>
-              <div class="d-flex">
+              <div class="d-flex align-center">
+                <div>{{dog.age}}</div>
                 <div class="d-flex" />
                 <img
                   v-if="dog.sex == 'M'"
                   src="/static/images/male.png"
-                  style="width: 30px;height:30px"
+                  style="width: 25px;height:25px"
                 />
                 <img v-else src="/static/images/female.png" style="width: 30px;height:30px" />
               </div>
@@ -216,11 +220,21 @@ export default {
 }
 
 .index-item-image {
+  position: relative;
   width: 100%;
   height: 33vw;
   background-size: cover;
   background-position: center center;
-  opacity: 0.9;
+}
+
+.index-item-scrap {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.61);
 }
 
 .index-item-content {
