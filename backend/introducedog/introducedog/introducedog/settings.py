@@ -31,21 +31,22 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    # 'django.contrib.admin',
-    # 'django.contrib.auth',
+    'django.contrib.admin',
+    'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts',
+    'dogs',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    # 'django.middleware.csrf.CsrfViewMiddleware',
-    # 'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -80,12 +81,12 @@ DATABASES = {
         "NAME": 'dog',
         "USER": 'root',
         "PASSWORD": 'throgoebro123',
-        "HOST":'j3a307.p.ssafy.io',
-        "PORT":'3306',
+        "HOST": 'j3a307.p.ssafy.io',
+        "PORT": '3306',
         "OPTIONS": {
             'init_command': 'SET sql_mode="STRICT_TRANS_TABLES"'
         }
-        
+
     }
 }
 
