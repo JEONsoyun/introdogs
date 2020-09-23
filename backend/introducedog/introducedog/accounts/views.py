@@ -12,6 +12,7 @@ from django.http import HttpResponse, JsonResponse
 
 from .models import User
 from likes.models import Like
+from dogs.models import Dog
 
 class SignupView(View):
     def post(self, request):
@@ -101,23 +102,18 @@ class LogoutView(View):
 class MypageView(View) :
     def get(self, request):
         myuser = User.objects.filter(user_name = request.session.get('username')).values()
-        
         ret = []
-
-        print(f'myuser : {myuser}')
-        
+        userid = myuser[0]['user_id']
+        like_dog_list = Like.objects.filter(user_id = userid).values()
         for now_user in myuser:
-            now_user_id = now_user['user_id']
-            mylike = Like.objects.filter(user_id=now_user_id).values()
-            # python list comprehension
-            now_user['dog_like_list'] = [now_val['dog_id'] for now_val in mylike if now_val['user_id'] == now_user_id]
-
-            ret.append(now_user)
-
-
-        print(ret)
-        # doglike = Like.objects.filter(user_id = userid).values()
-        # return JsonResponse({'user':list(myuser)}, status = 200)
+            now_user['dog_info'] = []
+            for now_dog in like_dog_list:
+                dogid = now_dog['dog_id']
+                doginfo = Dog.objects.filter(dog_id = dogid).values()
+                for now_dog_info in doginfo:
+                    now_user['dog_info'].append(now_dog_info)
+        
+        return JsonResponse({'user':list(myuser)}, status = 200)
 
 class ApicheckView(View):
     def get(self, request):

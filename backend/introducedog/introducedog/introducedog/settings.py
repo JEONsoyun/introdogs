@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'accounts',
     'likes',
     'dogs',
+    'details',
 ]
 
 MIDDLEWARE = [

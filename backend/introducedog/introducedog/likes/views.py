@@ -28,21 +28,17 @@ class MakelikeView(View):
     
     def get(self, request):
         myuser = User.objects.filter(user_name = request.session.get('username')).values()
-        # userid = myuser[0]['user_id']
-        # like_dog_list = Like.objects.filter(user_id = userid).values()
-        # print(like_dog_list)
         ret = []
         userid = myuser[0]['user_id']
         like_dog_list = Like.objects.filter(user_id = userid).values()
-        ret.append(myuser)
-        for now_dog in like_dog_list:
-            dogid = now_dog['dog_id']
-            doginfo = Dog.objects.filter(dog_id = dogid).values()
-            myuser['dog_info'] = doginfo
+        for now_user in myuser:
+            now_user['dog_info'] = []
+            for now_dog in like_dog_list:
+                dogid = now_dog['dog_id']
+                doginfo = Dog.objects.filter(dog_id = dogid).values()
+                for now_dog_info in doginfo:
+                    now_user['dog_info'].append(now_dog_info)
         
-
-
-
         return JsonResponse({'user':list(myuser)}, status = 200)
 
 class DeletelikeView(View):

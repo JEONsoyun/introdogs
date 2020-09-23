@@ -22,3 +22,4 @@ class DogFilter(View):
     def get(self, request, user_id):
         print(user_id)
         return True
+
