@@ -101,8 +101,21 @@ class LogoutView(View):
 class MypageView(View) :
     def get(self, request):
         myuser = User.objects.filter(user_name = request.session.get('username')).values()
-        # print(myuser)
-        userid = myuser[0]['user_id']
+        
+        ret = []
+
+        print(f'myuser : {myuser}')
+        
+        for now_user in myuser:
+            now_user_id = now_user['user_id']
+            mylike = Like.objects.filter(user_id=now_user_id).values()
+            # python list comprehension
+            now_user['dog_like_list'] = [now_val['dog_id'] for now_val in mylike if now_val['user_id'] == now_user_id]
+
+            ret.append(now_user)
+
+
+        print(ret)
         # doglike = Like.objects.filter(user_id = userid).values()
         return JsonResponse({'user':list(myuser)}, status = 200)
 

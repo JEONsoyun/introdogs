@@ -34,7 +34,13 @@ class DeletelikeView(View):
         else:
             return JsonResponse({'message':'뭔가 이상해'}, status=400)
         
-class 
+
+class LikelistView(View):
+    def get(self, request):
+        myuser = User.objects.filter(user_name = request.session.get('username')).values()
+        userid = myuser[0]['user_id']
+        like_dog_list = Like.objects.filter(user_id = userid)
+        print(like_dog_list)
 
 
 
