@@ -1,18 +1,63 @@
 <template>
   <s-main-layout>
-    <div class="index-filter-container">filter area</div>
-    <div class="index-item-container">
-      <div class="d-flex" style="flex-wrap: wrap;">
-        <div v-for="(dog, di) in dogs" class="d-flex" :key="`dog-${di}`">
-          <div class="d-flex flex-column index-item">
-            <div class="index-item-image" :style="`background-image:url(${dog.thumnail})`"/>
-            <div class="index-item-content">
-              <div>{{dog.dog_id}}</div>
-              <div>{{dog.age}}</div>
-              <div>{{dog.sex}}</div>
-            </div>
-            
+    <v-expansion-panels class="main-page-filter-container">
+      <v-expansion-panel>
+        <v-expansion-panel-header>
+          <div class="d-flex" />
+          <template v-slot:actions>
+            <v-icon>expand_more</v-icon>
+          </template>
+        </v-expansion-panel-header>
+        <v-expansion-panel-content>
+          <div class="d-flex align-center" style="margin-bottom:12px;">
+            <div
+              v-for="(color, ci) in colors"
+              :key="`color-${ci}`"
+              class="d-flex flex-grow-0 main-page-filter-color"
+              :style="`background: ${color.code}`"
+            ></div>
           </div>
+          <div class="d-flex align-center" style="margin-bottom:8px;">
+            <img class="d-flex flex-grow-0 main-page-filter-gender" src="/static/images/male.png" />
+            <img class="d-flex flex-grow-0 main-page-filter-gender" src="/static/images/female.png" />
+            <div class="d-flex" />
+            <div class="d-flex flex-grow-0">
+              <s-button size="small">확인</s-button>
+            </div>
+          </div>
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+    </v-expansion-panels>
+
+    <div class="main-page-item-container">
+      <div class="d-flex" style="flex-wrap: wrap;">
+        <div @click="onDetailClick(dog.dog_id)" v-for="(dog, di) in dogs" class="d-flex" :key="`dog-${di}`">
+          <div class="d-flex flex-column flex-grow-1 main-page-item">
+            <div class="d-flex main-page-item-image" :style="`background-image:url(${dog.thumnail})`" >
+              <div v-if="Math.random() > 0.7" class="d-flex justify-center align-center main-page-item-scrap">
+                <v-icon color="red">favorite</v-icon>
+              </div>
+            </div>
+            <div class="main-page-item-content">
+              <div>
+                <div>{{dog.dog_id}}</div>
+              </div>
+              <div class="d-flex align-center">
+                <div>{{dog.age}}</div>
+                <div class="d-flex" />
+                <img
+                  v-if="dog.sex == 'M'"
+                  src="/static/images/male.png"
+                  style="width: 25px;height:25px"
+                />
+                <img v-else src="/static/images/female.png" style="width: 30px;height:30px" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex align-center justify-center main-page-more">
+          더 보기
+          <v-icon color="#616161">expand_more</v-icon>
         </div>
       </div>
     </div>
@@ -21,8 +66,31 @@
 
 <script>
 export default {
-  name: 'index',
+  name: 'main-page',
   data: () => ({
+    colors: {
+      white: { tag: ['흰', '하양', '백'], code: '#fff' },
+      cream: { tag: ['크림', '아이보리', '미'], code: 'rgb(255, 249, 223)' },
+      beige: {
+        tag: ['베이지', '황백', '살구', '연갈'],
+        code: 'rgb(197, 181, 146)',
+      },
+      yellow: {
+        tag: ['황', '노', '주황', '금', '골드', '누렁'],
+        code: 'rgb(163, 120, 26)',
+      },
+      brown: {
+        tag: ['갈', '초코', '고동', '밤', '레드'],
+        code: 'rgb(59, 28, 3)',
+      },
+      black: { tag: ['검', '블랙', '흑', '탄'], code: '#000' },
+      gray: { tag: ['회', '실버', '잿빛'], code: 'rgb(68, 68, 68)' },
+      spotted: {
+        tag: ['얼룩', '점박이', '호피', ' 바둑'],
+        code:
+          'linear-gradient(rgb(255, 255, 255),rgb(138, 85, 49),rgb(0, 0, 0))',
+      },
+    },
     dogs: [
       {
         dog_id: 'N448548202000333',
@@ -85,6 +153,7 @@ export default {
         end_date: '20200924',
       },
     ],
+    isFilterVisible: false,
   }),
   methods: {
     // async getBest(cnt) {
@@ -99,6 +168,12 @@ export default {
     //     console.error(e);
     //   }
     // }
+    onFilterClick() {
+      this.isFilterVisible = !this.isFilterVisible;
+    },
+    onDetailClick(id) {
+      this.$router.push(`/detail/${id}`);
+    },
   },
   async created() {
     // this.getBest(0);
@@ -112,30 +187,75 @@ export default {
 </script>
 
 <style>
-.index-filter-container {
-  height: 120px;
-}
-.index-item-container {
+.main-page-filter-container {
+  position: fixed;
+  top: 48px;
+  left: 0;
   width: 100%;
+  z-index: 2;
+  background: #fbfbfb;
+  border-radius: 0;
 }
 
-.index-item {
-  width: 33vw;
-  background: #eee;
+.main-page-filter-color {
+  margin-right: 2px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: solid 2px #ffd501;
 }
 
-.index-item-image {
+.main-page-filter-gender {
+  margin-right: 2px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: solid 2px #ffd501;
+}
+
+.main-page-item-container {
+  width: 100%;
+  padding-top: 48px;
+}
+
+.main-page-item {
   width: 33vw;
+}
+
+.main-page-item-image {
+  position: relative;
+  width: 100%;
   height: 33vw;
   background-size: cover;
   background-position: center center;
-  opacity: 0.8;
 }
 
-.index-item-content {
+.main-page-item-scrap {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.61);
+}
+
+.main-page-item-content {
+  padding: 4px;
   width: 100%;
-  height: 40px;
   font-size: 10px;
+  font-weight: bold;
+  background: #fff9dc;
+  border: solid 1px #fff;
+}
+
+.main-page-more {
+  border-top: solid 1px #eee;
+  font-size: 14px;
+  font-weight: bold;
+  height: 70px;
+  color: #616161;
+  padding-bottom: 8px;
 }
 </style>
 

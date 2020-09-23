@@ -27,7 +27,6 @@
 export default {
   name: 's-main-layout',
   props: {
-    noFooter: Boolean,
     title: { type: String, default: '' },
     noArrow: Boolean
   },
