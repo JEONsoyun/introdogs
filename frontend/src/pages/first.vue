@@ -1,15 +1,15 @@
 <template>
   <s-first-layout>
-    <div class="d-flex flex-column justify-center first-container">
-      <div @click="$router.push('/match')" class="d-flex flex-column align-center justify-center first-item">
+    <div class="d-flex flex-column justify-center first-page-container">
+      <div @click="$router.push('/match')" class="d-flex flex-column align-center justify-center first-page-item">
         <img style="max-width: 50%;" src="/static/images/adopt_me.png" />
         <s-button style="margin-top:-8px;">나와 어울리는 멍멍이 매칭</s-button>
       </div>
-      <div class="d-flex flex-column align-center justify-center first-item">
+      <div class="d-flex flex-column align-center justify-center first-page-item">
         <img style="max-width: 50%" src="/static/images/lost_dog.png" />
         <s-button style="margin-top:-8px;">잃어버린 멍멍이 찾기</s-button>
       </div>
-      <div class="d-flex flex-grow-0 first-check" style>
+      <div class="d-flex flex-grow-0 first-page-check" style>
         <div class="d-flex align-center">
           <div class="d-flex" />
           <v-checkbox v-model="check" color="#ffd501" label="이 페이지 다시 안 보기" />
@@ -24,7 +24,7 @@
 
 <script>
 export default {
-  name: 'first',
+  name: 'first-page',
   data: () => ({
     check: false,
   }),
@@ -32,22 +32,22 @@ export default {
 </script>
 
 <style>
-.first-container {
+.first-page-container {
   height: 100%;
   padding: 32px 0;
 }
 
-.first-item {
+.first-page-item {
   padding: 16px;
 }
 
-.first-check {
+.first-page-check {
   margin-top: 32px;
   font-size: 12px;
   padding: 0 32px;
 }
 
-.first-check .v-label {
+.first-page-check .v-label {
     font-size: 12px;
 }
 </style>

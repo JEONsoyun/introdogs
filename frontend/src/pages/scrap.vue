@@ -1,6 +1,6 @@
 <template>
   <s-main-layout title="관심 멍멍이 목록">
-      <div class="scrap">
+      <div class="scrap-page">
       <s-scrap-list :data="dogs"/>
       </div>
   </s-main-layout>
@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: 'scrap',
+  name: 'scrap-page',
   data: () => ({
     dogs: [
       {
@@ -77,7 +77,7 @@ export default {
 </script>
 
 <style>
-.scrap {
+.scrap-page {
     padding: 24px 16px;
 }
 </style>

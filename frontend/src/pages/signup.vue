@@ -1,30 +1,30 @@
 <template>
   <s-main-layout title="회원가입" noArrow>
-    <div class="signup-container">
-      <div class="signup-title">이름</div>
+    <div class="signup-page">
+      <div class="signup-page-title">이름</div>
       <v-text-field
         v-model="data.memberName"
         placeholder="이름 입력"
-        class="signup-box"
+        class="signup-page-box"
         dense
         required
         hide-details
         outlined
       ></v-text-field>
-      <div class="signup-title">이메일 (ID)</div>
+      <div class="signup-page-title">이메일 (ID)</div>
       <v-text-field
         v-model="data.memberEmail"
         placeholder="이메일 입력 (예: introdogs@introdogs.com)"
-        class="signup-box"
+        class="signup-page-box"
         dense
         required
         hide-details
         outlined
       ></v-text-field>
-      <div class="signup-title">비밀번호</div>
+      <div class="signup-page-title">비밀번호</div>
       <v-text-field
         type="password"
-        class="signup-box"
+        class="signup-page-box"
         v-model="data.memberPw"
         dense
         hide-details
@@ -33,9 +33,9 @@
         counter
         outlined
       ></v-text-field>
-      <div class="signup-title">비밀번호 확인</div>
+      <div class="signup-page-title">비밀번호 확인</div>
       <v-text-field
-        class="signup-box"
+        class="signup-page-box"
         type="password"
         placeholder="비밀번호 확인"
         v-model="data.memberPwVerification"
@@ -52,23 +52,8 @@
 
 <script>
 export default {
-  name: 'signup',
+  name: 'signup-page',
   data: () => ({
-    link: { href: 'https://spot-web.shop/notice', target: '_blank' },
-    items: [
-      { team: '두산 베어스', teamIdx: 20001 },
-      { team: '한화 이글스', teamIdx: 20002 },
-      { team: 'NC 다이노스', teamIdx: 20003 },
-      { team: '롯데 자이언츠', teamIdx: 20004 },
-      { team: '키움 히어로즈', teamIdx: 20005 },
-      { team: 'KIA 타이거즈', teamIdx: 20006 },
-      { team: 'KT wiz', teamIdx: 20007 },
-      { team: 'SK 와이번스', teamIdx: 20008 },
-      { team: '삼성 라이온즈', teamIdx: 20009 },
-      { team: 'LG 트윈스', teamIdx: 20010 },
-    ],
-    data: {},
-    data1: {},
   }),
   methods: {
     async onSignupClick() {
@@ -122,11 +107,6 @@ export default {
           memberBirth = null;
         }
 
-        // 6. 구단 체크
-        if (teamIdx == null) {
-          return alert('구단을 선택해주세요.');
-        }
-
         await this.$api.postsignup({
           memberEmail,
           memberPw,
@@ -135,13 +115,10 @@ export default {
           teamIdx,
         });
 
-        this.$router.push('/tour');
+        this.$router.push('/');
       } catch (e) {
         console.error(e);
       }
-    },
-    onCheckButtonClick() {
-      alert('업데이트 예정입니다.');
     },
     async postEmail() {
       try {
@@ -154,9 +131,6 @@ export default {
       } catch (e) {
         console.error(e);
       }
-    },
-    onAgreementDetailClick() {
-      this.$router.push('/notice');
     },
   },
 };
@@ -177,7 +151,7 @@ export default {
   left: 0px;
 }
 
-.signup-title {
+.signup-page-title {
   width: 80%;
   height: 16px;
   font-size: 14px;
@@ -191,10 +165,10 @@ export default {
   margin-left: 4%;
 }
 
-.v-text-field input {
+.signup-page .v-text-field input {
   font-family: Binggrae;
 }
-.signup-password {
+.signup-page-password {
   width: 100%;
   height: 44px;
   border-radius: 4px;
@@ -209,20 +183,20 @@ export default {
   text-align: left;
   color: #1e1e1e;
 }
-.v-label theme--light {
+.signup-page .v-label theme--light {
   font-size: 14px;
   color: #616161;
   font-weight: 400;
 }
 
-.signup-container {
+.signup-page {
   margin-top: 24px;
   margin-left: 3%;
   margin-right: 3%;
   margin-bottom: 18px;
 }
 
-.signup-birth {
+.signup-page-birth {
   width: 30%;
   height: 44px;
   border-radius: 4px;
@@ -240,7 +214,7 @@ export default {
   color: #1e1e1e;
 }
 
-.signup-slash {
+.signup-page-slash {
   width: 9px;
   height: 26px;
   font-size: 24px;
@@ -254,11 +228,11 @@ export default {
   margin-right: 2%;
 }
 
-.signup-select {
+.signup-page-select {
   padding-top: 0px;
 }
 
-.signup-selectbox {
+.signup-page-selectbox {
   margin-top: 0px;
   width: 50%;
   height: 44px;
@@ -269,7 +243,7 @@ export default {
   text-align: left;
   color: #1e1e1e;
 }
-.signup-line {
+.signup-page-line {
   margin-top: 24px;
   margin-bottom: 29px;
   width: 100%;
@@ -277,17 +251,17 @@ export default {
   background-color: #e9e9e9;
 }
 
-.signup-right {
+.signup-page-right {
   width: 10%;
   margin-left: 5%;
   margin-bottom: 20px;
 }
-.signup-left {
+.signup-page-left {
   width: 90%;
   margin: 0px 5% 0px 0px;
   border-left: 10%;
 }
-.signup-title1 {
+.signup-page-title1 {
   width: 80%;
   font-size: 14px;
   font-weight: 700;
@@ -296,7 +270,7 @@ export default {
   color: #616161;
 }
 
-.signup-agree-content {
+.signup-page-agree-content {
   width: 90%;
   margin-left: 32px;
   height: 53px;
@@ -310,58 +284,33 @@ export default {
 .s-header-layout-content {
   padding-top: 40px;
 }
-.v-application .signup {
-  background-color: #ffffff !important;
-  border-color: #e9e9e9;
-}
 
-.find-row1 {
-  width: 100%;
-  margin-left: 0%;
-  height: 44px;
-}
-
-.find-textfield {
-  width: 100%;
-  height: 44px;
-  border-radius: 4px;
-  border: solid 1px #e1e1e1;
-  background-color: #ffffff;
-  margin-bottom: 18px;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.29;
-  letter-spacing: -0.39px;
-  text-align: left;
-  color: #1e1e1e;
-}
-
-.signup-box input {
+.signup-page-box input {
   padding: 0 !important;
 }
-.signup-box .v-input__control {
+.signup-page-box .v-input__control {
   height: 44px !important;
 }
 
-.signup-box .v-text-field__slot {
+.signup-page-box .v-text-field__slot {
   height: 44px;
   font-size: 14px;
   color: #8a8a8a !important;
 }
-.signup-box fieldset {
+.signup-page-box fieldset {
   border-color: #e1e1e1 !important;
   height: 48px;
   background: #fff;
 }
 
-.signup-selectbox fieldset {
+.signup-page-selectbox fieldset {
   border-color: #e1e1e1 !important;
   height: 48px;
   border-width: 0.1px !important;
   background: #fff;
 }
 
-.signup-line {
+.signup-page-line {
   border-color: #e9e9e9 !important;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <s-main-layout>
-    <v-expansion-panels class="index-filter-container">
+    <v-expansion-panels class="main-page-filter-container">
       <v-expansion-panel>
         <v-expansion-panel-header>
           <div class="d-flex" />
@@ -13,13 +13,13 @@
             <div
               v-for="(color, ci) in colors"
               :key="`color-${ci}`"
-              class="d-flex flex-grow-0 index-filter-color"
+              class="d-flex flex-grow-0 main-page-filter-color"
               :style="`background: ${color.code}`"
             ></div>
           </div>
           <div class="d-flex align-center" style="margin-bottom:8px;">
-            <img class="d-flex flex-grow-0 index-filter-gender" src="/static/images/male.png" />
-            <img class="d-flex flex-grow-0 index-filter-gender" src="/static/images/female.png" />
+            <img class="d-flex flex-grow-0 main-page-filter-gender" src="/static/images/male.png" />
+            <img class="d-flex flex-grow-0 main-page-filter-gender" src="/static/images/female.png" />
             <div class="d-flex" />
             <div class="d-flex flex-grow-0">
               <s-button size="small">확인</s-button>
@@ -29,16 +29,16 @@
       </v-expansion-panel>
     </v-expansion-panels>
 
-    <div class="index-item-container">
+    <div class="main-page-item-container">
       <div class="d-flex" style="flex-wrap: wrap;">
         <div v-for="(dog, di) in dogs" class="d-flex" :key="`dog-${di}`">
-          <div class="d-flex flex-column flex-grow-1 index-item">
-            <div class="d-flex index-item-image" :style="`background-image:url(${dog.thumnail})`" >
-              <div v-if="Math.random() > 0.7" class="d-flex justify-center align-center index-item-scrap">
+          <div class="d-flex flex-column flex-grow-1 main-page-item">
+            <div class="d-flex main-page-item-image" :style="`background-image:url(${dog.thumnail})`" >
+              <div v-if="Math.random() > 0.7" class="d-flex justify-center align-center main-page-item-scrap">
                 <v-icon color="red">favorite</v-icon>
               </div>
             </div>
-            <div class="index-item-content">
+            <div class="main-page-item-content">
               <div>
                 <div>{{dog.dog_id}}</div>
               </div>
@@ -55,7 +55,7 @@
             </div>
           </div>
         </div>
-        <div class="d-flex align-center justify-center index-more">
+        <div class="d-flex align-center justify-center main-page-more">
           더 보기
           <v-icon color="#616161">expand_more</v-icon>
         </div>
@@ -66,7 +66,7 @@
 
 <script>
 export default {
-  name: 'index',
+  name: 'main-page',
   data: () => ({
     colors: {
       white: { tag: ['흰', '하양', '백'], code: '#fff' },
@@ -184,7 +184,7 @@ export default {
 </script>
 
 <style>
-.index-filter-container {
+.main-page-filter-container {
   position: fixed;
   top: 48px;
   left: 0;
@@ -194,7 +194,7 @@ export default {
   border-radius: 0;
 }
 
-.index-filter-color {
+.main-page-filter-color {
   margin-right: 2px;
   width: 36px;
   height: 36px;
@@ -202,7 +202,7 @@ export default {
   border: solid 2px #ffd501;
 }
 
-.index-filter-gender {
+.main-page-filter-gender {
   margin-right: 2px;
   width: 36px;
   height: 36px;
@@ -210,16 +210,16 @@ export default {
   border: solid 2px #ffd501;
 }
 
-.index-item-container {
+.main-page-item-container {
   width: 100%;
   padding-top: 48px;
 }
 
-.index-item {
+.main-page-item {
   width: 33vw;
 }
 
-.index-item-image {
+.main-page-item-image {
   position: relative;
   width: 100%;
   height: 33vw;
@@ -227,7 +227,7 @@ export default {
   background-position: center center;
 }
 
-.index-item-scrap {
+.main-page-item-scrap {
   position: absolute;
   top: 4px;
   left: 4px;
@@ -237,7 +237,7 @@ export default {
   background: rgba(255, 255, 255, 0.61);
 }
 
-.index-item-content {
+.main-page-item-content {
   padding: 4px;
   width: 100%;
   font-size: 10px;
@@ -246,7 +246,7 @@ export default {
   border: solid 1px #fff;
 }
 
-.index-more {
+.main-page-more {
   border-top: solid 1px #eee;
   font-size: 14px;
   font-weight: bold;

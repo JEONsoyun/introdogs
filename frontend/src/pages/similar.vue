@@ -1,14 +1,14 @@
 <template>
   <s-main-layout title="나와 닮은 멍멍이">
-    <div class="similar">
+    <div class="similar-page">
       <template v-if="dog != null && dog.id != null">
         <s-dog-profile :data="dog" />
         <s-button style="margin-top: 24px;">다시 찾아보기</s-button>
       </template>
       <template v-else>
           <div class="d-flex flex-column justify-center align-center ">
-          <img class="similar-empty-image" src="/static/images/question_dog.png"/>
-          <div class="similar-empty-text">나와 닮은 멍멍이 기록이 없네요!</div>
+          <img class="similar-page-empty-image" src="/static/images/question_dog.png"/>
+          <div class="similar-page-empty-text">나와 닮은 멍멍이 기록이 없네요!</div>
           </div>
           <s-button style="margin-top: 24px;">나와 닮은 멍멍이 찾으러 가기</s-button>
       </template>
@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: 'similar',
+  name: 'similar-page',
   data: () => ({
     dog: {
     //   dog_id: 'N448548202000333',
@@ -45,17 +45,17 @@ export default {
 </script>
 
 <style>
-.similar {
+.similar-page {
   padding: 24px 12px;
 }
 
-.similar-empty-image {
+.similar-page-empty-image {
     margin-top: 24px;
     width: 220px;
     opacity: 0.4;
 }
 
-.similar-empty-text {
+.similar-page-empty-text {
     margin: 32px;
     font-size: 16px;
     color: #585858;

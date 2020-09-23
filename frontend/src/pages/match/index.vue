@@ -1,50 +1,50 @@
 <template>
   <s-first-layout title="나와 어울리는 멍멍이 매칭">
-    <div class="match-container">
-      <div class="match-box">
+    <div class="match-page-container">
+      <div class="match-page-box">
         <div>1. 더 귀엽다고 생각하는 멍멍이를 선택해주세요.</div>
         <div style="margin-top:24px;">
-          <div class="d-flex justify-center align-center match-number">1</div>
+          <div class="d-flex justify-center align-center match-page-number">1</div>
           <div class="d-flex">
-            <div class="d-flex flex-column flex-grow-1 match-item">
-              <div class="d-flex match-item-image" style="background:#eee"></div>
+            <div class="d-flex flex-column flex-grow-1 match-page-item">
+              <div class="d-flex match-page-item-image" style="background:#eee"></div>
             </div>
-            <div class="d-flex flex-column flex-grow-1 match-item">
-              <div class="d-flex match-item-image" style="background:#eee"></div>
+            <div class="d-flex flex-column flex-grow-1 match-page-item">
+              <div class="d-flex match-page-item-image" style="background:#eee"></div>
             </div>
-            <div class="d-flex flex-column flex-grow-1 match-item">
-              <div class="d-flex match-item-image" style="background:#eee"></div>
+            <div class="d-flex flex-column flex-grow-1 match-page-item">
+              <div class="d-flex match-page-item-image" style="background:#eee"></div>
             </div>
           </div>
         </div>
         <div style="margin: 24px 0;width:100%;border-bottom: solid 1px #ffd501" />
-        <div class="d-flex justify-center align-center match-number">2</div>
+        <div class="d-flex justify-center align-center match-page-number">2</div>
         <div class="d-flex">
-          <div class="d-flex flex-column flex-grow-1 match-item">
-            <div class="d-flex match-item-image" style="background:#eee"></div>
+          <div class="d-flex flex-column flex-grow-1 match-page-item">
+            <div class="d-flex match-page-item-image" style="background:#eee"></div>
           </div>
-          <div class="d-flex flex-column flex-grow-1 match-item">
-            <div class="d-flex match-item-image" style="background:#eee"></div>
+          <div class="d-flex flex-column flex-grow-1 match-page-item">
+            <div class="d-flex match-page-item-image" style="background:#eee"></div>
           </div>
-          <div class="d-flex flex-column flex-grow-1 match-item">
-            <div class="d-flex match-item-image" style="background:#eee"></div>
+          <div class="d-flex flex-column flex-grow-1 match-page-item">
+            <div class="d-flex match-page-item-image" style="background:#eee"></div>
           </div>
         </div>
         <div style="margin: 24px 0;width:100%;border-bottom: solid 1px #ffd501" />
-        <div class="d-flex justify-center align-center match-number">3</div>
+        <div class="d-flex justify-center align-center match-page-number">3</div>
         <div class="d-flex">
-          <div class="d-flex flex-column flex-grow-1 match-item">
-            <div class="d-flex match-item-image" style="background:#eee"></div>
+          <div class="d-flex flex-column flex-grow-1 match-page-item">
+            <div class="d-flex match-page-item-image" style="background:#eee"></div>
           </div>
-          <div class="d-flex flex-column flex-grow-1 match-item">
-            <div class="d-flex match-item-image" style="background:#eee"></div>
+          <div class="d-flex flex-column flex-grow-1 match-page-item">
+            <div class="d-flex match-page-item-image" style="background:#eee"></div>
           </div>
-          <div class="d-flex flex-column flex-grow-1 match-item">
-            <div class="d-flex match-item-image" style="background:#eee"></div>
+          <div class="d-flex flex-column flex-grow-1 match-page-item">
+            <div class="d-flex match-page-item-image" style="background:#eee"></div>
           </div>
         </div>
       </div>
-      <div class="match-box" style="margin-top: 24px;">
+      <div class="match-page-box" style="margin-top: 24px;">
         <div>2. 해당사항에 체크해주세요.</div>
         <v-checkbox v-model="check1" color="#ffd501" hide-details label="나는 활동적인 편이다." />
         <v-checkbox v-model="check2" color="#ffd501" hide-details label="나는 금전적으로 여유가 있다." />
@@ -57,7 +57,7 @@
 
 <script>
 export default {
-  name: 'match',
+  name: 'match-page',
   data: () => ({
     check1: false,
     check2: false,
@@ -72,12 +72,12 @@ export default {
 </script>
 
 <style>
-.match-container {
+.match-page-container {
   padding: 24px 12px;
   padding-top: 64px;
 }
 
-.match-box {
+.match-page-box {
   width: 100%;
   padding: 16px;
   border-radius: 4px;
@@ -89,7 +89,7 @@ export default {
   color: #1e1e1e;
 }
 
-.match-number {
+.match-page-number {
   margin-left: 2px;
   margin-bottom: 8px;
   width: 28px;
@@ -101,12 +101,12 @@ export default {
   border-radius: 50%;
 }
 
-.match-item {
+.match-page-item {
   width: 33%;
   height: 100px;
 }
 
-.match-item-image {
+.match-page-item-image {
   position: relative;
   width: 100%;
   height: 100%;
@@ -116,7 +116,7 @@ export default {
   border-radius: 8px;
 }
 
-.match-box .v-label {
+.match-page-box .v-label {
   font-size: 12px;
 }
 </style>

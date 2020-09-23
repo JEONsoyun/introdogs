@@ -11,6 +11,7 @@ import match from '@/pages/match/index'
 import matchResult from '@/pages/match/result'
 import scrap from '@/pages/scrap'
 import similar from '@/pages/similar'
+import detail from '@/pages/detail'
 
 const router = new Router({
   mode: 'history',
@@ -46,6 +47,10 @@ const router = new Router({
     {
       path: '/similar',
       component: similar
+    },
+    {
+      path: '/detail/:id',
+      component: detail
     },
   ]
 })

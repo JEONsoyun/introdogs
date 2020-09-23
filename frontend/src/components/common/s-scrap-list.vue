@@ -1,7 +1,12 @@
 <template>
   <div class="s-scrap-list">
     <template v-if="data != null && data.length != 0">
-      <div class="d-flex s-scrap-list-box" v-for="(dog, di) in data" :key="`dog-${di}`">
+      <div
+        @click="onDetailClick(dog.dog_id)"
+        class="d-flex s-scrap-list-box"
+        v-for="(dog, di) in data"
+        :key="`dog-${di}`"
+      >
         <div class="s-scrap-list-image" :style="`background-image: url(${dog.thumnail})`">
           <div class="s-scrap-list-heart">
             <v-icon color="red">favorite</v-icon>
@@ -47,6 +52,11 @@ export default {
     data: { type: Array, default: () => [] },
   },
   data: () => ({}),
+  methods: {
+    onDetailClick(id) {
+      this.$router.push(`/detail/${id}`);
+    },
+  },
 };
 </script>
 
@@ -115,14 +125,14 @@ export default {
 }
 
 .s-scrap-list-empty-image {
-    margin-top: 24px;
-    width: 220px;
-    opacity: 0.4;
+  margin-top: 24px;
+  width: 220px;
+  opacity: 0.4;
 }
 
 .s-scrap-list-empty-text {
-    margin: 32px;
-    font-size: 16px;
-    color: #585858;
+  margin: 32px;
+  font-size: 16px;
+  color: #585858;
 }
 </style>
