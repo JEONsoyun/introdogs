@@ -31,7 +31,7 @@
 
     <div class="main-page-item-container">
       <div class="d-flex" style="flex-wrap: wrap;">
-        <div v-for="(dog, di) in dogs" class="d-flex" :key="`dog-${di}`">
+        <div @click="onDetailClick(dog.dog_id)" v-for="(dog, di) in dogs" class="d-flex" :key="`dog-${di}`">
           <div class="d-flex flex-column flex-grow-1 main-page-item">
             <div class="d-flex main-page-item-image" :style="`background-image:url(${dog.thumnail})`" >
               <div v-if="Math.random() > 0.7" class="d-flex justify-center align-center main-page-item-scrap">
@@ -170,6 +170,9 @@ export default {
     // }
     onFilterClick() {
       this.isFilterVisible = !this.isFilterVisible;
+    },
+    onDetailClick(id) {
+      this.$router.push(`/detail/${id}`);
     },
   },
   async created() {

@@ -1,5 +1,8 @@
 <template>
   <div class="s-dog-profile-box">
+    <template v-if="isDetail">
+      <div class="d-flex align-center s-dog-profile-section" style="margin-top:-16px;">멍멍이 정보</div>
+    </template>
     <div class="s-dog-profile-image" :style="`background-image: url(${data.profile})`" />
     <div class="s-dog-profile-content">
       <div style="padding: 0 16px;">{{data.dog_id}}</div>
@@ -41,6 +44,36 @@
         <div class="s-dog-profile-title">특징</div>
         <div class="s-dog-profile-text">{{data.special}}</div>
       </div>
+      <template v-if="isDetail">
+        <div class="d-flex align-center s-dog-profile-section" style="margin-top: 16px;margin-bottom:0;">보호소 정보</div>
+        <div class="d-flex s-dog-profile-row">
+          <div class="s-dog-profile-title">보호소</div>
+          <div class="s-dog-profile-text">{{data.careNm}}</div>
+        </div>
+        <div class="s-dog-profile-bar" />
+        <div class="d-flex s-dog-profile-row">
+          <div class="s-dog-profile-title">발견 장소</div>
+          <div class="s-dog-profile-text">{{data.find_place}}</div>
+        </div>
+        <div class="s-dog-profile-bar" />
+        <div class="d-flex s-dog-profile-row">
+          <div class="s-dog-profile-title">발견 날짜</div>
+          <div class="s-dog-profile-text">{{data.find_date}}</div>
+        </div>
+        <div class="s-dog-profile-bar" />
+        <div class="d-flex s-dog-profile-row">
+          <div class="s-dog-profile-title">보호 기간</div>
+          <div class="s-dog-profile-text">{{data.find_date}} ~ {{data.end_date}}</div>
+        </div>
+        <div class="s-dog-profile-bar" />
+        <div class="d-flex s-dog-profile-row">
+          <div class="s-dog-profile-title">보호소 주소</div>
+          <div class="s-dog-profile-text">{{data.careAddr}}</div>
+        </div>
+        <div class="s-dog-proflie-map">
+          
+        </div>
+      </template>
     </div>
   </div>
 </template>
@@ -50,9 +83,9 @@ export default {
   name: 's-dog-profile',
   props: {
     data: { type: Object, default: () => ({}) },
+    isDetail: { type: Boolean, default: false },
   },
-  data: () => ({
-  }),
+  data: () => ({}),
 };
 </script>
 
@@ -67,6 +100,17 @@ export default {
   font-weight: 700;
   letter-spacing: -0.48px;
   color: #1e1e1e;
+  overflow: hidden;
+}
+
+.s-dog-profile-section {
+  padding: 0 16px;
+  margin-bottom: 16px;
+  background: #ffd501;
+  height: 30px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
 }
 
 .s-dog-profile-image {
@@ -103,5 +147,11 @@ export default {
 .s-dog-profile-bar {
   width: 100%;
   border-bottom: solid 1px #eee;
+}
+
+.s-dog-proflie-map {
+  width: 100%;
+  height: 180px;
+  background: #eee;
 }
 </style>

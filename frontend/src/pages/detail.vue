@@ -1,8 +1,16 @@
 <template>
-  <s-main-layout>
-      <div class="detail-page">
-      <s-dog-profile :data="dog" />
+  <s-main-layout title="멍멍이 상세보기">
+    <div class="detail-page">
+      <div class="d-flex align-center" style="margin-bottom: 8px;">
+        <div class="detail-page-title">{{dog.dog_id}}</div>
+        <div class="d-flex" />
+        <div @click="onScrapClick">
+          <v-icon v-if="isScrapped" size="36" color="red">favorite</v-icon>
+          <v-icon v-if="!isScrapped" size="36" color="red">favorite_border</v-icon>
+        </div>
       </div>
+      <s-dog-profile :data="dog" isDetail />
+    </div>
   </s-main-layout>
 </template>
 
@@ -31,7 +39,13 @@ export default {
       find_date: '20200915',
       end_date: '20200925',
     },
+    isScrapped: false,
   }),
+  methods: {
+    onScrapClick() {
+      this.isScrapped = !this.isScrapped
+    }
+  },
   created() {
     this.dogId = this.$route.params.id;
     // dog api 부르기
@@ -41,6 +55,12 @@ export default {
 
 <style>
 .detail-page {
+  padding: 24px 16px;
+}
 
+.detail-page-title {
+  font-size: 16px;
+  letter-spacing: -0.48px;
+  font-weight: bold;
 }
 </style>
