@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'accounts',
     'dogs',
     'likes',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
