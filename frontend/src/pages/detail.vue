@@ -56,6 +56,7 @@ export default {
 <style>
 .detail-page {
   padding: 24px 16px;
+  padding-bottom: 80px;
 }
 
 .detail-page-title {

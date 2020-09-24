@@ -1,6 +1,6 @@
 <template>
   <s-main-layout title="나와 닮은 멍멍이 찾기">
-    <div class="lost-page">
+    <div class="my-similar-page">
       <div @click.stop="$refs.image.click">
         <s-button>
           <v-icon color="#fff">photo_camera</v-icon>
@@ -8,9 +8,9 @@
         </s-button>
         <input accept="image/*" class="d-none" ref="image" type="file" @input="pickFile" />
       </div>
-      <div class="d-flex justify-center lost-page-image-container">
+      <div class="d-flex justify-center my-similar-page-image-container">
         <div
-          class="lost-page-image"
+          class="my-similar-page-image"
           v-if="previewImage"
           :style="`background-image:url(${previewImage})`"
         />
@@ -28,7 +28,7 @@
           >
             <div
               class="d-flex similar-page-item-image"
-              :style="`background-image:url(${dog.thumnail})`"
+              :style="`background-image:url(${dog.profile})`"
             >
               <div
                 v-if="Math.random() > 0.7"
@@ -46,7 +46,7 @@
 
 <script>
 export default {
-  name: 'lost-page',
+  name: 'my-similar-page',
   data: () => ({
     previewImage: null,
     location: '',
@@ -149,20 +149,20 @@ export default {
 </script>
 
 <style>
-.lost-page {
+.my-similar-page {
   padding: 24px 16px;
   padding-bottom: 40px;
 }
 
-.lost-page-image-container {
+.my-similar-page-image-container {
   padding-top: 24px;
-  max-width: 30%;
+  max-width: 20%;
   height: 120px;
   display: flex;
   margin: 0 auto;
 }
 
-.lost-page-image {
+.my-similar-page-image {
   width: 100%;
   height: 100%;
   background-size: cover;
@@ -193,13 +193,15 @@ export default {
 }
 
 .similar-page-item {
-  width: 25vw;
+  width: 33%;
 }
 
 .similar-page-item-image {
   position: relative;
   width: 100%;
+  min-height: 120px;
   height: 30vw;
+  max-height: 200px;
   background-size: cover;
   background-position: center center;
   opacity: 0.8;

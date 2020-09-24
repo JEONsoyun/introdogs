@@ -50,21 +50,22 @@ export default {
       }
     },
     onConfirmClick() {
-        this.$router.push('/lost/result')
-    }
+      this.$router.push('/lost/result');
+    },
   },
 };
 </script>
 
 <style>
 .lost-page {
-  padding: 24px 16px;
+  padding: 0 16px;
   padding-top: 64px;
+  padding-bottom: 80px;
 }
 
 .lost-page-image-container {
-    padding-top: 24px;
-  max-width: 80%;
+  padding-top: 24px;
+  max-width: 50%;
   height: 300px;
   display: flex;
   margin: 0 auto;
@@ -102,12 +103,17 @@ export default {
 }
 
 .lost-page-map {
-    height: 160px;
-    background: #eee;
+  width: 100%;
+  min-height: 180px;
+  height: 50vw;
+  max-height: 320px;
+  background: #eee;
 }
 
 .lost-page-list {
-    height: 160px;
-    background: #fff;
+  min-height: 160px;
+  height: 30vw;
+  max-height: 240px;
+  background: #fff;
 }
 </style>

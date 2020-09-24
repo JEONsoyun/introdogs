@@ -54,12 +54,17 @@ export default {
 }
 
 .lost-result-page-map {
-  height: 160px;
+  width: 100%;
+  min-height: 180px;
+  height: 50vw;
+  max-height: 320px;
   background: #eee;
 }
 
 .lost-result-page-list {
-  height: 160px;
+  min-height: 160px;
+  height: 30vw;
+  max-height: 240px;
   background: #fff;
 }
 </style>

@@ -31,16 +31,27 @@
 
     <div class="main-page-item-container">
       <div class="d-flex" style="flex-wrap: wrap;">
-        <div @click="onDetailClick(dog.dog_id)" v-for="(dog, di) in dogs" class="d-flex" :key="`dog-${di}`">
-          <div class="d-flex flex-column flex-grow-1 main-page-item">
-            <div class="d-flex main-page-item-image" :style="`background-image:url(${dog.thumnail})`" >
-              <div v-if="Math.random() > 0.7" class="d-flex justify-center align-center main-page-item-scrap">
+        <div
+          @click="onDetailClick(dog.dog_id)"
+          v-for="(dog, di) in dogs"
+          class="d-flex main-page-item"
+          :key="`dog-${di}`"
+        >
+          <div class="d-flex flex-column flex-grow-1">
+            <div
+              class="d-flex flex-shrink-1 main-page-item-image"
+              :style="`background-image:url(${dog.profile})`"
+            >
+              <div
+                v-if="Math.random() > 0.7"
+                class="d-flex justify-center align-center main-page-item-scrap"
+              >
                 <v-icon color="red">favorite</v-icon>
               </div>
             </div>
             <div class="main-page-item-content">
-              <div>
-                <div>{{dog.dog_id}}</div>
+              <div class="main-page-item-id-container">
+                <div class="main-page-item-id">{{dog.dog_id}}</div>
               </div>
               <div class="d-flex align-center">
                 <div>{{dog.age}}</div>
@@ -219,13 +230,31 @@ export default {
 }
 
 .main-page-item {
-  width: 33vw;
+  width: 33%;
+}
+
+.main-page-item-id-container {
+  position: relative;
+  height: 16px;
+  overflow: hidden;
+}
+
+.main-page-item-id {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .main-page-item-image {
   position: relative;
   width: 100%;
-  height: 33vw;
+  min-height: 100px;
+  height: 30vw;
+  max-height: 200px;
   background-size: cover;
   background-position: center center;
   opacity: 0.8;

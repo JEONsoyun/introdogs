@@ -43,7 +43,8 @@ export default {
 
 <style>
 .match-result-page {
-    padding: 24px 12px;
+    padding: 0 12px;
     padding-top: 64px;
+    padding-bottom: 80px;
 }
 </style>

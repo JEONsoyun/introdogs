@@ -1,7 +1,7 @@
 <template>
   <div class="s-dog-profile-small">
     <div class="d-flex s-dog-profile-small-box">
-      <div class="s-dog-profile-small-image" :style="`background-image: url(${data.thumnail})`">
+      <div class="s-dog-profile-small-image" :style="`background-image: url(${data.profile})`">
         <div class="s-dog-profile-small-heart">
           <v-icon color="red">favorite</v-icon>
         </div>

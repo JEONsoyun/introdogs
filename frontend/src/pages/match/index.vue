@@ -103,7 +103,9 @@ export default {
 
 .match-page-item {
   width: 33%;
-  height: 100px;
+  min-height: 100px;
+  height: 30vw;
+  max-height: 200px;
 }
 
 .match-page-item-image {

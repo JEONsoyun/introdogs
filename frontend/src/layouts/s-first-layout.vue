@@ -1,18 +1,26 @@
 <template>
-  <div class="d-flex flex-column">
-    <div class="s-first-layout-header-container">
-      <div @click="$router.push('/')" class="d-flex align-center s-first-layout-header">LOGO</div>
-    </div>
-    <div class="s-first-layout-content">
-      <div class="s-first-layout-sub-container">
-        <div class="d-flex justify-center align-center s-first-layout-sub" v-if="title != ''">
-          <div v-if="!noArrow" @click="$router.go(-1)" class="d-flex justify-center align-center s-first-layout-sub-arrow">
-            <v-icon size="28" color="#ffd501">keyboard_arrow_left</v-icon>
+  <div class="mobile-layout-container">
+    <div class="mobile-layout">
+      <div class="d-flex flex-column">
+        <div class="s-first-layout-header-container">
+          <div @click="$router.push('/')" class="d-flex align-center s-first-layout-header">LOGO</div>
+        </div>
+        <div class="s-first-layout-content">
+          <div class="s-first-layout-sub-container">
+            <div class="d-flex justify-center align-center s-first-layout-sub" v-if="title != ''">
+              <div
+                v-if="!noArrow"
+                @click="$router.go(-1)"
+                class="d-flex justify-center align-center s-first-layout-sub-arrow"
+              >
+                <v-icon size="28" color="#ffd501">keyboard_arrow_left</v-icon>
+              </div>
+              <div>{{title}}</div>
+            </div>
           </div>
-          <div>{{title}}</div>
+          <slot />
         </div>
       </div>
-      <slot />
     </div>
   </div>
 </template>
@@ -22,7 +30,7 @@ export default {
   name: 's-first-layout',
   props: {
     title: { type: String, default: '' },
-    noArrow: Boolean
+    noArrow: Boolean,
   },
   data: () => ({}),
   methods: {},
@@ -67,7 +75,6 @@ export default {
   z-index: 10;
 }
 
-
 .s-first-layout-sub {
   position: relative;
   height: 40px;
@@ -83,5 +90,4 @@ export default {
   top: 6px;
   left: 10px;
 }
-
 </style>

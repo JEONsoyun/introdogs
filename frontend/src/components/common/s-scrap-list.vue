@@ -7,7 +7,7 @@
         v-for="(dog, di) in data"
         :key="`dog-${di}`"
       >
-        <div class="s-scrap-list-image" :style="`background-image: url(${dog.thumnail})`">
+        <div class="s-scrap-list-image" :style="`background-image: url(${dog.profile})`">
           <div class="s-scrap-list-heart">
             <v-icon color="red">favorite</v-icon>
           </div>

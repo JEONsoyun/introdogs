@@ -115,7 +115,9 @@ export default {
 
 .s-dog-profile-image {
   margin: 0 16px 16px 16px;
-  height: 214px;
+  min-height: 214px;
+  height: 100vh;
+  max-height: 400px;
   background-size: cover;
   background-position: center center;
 }
@@ -151,7 +153,9 @@ export default {
 
 .s-dog-proflie-map {
   width: 100%;
-  height: 180px;
+  min-height: 180px;
+  height: 50vw;
+  max-height: 360px;
   background: #eee;
 }
 </style>
