@@ -58,6 +58,7 @@ import SMypageDrawer from './components/common/s-mypage-drawer'
 import SNavigationDrawer from './components/common/s-navigation-drawer'
 import SNavigation from './components/common/s-navigation'
 import SDogProfile from './components/common/s-dog-profile'
+import SDogProfileSmall from './components/common/s-dog-profile-small'
 import SScrapList from './components/common/s-scrap-list'
 
 Vue.component('s-button', SButton)
@@ -66,6 +67,7 @@ Vue.component('s-mypage-drawer', SMypageDrawer)
 Vue.component('s-navigation-drawer', SNavigationDrawer)
 Vue.component('s-navigation', SNavigation)
 Vue.component('s-dog-profile', SDogProfile)
+Vue.component('s-dog-profile-small', SDogProfileSmall)
 Vue.component('s-scrap-list', SScrapList)
 
 // HTML 태그 제거용

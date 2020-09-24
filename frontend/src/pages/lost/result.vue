@@ -1,16 +1,21 @@
 <template>
-  <s-first-layout title="멍멍이 매칭 결과">
-    <div class="match-result-page">
-      <s-dog-profile :data="dog" />
-      <s-button @click="onDetailClick" style="margin-top: 24px;">더 자세히 보기</s-button>
-      <s-button @click="$router.push('/')" type="white" style="margin-top: 8px;">다른 멍멍이들 보러 가기</s-button>
+  <s-first-layout title="잃어버린 멍멍이 찾기 결과">
+    <div class="lost-result-page">
+      <div class="lost-result-page-map"></div>
+      <div class="lost-result-page-list"></div>
+      <s-dog-profile-small style="margin-top: 24px;" :data="dog" />
+      <s-button
+        @click="onDetailClick"
+        style="border-top-left-radius:0;border-top-right-radius:0;"
+        size="small"
+      >자세히 보기</s-button>
     </div>
   </s-first-layout>
 </template>
 
 <script>
 export default {
-  name: 'match-result-page',
+  name: 'lost-result-page',
   data: () => ({
     dog: {
       dog_id: 'N448548202000333',
@@ -37,14 +42,29 @@ export default {
     onDetailClick() {
       this.$router.push(`/detail/${this.dog.dog_id}`);
     },
-  }
+  },
 };
 </script>
 
 <style>
-.match-result-page {
-    padding: 0 12px;
-    padding-top: 64px;
-    padding-bottom: 80px;
+.lost-result-page {
+  padding: 0 16px;
+  padding-top: 64px;
+  padding-bottom: 40px;
+}
+
+.lost-result-page-map {
+  width: 100%;
+  min-height: 180px;
+  height: 50vw;
+  max-height: 320px;
+  background: #eee;
+}
+
+.lost-result-page-list {
+  min-height: 160px;
+  height: 30vw;
+  max-height: 240px;
+  background: #fff;
 }
 </style>

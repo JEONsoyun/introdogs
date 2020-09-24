@@ -132,14 +132,9 @@ export default {
 }
 
 .login-page-enter .v-text-field {
-  font-family: NanumSquareR;
+  font-weight: 400;
   font-size: 14px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.29;
   letter-spacing: -0.39px;
-  text-align: left;
   color: #c5c5c5;
 }
 

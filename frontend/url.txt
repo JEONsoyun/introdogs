@@ -14,11 +14,17 @@
 /match
 /match/result
 
-관심 멍멍이
-/scrap
+잃어버린 멍멍이 찾기
+/lost
+/lost/result
 
-나와 닮은 멍멍이
+나와 닮은 멍멍이 찾기
 /similar
 
-멍멍이 정보
+관심 멍멍이
+/my/scrap
+나와 닮은 멍멍이
+/my/similar
+
+멍멍이 상세정보
 /detail/:dogId

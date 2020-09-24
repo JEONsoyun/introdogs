@@ -9,8 +9,13 @@ import signup from '@/pages/signup'
 import first from '@/pages/first'
 import match from '@/pages/match/index'
 import matchResult from '@/pages/match/result'
-import scrap from '@/pages/scrap'
+import lost from '@/pages/lost/index'
+import lostResult from '@/pages/lost/result'
 import similar from '@/pages/similar'
+import nearby from '@/pages/nearby'
+import about from '@/pages/about'
+import myScrap from '@/pages/my/scrap'
+import mySimilar from '@/pages/my/similar'
 import detail from '@/pages/detail'
 
 const router = new Router({
@@ -41,12 +46,32 @@ const router = new Router({
       component: matchResult
     },
     {
-      path: '/scrap',
-      component: scrap
+      path: '/lost',
+      component: lost
+    },
+    {
+      path: '/lost/result',
+      component: lostResult
     },
     {
       path: '/similar',
       component: similar
+    },
+    {
+      path: '/nearby',
+      component: nearby
+    },
+    {
+      path: '/about',
+      component: about
+    },
+    {
+      path: '/my/scrap',
+      component: myScrap
+    },
+    {
+      path: '/my/similar',
+      component: mySimilar
     },
     {
       path: '/detail/:id',

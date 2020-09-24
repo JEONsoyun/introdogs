@@ -7,17 +7,13 @@
 
 <script>
 // Login check
-const prohibitedContextsBeforeLoggedIn = [
-  /^\/info/,
-]
+const prohibitedContextsBeforeLoggedIn = [/^\/info/];
 
 export default {
   name: 'App',
   data: () => ({
     isLoggedIn: null,
-    allowedBeforeLoggedInContext: [
-
-    ],
+    allowedBeforeLoggedInContext: [],
   }),
   async beforeCreate() {
     // try {
@@ -29,7 +25,6 @@ export default {
     //   }
     //   this.$store.commit('USER', {});
     // }
-
     // try {
     //   this.isLoggedIn = await this.$api.isLoggedIn();
     //   this.$store.commit('ISLOGGEDIN', this.isLoggedIn);
@@ -38,7 +33,6 @@ export default {
     //   this.isLoggedIn = false
     //   this.$store.commit('ISLOGGEDIN', false);
     // }
-
     // if (!this.isLoggedIn) {
     //   for (const context of prohibitedContextsBeforeLoggedIn) {
     //     if (this.$route.path.match(context)) {
@@ -46,7 +40,6 @@ export default {
     //     }
     //   }
     // }
-
     // window.$root = this
     // console.log(this.$store.getters.ISLOGGEDIN)
   },
@@ -60,5 +53,15 @@ export default {
 
 span {
   margin: 0 !important;
+}
+
+.mobile-layout-container {
+  width: 100%;
+  background: #fbfbfb;
+}
+
+.mobile-layout {
+  max-width: 640px;
+  margin: 0 auto;
 }
 </style>

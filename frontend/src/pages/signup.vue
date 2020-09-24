@@ -54,6 +54,7 @@
 export default {
   name: 'signup-page',
   data: () => ({
+    data: {}
   }),
   methods: {
     async onSignupClick() {
