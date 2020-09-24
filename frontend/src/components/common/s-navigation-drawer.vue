@@ -16,11 +16,12 @@
     <div class="d-flex flex-column">
       <div class="d-flex">
         <div
-          @click="onMenuClick(1)"
+          @click="onMenuClick(0)"
           class="d-flex align-center s-navigation-drawer-menu"
-          :class="{'s-navigation-drawer-menu--selected': selectedMenuId == 1}"
+          :class="{'s-navigation-drawer-menu--selected': selectedMenuId == 0}"
         >
-          <v-icon size="24" style="margin-right:8px;">location_on</v-icon>
+          <v-icon v-if="selectedMenuId == 0" size="24" color="#ffd501" style="margin-right:8px;">location_on</v-icon>
+          <v-icon v-else size="24" style="margin-right:8px;">location_on</v-icon>
           <div>내 주변 멍멍이 찾기</div>
         </div>
       </div>
@@ -30,39 +31,43 @@
           class="d-flex align-center s-navigation-drawer-menu"
           :class="{'s-navigation-drawer-menu--selected': selectedMenuId == 1}"
         >
-          <v-icon size="24" style="margin-right:8px;">face</v-icon>
+          <v-icon v-if="selectedMenuId == 1" size="24" color="#ffd501" style="margin-right:8px;">face</v-icon>
+          <v-icon v-else size="24" style="margin-right:8px;">face</v-icon>
           <div>나와 닮은 멍멍이 찾기</div>
         </div>
       </div>
       <div class="s-navigation-drawer-bar" />
       <div class="d-flex">
         <div
-          @click="onMenuClick(1)"
+          @click="onMenuClick(2)"
           class="d-flex align-center s-navigation-drawer-menu"
-          :class="{'s-navigation-drawer-menu--selected': selectedMenuId == 1}"
+          :class="{'s-navigation-drawer-menu--selected': selectedMenuId == 2}"
         >
-          <v-icon size="24" style="margin-right:8px;">accessibility_new</v-icon>
+          <v-icon v-if="selectedMenuId == 2" size="24" color="#ffd501" style="margin-right:8px;">accessibility_new</v-icon>
+          <v-icon v-else size="24" style="margin-right:8px;">accessibility_new</v-icon>
           <div>나와 어울리는 멍멍이 매칭</div>
         </div>
       </div>
       <div class="d-flex">
         <div
-          @click="onMenuClick(1)"
+          @click="onMenuClick(3)"
           class="d-flex align-center s-navigation-drawer-menu"
-          :class="{'s-navigation-drawer-menu--selected': selectedMenuId == 1}"
+          :class="{'s-navigation-drawer-menu--selected': selectedMenuId == 3}"
         >
-          <v-icon size="24" style="margin-right:8px;">search</v-icon>
+          <v-icon v-if="selectedMenuId == 3" size="24" color="#ffd501" style="margin-right:8px;">search</v-icon>
+          <v-icon v-else size="24" style="margin-right:8px;">search</v-icon>
           <div>잃어버린 멍멍이 찾기</div>
         </div>
       </div>
       <div class="s-navigation-drawer-bar" />
       <div class="d-flex">
         <div
-          @click="onMenuClick(0)"
+          @click="onMenuClick(4)"
           class="d-flex align-center s-navigation-drawer-menu"
-          :class="{'s-navigation-drawer-menu--selected': selectedMenuId == 0}"
+          :class="{'s-navigation-drawer-menu--selected': selectedMenuId == 4}"
         >
-          <v-icon size="24" style="margin-right:8px;">pets</v-icon>
+          <v-icon v-if="selectedMenuId == 4" size="24" color="#ffd501" style="margin-right:8px;">pets</v-icon>
+          <v-icon v-else size="24" style="margin-right:8px;">pets</v-icon>
           <div>ABOUT</div>
         </div>
       </div>
@@ -84,9 +89,11 @@ export default {
         { title: '고객센터' },
       ],
       pathArray: [
-        { id: 0, path: '/about' },
-        { id: 1, path: '/notice' },
-        { id: 2, path: '/center' },
+        { id: 0, path: '/nearby' },
+        { id: 1, path: '/similar' },
+        { id: 2, path: '/match' },
+        { id: 3, path: '/lost' },
+        { id: 4, path: '/about' },
       ],
       selectedMenuId: null,
       mDrawer: this.drawer,

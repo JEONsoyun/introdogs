@@ -228,6 +228,7 @@ export default {
   height: 33vw;
   background-size: cover;
   background-position: center center;
+  opacity: 0.8;
 }
 
 .main-page-item-scrap {
