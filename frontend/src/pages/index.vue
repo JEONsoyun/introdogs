@@ -4,6 +4,11 @@
       <v-expansion-panel>
         <v-expansion-panel-header>
           <div class="d-flex" />
+          <v-icon class="d-flex flex-grow-0" size="14px">pets</v-icon>
+          <div
+            class="d-flex flex-grow-0"
+            style="margin-left:4px;color:rgba(0,0,0,.54);font-weight:bold;font-size: 12px;margin-right: 4px;"
+          >멍멍이 스타일</div>
           <template v-slot:actions>
             <v-icon>expand_more</v-icon>
           </template>
@@ -194,18 +199,26 @@ export default {
       this.dogs.push(this.dogs[2]);
     }
   },
+  mounted() {
+    if (this.$store.state.ISSKIP) {
+      return;
+    }
+    if (!localStorage.getItem('isChecked')) {
+      this.$router.push('/first');
+    }
+  },
 };
 </script>
 
 <style>
 .main-page-filter-container {
-  position: fixed;
-  top: 48px;
-  left: 0;
-  width: 100%;
-  z-index: 2;
-  background: #fbfbfb;
-  border-radius: 0;
+  position: fixed !important;
+  top: 48px !important;
+  left: 0 !important;
+  width: 100% !important;
+  z-index: 2 !important;
+  background: #fbfbfb !important;
+  border-radius: 0 !important;
 }
 
 .main-page-filter-color {

@@ -60,6 +60,7 @@ import SNavigation from './components/common/s-navigation'
 import SDogProfile from './components/common/s-dog-profile'
 import SDogProfileSmall from './components/common/s-dog-profile-small'
 import SScrapList from './components/common/s-scrap-list'
+import SMap from './components/common/s-map'
 
 Vue.component('s-button', SButton)
 Vue.component('s-header', SHeader)
@@ -69,6 +70,7 @@ Vue.component('s-navigation', SNavigation)
 Vue.component('s-dog-profile', SDogProfile)
 Vue.component('s-dog-profile-small', SDogProfileSmall)
 Vue.component('s-scrap-list', SScrapList)
+Vue.component('s-map', SMap)
 
 // HTML 태그 제거용
 Vue.filter('striphtml', function (value) {

@@ -3,7 +3,9 @@
     <div class="mobile-layout">
       <div class="d-flex flex-column">
         <div class="s-first-layout-header-container">
-          <div @click="$router.push('/')" class="d-flex align-center s-first-layout-header">LOGO</div>
+          <div @click="$router.push('/')" class="d-flex align-center s-first-layout-header">
+            <div style="padding-left: 16px;font-size:16px;color:#fff;font-weight:bold">소개해듀개LOGO</div>
+          </div>
         </div>
         <div class="s-first-layout-content">
           <div class="s-first-layout-sub-container">
@@ -53,11 +55,10 @@ export default {
 .s-first-layout-header {
   position: relative;
   height: 48px;
-  background: #fff;
+  background: #ffd501;
   font-size: 14px;
   font-weight: 700;
   color: #585858;
-  border-bottom: solid 1px #e9e9e9;
 }
 
 .s-first-layout-content {

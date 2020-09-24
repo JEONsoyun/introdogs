@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
     ISLOGGEDIN: null,
     USER: {},
+    ISSKIP: false,
 
   },
   mutations: {
@@ -15,6 +16,9 @@ export default new Vuex.Store({
     },
     USER(state, val) {
       state.USER = val
+    },
+    ISSKIP(state, val) {
+      state.ISSKIP = val
     },
 
   },
