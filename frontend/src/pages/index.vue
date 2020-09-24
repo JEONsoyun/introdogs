@@ -194,6 +194,14 @@ export default {
       this.dogs.push(this.dogs[2]);
     }
   },
+  mounted() {
+    if (this.$store.state.ISSKIP) {
+      return;
+    }
+    if (!localStorage.getItem('isChecked')) {
+      this.$router.push('/first');
+    }
+  },
 };
 </script>
 

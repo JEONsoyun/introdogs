@@ -1,12 +1,15 @@
 <template>
   <div class="s-dog-profile-small">
     <div class="d-flex s-dog-profile-small-box">
-      <div class="s-dog-profile-small-image" :style="`background-image: url(${data.profile})`">
+      <div
+        class="d-flex flex-grow-0 s-dog-profile-small-image"
+        :style="`background-image: url(${data.profile})`"
+      >
         <div class="s-dog-profile-small-heart">
           <v-icon color="red">favorite</v-icon>
         </div>
       </div>
-      <div class="s-dog-profile-small-content">
+      <div class="d-flex flex-column flex-grow-1 s-dog-profile-small-content">
         <div style="margin-bottom: 4px;">{{data.dog_id}}</div>
         <div class="d-flex s-dog-profile-small-row">
           <div class="s-dog-profile-small-title">나이</div>

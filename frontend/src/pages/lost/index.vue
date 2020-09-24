@@ -16,15 +16,16 @@
         />
       </div>
       <div class="d-flex" style="margin-top: 32px;">
-        <v-text-field label="잃어버린 위치 검색" v-model="location" dense outlined solo flat hide-details></v-text-field>
+        <v-text-field style="border-top-right-radius:0;border-bottom-right-radius:0;border-bottom-left-radius:0;" label="잃어버린 위치 검색" v-model="location" dense outlined solo flat hide-details></v-text-field>
         <div class="d-flex flex-grow-0">
-          <s-button>
+          <s-button style="border-top-left-radius:0;border-bottom-left-radius:0;border-bottom-right-radius:0;">
             <v-icon color="#fff">search</v-icon>
           </s-button>
         </div>
       </div>
-      <div class="lost-page-map"></div>
-      <div class="lost-page-list"></div>
+      <div class="lost-page-map">
+        <s-map />
+      </div>
       <s-button @click="onConfirmClick" style="margin-top: 32px;">입력 완료</s-button>
     </div>
   </s-first-layout>
@@ -89,10 +90,12 @@ export default {
   height: 44px;
   font-size: 12px;
   color: #8a8a8a !important;
+  
 }
 .lost-page fieldset {
-  border-color: #e1e1e1 !important;
-  height: 48px;
+  border-color: #ffd501 !important;
+  height: 49px;
+  border-bottom: 0;
 }
 
 .lost-page .v-text-field {
@@ -103,17 +106,10 @@ export default {
 }
 
 .lost-page-map {
-  width: 100%;
-  min-height: 180px;
-  height: 50vw;
-  max-height: 320px;
-  background: #eee;
-}
-
-.lost-page-list {
-  min-height: 160px;
-  height: 30vw;
-  max-height: 240px;
-  background: #fff;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  overflow: hidden;
+  border: solid 1px #ffd501;
+  border-top: 0;
 }
 </style>

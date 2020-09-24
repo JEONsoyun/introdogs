@@ -3,7 +3,7 @@
     <v-icon @click="onMenuClick" color="#ffd501" size="24">menu</v-icon>
     <div class="d-flex" grow/>
     <!-- <img class="s-header-logo" @click="$router.push('/').catch(()=>{})" src="/static/images/스팟_로고_웹용@2x.png" /> -->
-    <div @click="$router.push('/').catch(()=>{})">LOGO</div>
+    <div style="font-weight:bold;font-size:16px;" @click="$router.push('/').catch(()=>{})">소개해듀개LOGO</div>
     <div class="d-flex" grow/>
     <v-icon @click="onMypageClick" color="#ffd501" size="30">person</v-icon>
   </div>
