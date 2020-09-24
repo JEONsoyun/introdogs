@@ -1,5 +1,8 @@
 <template>
   <s-main-layout title="ABOUT">
+    <div class="d-flex justify-center align-center about-page">
+    업데이트 예정입니다.
+    </div>
   </s-main-layout>
 </template>
 
@@ -10,5 +13,7 @@ export default {
 </script>
 
 <style>
-
+.about-page {
+  padding: 80px;
+}
 </style>
