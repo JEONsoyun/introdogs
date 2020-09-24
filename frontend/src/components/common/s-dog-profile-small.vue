@@ -1,35 +1,33 @@
 <template>
-  <div class="s-dog-profile-small">
-    <div class="d-flex s-dog-profile-small-box">
-      <div
-        class="d-flex flex-grow-0 s-dog-profile-small-image"
-        :style="`background-image: url(${data.profile})`"
-      >
-        <div class="s-dog-profile-small-heart">
-          <v-icon color="red">favorite</v-icon>
-        </div>
+  <div class="d-flex s-dog-profile-small">
+    <div
+      class="d-flex flex-grow-0 s-dog-profile-small-image"
+      :style="`background-image: url(${data.profile})`"
+    >
+      <div class="s-dog-profile-small-heart">
+        <v-icon color="red">favorite</v-icon>
       </div>
-      <div class="d-flex flex-column flex-grow-1 s-dog-profile-small-content">
-        <div style="margin-bottom: 4px;">{{data.dog_id}}</div>
-        <div class="d-flex s-dog-profile-small-row">
-          <div class="s-dog-profile-small-title">나이</div>
-          <div class="s-dog-profile-small-text">{{data.age}}</div>
-        </div>
-        <div class="s-dog-profile-small-bar" />
-        <div class="d-flex s-dog-profile-small-row">
-          <div class="s-dog-profile-small-title">성별</div>
-          <div class="s-dog-profile-small-text">{{data.sex == 'M' ? '남' : '여'}}</div>
-        </div>
-        <div class="s-dog-profile-small-bar" />
-        <div class="d-flex s-dog-profile-small-row">
-          <div class="s-dog-profile-small-title">견종</div>
-          <div class="s-dog-profile-small-text">{{data.kind}}</div>
-        </div>
-        <div class="s-dog-profile-small-bar" />
-        <div class="d-flex s-dog-profile-small-row">
-          <div class="s-dog-profile-small-title">털색</div>
-          <div class="s-dog-profile-small-text">{{data.color}}</div>
-        </div>
+    </div>
+    <div class="d-flex flex-column flex-grow-1 s-dog-profile-small-content">
+      <div style="margin-bottom: 4px;">{{data.dog_id}}</div>
+      <div class="d-flex s-dog-profile-small-row">
+        <div class="s-dog-profile-small-title">나이</div>
+        <div class="s-dog-profile-small-text">{{data.age}}</div>
+      </div>
+      <div class="s-dog-profile-small-bar" />
+      <div class="d-flex s-dog-profile-small-row">
+        <div class="s-dog-profile-small-title">성별</div>
+        <div class="s-dog-profile-small-text">{{data.sex == 'M' ? '남' : '여'}}</div>
+      </div>
+      <div class="s-dog-profile-small-bar" />
+      <div class="d-flex s-dog-profile-small-row">
+        <div class="s-dog-profile-small-title">견종</div>
+        <div class="s-dog-profile-small-text">{{data.kind}}</div>
+      </div>
+      <div class="s-dog-profile-small-bar" />
+      <div class="d-flex s-dog-profile-small-row">
+        <div class="s-dog-profile-small-title">털색</div>
+        <div class="s-dog-profile-small-text">{{data.color}}</div>
       </div>
     </div>
   </div>
@@ -47,7 +45,7 @@ export default {
 </script>
 
 <style>
-.s-dog-profile-small-box {
+.s-dog-profile-small {
   width: 100%;
   padding: 16px;
   border-top-left-radius: 4px;
