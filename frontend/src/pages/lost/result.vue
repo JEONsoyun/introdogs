@@ -2,9 +2,12 @@
   <s-first-layout title="잃어버린 멍멍이 찾기 결과">
     <div class="lost-result-page">
       <div class="lost-result-page-map">
-      <s-map />
+        <s-map noToolbar />
       </div>
-      <s-dog-profile-small style="margin-top: 24px;" :data="dog" />
+      <s-dog-profile-small
+        style="margin-top:-1px;border-top-right-radius:0;border-top-left-radius:0;"
+        :data="dog"
+      />
       <s-button
         @click="onDetailClick"
         style="border-top-left-radius:0;border-top-right-radius:0;"
@@ -20,16 +23,16 @@ export default {
   data: () => ({
     dog: {
       dog_id: 'N448548202000333',
-      age: '2018(년생)',
-      weight: '10(Kg)',
-      sex: 'M',
+      age: '2020(년생)',
+      weight: '1(Kg)',
+      sex: 'W',
       kind: '진도견',
       color: '흰색',
       neuter: 'N',
       thumnail:
         'http://www.animal.go.kr/files/shelter/2020/07/202009151909319_s.jpg',
       profile:
-        'http://www.animal.go.kr/files/shelter/2020/07/202009151909319.jpg',
+        'http://www.animal.go.kr/files/shelter/2020/07/202009092009658.jpg',
       careAddr:
         '경상남도 합천군 합천읍 옥산로 16 (합천읍/ 까치빌라) 태민동물병원',
       careNm: '태민동물병원',
@@ -49,15 +52,15 @@ export default {
 
 <style>
 .lost-result-page {
-  padding: 0 16px;
+  padding: 24px 16px;
   padding-top: 64px;
   padding-bottom: 80px;
 }
 
 .lost-result-page-map {
-  border-radius: 4px;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
   overflow: hidden;
   border: solid 1px #ffd501;
 }
-
 </style>

@@ -10,12 +10,12 @@
 export default {
   name: 'scrap-page',
   data: () => ({
-    dogs: [
+        dogs: [
       {
         dog_id: 'N448548202000333',
         age: '2018(년생)',
         weight: '10(Kg)',
-        sex: 'M',
+        sex: 'W',
         kind: '진도견',
         color: '흰색',
         neuter: 'N',
@@ -75,7 +75,7 @@ export default {
         dog_id: 'N442418202000563',
         age: '2017(년생)',
         weight: '4(Kg)',
-        sex: 'M',
+        sex: 'W',
         kind: '푸들',
         color: '연갈색',
         neuter: 'U',
@@ -95,7 +95,7 @@ export default {
         dog_id: 'N448548202000333',
         age: '2018(년생)',
         weight: '10(Kg)',
-        sex: 'M',
+        sex: 'W',
         kind: '진도견',
         color: '흰색',
         neuter: 'N',
@@ -155,7 +155,7 @@ export default {
         dog_id: 'N442418202000563',
         age: '2017(년생)',
         weight: '4(Kg)',
-        sex: 'M',
+        sex: 'W',
         kind: '푸들',
         color: '연갈색',
         neuter: 'U',
@@ -175,7 +175,7 @@ export default {
         dog_id: 'N448548202000333',
         age: '2018(년생)',
         weight: '10(Kg)',
-        sex: 'M',
+        sex: 'W',
         kind: '진도견',
         color: '흰색',
         neuter: 'N',

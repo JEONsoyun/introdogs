@@ -71,7 +71,7 @@
           <div class="s-dog-profile-text">{{data.careAddr}}</div>
         </div>
         <div class="s-dog-proflie-map">
-          <s-map noList />
+          <s-map height="200px" noToolbar noList />
         </div>
       </template>
     </div>
