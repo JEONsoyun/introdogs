@@ -32,18 +32,18 @@ class DogList(View):
         data = Dog.objects.values()
         return JsonResponse({"data": list(data)}, status=200)
 '''
+
+
 class DogList(generics.ListCreateAPIView):
     queryset = Dog.objects.all()
     serializer_class = DogSerializer
 
+
 class DogFilter(View):
     def get(self, request, user_id):
         print(user_id)
-<<<<<<< HEAD
-        return True
-
-=======
         return user_id
+
 
 class DogDetail(APIView):
     def get_object(self, dog_id):
@@ -51,7 +51,7 @@ class DogDetail(APIView):
             return Dog.objects.get(dog_id=dog_id)
         except Dog.DoesNotExist:
             raise Http404
-    
+
     def get(self, request, dog_id, format=None):
         dog = self.get_object(dog_id)
         serializer = DogSerializer(dog)
@@ -70,9 +70,10 @@ class DogDetail(APIView):
         dog.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+
 class FindDogByImg(View):
     def post(self, request):
-        
+
         img = json.loads(request.body)
         image_w = 64
         image_h = 64
@@ -128,5 +129,3 @@ class FindDogByImg(View):
             # 즉 얘랑, 나중에 카테고리 데이터 불러와서 카테고리랑 비교를 해서 같으면 맞는거고, 아니면 틀린거로 취급하면 된다.
             # 이걸 한 것은 _4.py에.
             return JsonResponse({"data": pre_ans_str}, status=200)
-            
->>>>>>> develop_ssh_data
