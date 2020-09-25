@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'details',
     'losts',
     'arrounds',
-    'dogs.apps.DogsConfig',
     'rest_framework',
 ]
 
@@ -136,7 +135,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-
+'''
 LOGGING = {
     'version': 1,
     'formatters': {
@@ -173,7 +172,7 @@ if DEBUG:
     # make all loggers use the console.
     for logger in LOGGING['loggers']:
         LOGGING['loggers'][logger]['handlers'] = ['console']
-
+'''
 
 # 사진 올리기 도저언!
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
