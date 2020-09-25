@@ -50,6 +50,7 @@ class SignupView(View):
         users = User.objects.values()
         return JsonResponse({"data" : list(users)}, status = 200)
 
+
 class LoginView(View):
     def post(self, request):
         data = json.loads(request.body)
@@ -83,6 +84,7 @@ class LoginView(View):
 
         # return JsonResponse({'message':'등록되지 않은 이메일 입니다.'},status=200)
 
+
 class TokenCheckView(View):
     def post(self,request):
         data = json.loads(request.body)
@@ -93,7 +95,8 @@ class TokenCheckView(View):
             return HttpResponse(status=200)
 
         return HttpResponse(status=403)
-    
+
+
 class LogoutView(View):
     def post(self, request):
         # print(request.session.get('username'))
@@ -101,6 +104,7 @@ class LogoutView(View):
             del(request.session['username'])
         
         return JsonResponse({'message': '로그아웃되었습니다.'}, status = 200)
+
 
 class MypageView(View) :
     def get(self, request):
