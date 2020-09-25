@@ -14,6 +14,9 @@ from .models import User
 from likes.models import Like
 from dogs.models import Dog
 
+from rest_framework.viewsets import ModelViewSet
+from .serializers import UserSerializer
+
 class SignupView(View):
     def post(self, request):
         data = json.loads(request.body)
@@ -119,4 +122,12 @@ class ApicheckView(View):
     def get(self, request):
         if request.session['username'] :
             return JsonResponse({'message': 'true'})
+
+class FileTestViewSet(ModelViewSet):
+    queryset = User.objects.all()
+    serialize_class = UserSerializer
+
+    def create(self, request, *args, **kwargs):
+        return super(FileTestViewSet, self).create(request, *args, **kwargs)
+
     

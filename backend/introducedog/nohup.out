@@ -1,0 +1,261 @@
+[2020-09-24 03:06:22 +0000] [23992] [INFO] Starting gunicorn 20.0.4
+[2020-09-24 03:06:22 +0000] [23992] [INFO] Listening at: http://0.0.0.0:8000 (23992)
+[2020-09-24 03:06:22 +0000] [23992] [INFO] Using worker: sync
+[2020-09-24 03:06:22 +0000] [23995] [INFO] Booting worker with pid: 23995
+[2020-09-24 03:06:36 +0000] [23992] [INFO] Handling signal: winch
+[2020-09-24 03:06:37 +0000] [23992] [INFO] Handling signal: winch
+Internal Server Error: /accounts/login
+Traceback (most recent call last):
+  File "/home/ubuntu/introdogsenv/lib/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/ubuntu/introdogsenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/ubuntu/introdogsenv/lib/python3.6/site-packages/django/views/generic/base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/ubuntu/introdogsenv/lib/python3.6/site-packages/django/views/generic/base.py", line 98, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/home/ubuntu/introducedog/introducedog/accounts/views.py", line 62, in post
+    token = jwt.encode({'user_email' : data['user_email']}, SECRET_KEY, algorithm = "HS256")
+AttributeError: module 'jwt' has no attribute 'encode'
+Internal Server Error: /accounts/login
+Traceback (most recent call last):
+  File "/home/ubuntu/introdogsenv/lib/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/ubuntu/introdogsenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/ubuntu/introdogsenv/lib/python3.6/site-packages/django/views/generic/base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/ubuntu/introdogsenv/lib/python3.6/site-packages/django/views/generic/base.py", line 98, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/home/ubuntu/introducedog/introducedog/accounts/views.py", line 62, in post
+    token = jwt.encode({'user_email' : data['user_email']}, SECRET_KEY, algorithm = "HS256")
+AttributeError: module 'jwt' has no attribute 'encode'
+Internal Server Error: /accounts/login
+Traceback (most recent call last):
+  File "/home/ubuntu/introdogsenv/lib/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/ubuntu/introdogsenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/ubuntu/introdogsenv/lib/python3.6/site-packages/django/views/generic/base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/ubuntu/introdogsenv/lib/python3.6/site-packages/django/views/generic/base.py", line 98, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/home/ubuntu/introducedog/introducedog/accounts/views.py", line 62, in post
+    token = jwt.encode({'user_email' : data['user_email']}, SECRET_KEY, algorithm = "HS256")
+AttributeError: module 'jwt' has no attribute 'encode'
+Internal Server Error: /accounts/login
+Traceback (most recent call last):
+  File "/home/ubuntu/introdogsenv/lib/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/ubuntu/introdogsenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/ubuntu/introdogsenv/lib/python3.6/site-packages/django/views/generic/base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/ubuntu/introdogsenv/lib/python3.6/site-packages/django/views/generic/base.py", line 98, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/home/ubuntu/introducedog/introducedog/accounts/views.py", line 62, in post
+    token = jwt.encode({'user_email' : data['user_email']}, SECRET_KEY, algorithm = "HS256")
+AttributeError: module 'jwt' has no attribute 'encode'
+Internal Server Error: /accounts/login
+Traceback (most recent call last):
+  File "/home/ubuntu/introdogsenv/lib/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/ubuntu/introdogsenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/ubuntu/introdogsenv/lib/python3.6/site-packages/django/views/generic/base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/ubuntu/introdogsenv/lib/python3.6/site-packages/django/views/generic/base.py", line 98, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/home/ubuntu/introducedog/introducedog/accounts/views.py", line 62, in post
+    token = jwt.encode({'user_email' : data['user_email']}, SECRET_KEY, algorithm = "HS256")
+AttributeError: module 'jwt' has no attribute 'encode'
+Internal Server Error: /accounts/login
+Traceback (most recent call last):
+  File "/home/ubuntu/introdogsenv/lib/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/ubuntu/introdogsenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/ubuntu/introdogsenv/lib/python3.6/site-packages/django/views/generic/base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/ubuntu/introdogsenv/lib/python3.6/site-packages/django/views/generic/base.py", line 98, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/home/ubuntu/introducedog/introducedog/accounts/views.py", line 62, in post
+    token = jwt.encode({'user_email' : data['user_email']}, SECRET_KEY, algorithm = "HS256")
+AttributeError: module 'jwt' has no attribute 'encode'
+Internal Server Error: /accounts/login
+Traceback (most recent call last):
+  File "/home/ubuntu/introdogsenv/lib/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/ubuntu/introdogsenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/ubuntu/introdogsenv/lib/python3.6/site-packages/django/views/generic/base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/ubuntu/introdogsenv/lib/python3.6/site-packages/django/views/generic/base.py", line 98, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/home/ubuntu/introducedog/introducedog/accounts/views.py", line 62, in post
+    token = jwt.encode({'user_email' : data['user_email']}, SECRET_KEY, algorithm = "HS256")
+AttributeError: module 'jwt' has no attribute 'encode'
+Internal Server Error: /accounts/login
+Traceback (most recent call last):
+  File "/home/ubuntu/introdogsenv/lib/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/ubuntu/introdogsenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/ubuntu/introdogsenv/lib/python3.6/site-packages/django/views/generic/base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/ubuntu/introdogsenv/lib/python3.6/site-packages/django/views/generic/base.py", line 98, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/home/ubuntu/introducedog/introducedog/accounts/views.py", line 62, in post
+    token = jwt.encode({'user_email' : data['user_email']}, SECRET_KEY, algorithm = "HS256")
+AttributeError: module 'jwt' has no attribute 'encode'
+Internal Server Error: /accounts/login
+Traceback (most recent call last):
+  File "/home/ubuntu/introdogsenv/lib/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/ubuntu/introdogsenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/ubuntu/introdogsenv/lib/python3.6/site-packages/django/views/generic/base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/ubuntu/introdogsenv/lib/python3.6/site-packages/django/views/generic/base.py", line 98, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/home/ubuntu/introducedog/introducedog/accounts/views.py", line 62, in post
+    token = jwt.encode({'user_email' : data['user_email']}, SECRET_KEY, algorithm = "HS256")
+AttributeError: module 'jwt' has no attribute 'encode'
+[2020-09-24 04:09:51 +0000] [23992] [INFO] Handling signal: winch
+[2020-09-24 04:09:54 +0000] [23992] [INFO] Handling signal: int
+[2020-09-24 13:09:54 +0900] [23995] [INFO] Worker exiting (pid: 23995)
+[2020-09-24 04:09:54 +0000] [23992] [INFO] Shutting down: Master
+[2020-09-24 04:11:17 +0000] [25584] [INFO] Starting gunicorn 20.0.4
+[2020-09-24 04:11:17 +0000] [25584] [INFO] Listening at: http://0.0.0.0:8000 (25584)
+[2020-09-24 04:11:17 +0000] [25584] [INFO] Using worker: sync
+[2020-09-24 04:11:17 +0000] [25587] [INFO] Booting worker with pid: 25587
+Internal Server Error: /accounts/login
+Traceback (most recent call last):
+  File "/home/ubuntu/dj/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/ubuntu/dj/lib/python3.6/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/ubuntu/dj/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/ubuntu/dj/lib/python3.6/site-packages/django/views/generic/base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/ubuntu/dj/lib/python3.6/site-packages/django/views/generic/base.py", line 97, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/home/ubuntu/introducedog/introducedog/accounts/views.py", line 62, in post
+    token = jwt.encode({'user_email' : data['user_email']}, SECRET_KEY, algorithm = "HS256")
+AttributeError: module 'jwt' has no attribute 'encode'
+[2020-09-24 04:11:54 +0000] [25584] [INFO] Handling signal: int
+[2020-09-24 13:11:54 +0900] [25587] [INFO] Worker exiting (pid: 25587)
+[2020-09-24 04:11:54 +0000] [25584] [INFO] Shutting down: Master
+[2020-09-24 04:14:13 +0000] [25604] [INFO] Starting gunicorn 20.0.4
+[2020-09-24 04:14:13 +0000] [25604] [INFO] Listening at: http://0.0.0.0:8000 (25604)
+[2020-09-24 04:14:13 +0000] [25604] [INFO] Using worker: sync
+[2020-09-24 04:14:13 +0000] [25607] [INFO] Booting worker with pid: 25607
+[2020-09-24 04:14:28 +0000] [25604] [INFO] Handling signal: winch
+[2020-09-24 04:14:52 +0000] [25604] [INFO] Handling signal: int
+[2020-09-24 13:14:52 +0900] [25607] [INFO] Worker exiting (pid: 25607)
+[2020-09-24 04:14:52 +0000] [25604] [INFO] Shutting down: Master
+[2020-09-24 04:19:29 +0000] [25898] [INFO] Starting gunicorn 20.0.4
+[2020-09-24 04:19:29 +0000] [25898] [INFO] Listening at: http://0.0.0.0:8000 (25898)
+[2020-09-24 04:19:29 +0000] [25898] [INFO] Using worker: sync
+[2020-09-24 04:19:29 +0000] [25901] [INFO] Booting worker with pid: 25901
+[2020-09-24 04:20:28 +0000] [25898] [INFO] Handling signal: int
+[2020-09-24 13:20:28 +0900] [25901] [INFO] Worker exiting (pid: 25901)
+[2020-09-24 04:20:28 +0000] [25898] [INFO] Shutting down: Master
+[2020-09-24 04:21:50 +0000] [25928] [INFO] Starting gunicorn 20.0.4
+[2020-09-24 04:21:50 +0000] [25928] [INFO] Listening at: http://0.0.0.0:8000 (25928)
+[2020-09-24 04:21:50 +0000] [25928] [INFO] Using worker: sync
+[2020-09-24 04:21:50 +0000] [25931] [INFO] Booting worker with pid: 25931
+[2020-09-24 04:25:15 +0000] [26160] [INFO] Starting gunicorn 20.0.4
+[2020-09-24 04:25:15 +0000] [26160] [ERROR] Connection in use: ('0.0.0.0', 8000)
+[2020-09-24 04:25:15 +0000] [26160] [ERROR] Retrying in 1 second.
+[2020-09-24 04:25:16 +0000] [26160] [ERROR] Connection in use: ('0.0.0.0', 8000)
+[2020-09-24 04:25:16 +0000] [26160] [ERROR] Retrying in 1 second.
+[2020-09-24 04:25:17 +0000] [26160] [ERROR] Connection in use: ('0.0.0.0', 8000)
+[2020-09-24 04:25:17 +0000] [26160] [ERROR] Retrying in 1 second.
+[2020-09-24 04:25:18 +0000] [26160] [ERROR] Connection in use: ('0.0.0.0', 8000)
+[2020-09-24 04:25:18 +0000] [26160] [ERROR] Retrying in 1 second.
+[2020-09-24 04:25:19 +0000] [26160] [ERROR] Connection in use: ('0.0.0.0', 8000)
+[2020-09-24 04:25:19 +0000] [26160] [ERROR] Retrying in 1 second.
+[2020-09-24 04:25:20 +0000] [26160] [ERROR] Can't connect to ('0.0.0.0', 8000)
+[2020-09-24 04:28:22 +0000] [25928] [INFO] Handling signal: hup
+[2020-09-24 04:28:22 +0000] [25928] [INFO] Hang up: Master
+[2020-09-24 04:28:22 +0000] [25928] [INFO] Handling signal: hup
+[2020-09-24 04:28:22 +0000] [25928] [INFO] Hang up: Master
+[2020-09-24 04:28:22 +0000] [26184] [INFO] Booting worker with pid: 26184
+[2020-09-24 04:28:22 +0000] [26185] [INFO] Booting worker with pid: 26185
+[2020-09-24 13:28:22 +0900] [26184] [INFO] Worker exiting (pid: 26184)
+Not Found: /dog/filter
+Bad Request: /accounts/signup
+Internal Server Error: /accounts/login
+Traceback (most recent call last):
+  File "/home/ubuntu/dj/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/ubuntu/dj/lib/python3.6/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/ubuntu/dj/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/ubuntu/dj/lib/python3.6/site-packages/django/views/generic/base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/ubuntu/dj/lib/python3.6/site-packages/django/views/generic/base.py", line 97, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/home/ubuntu/introducedog/introducedog/accounts/views.py", line 61, in post
+    if bcrypt.checkpw(data['user_password'].encode('utf-8'), user.user_password.encode('utf-8')):
+  File "/home/ubuntu/dj/lib/python3.6/site-packages/bcrypt/__init__.py", line 127, in checkpw
+    ret = hashpw(password, hashed_password)
+  File "/home/ubuntu/dj/lib/python3.6/site-packages/bcrypt/__init__.py", line 105, in hashpw
+    raise ValueError("Invalid salt")
+ValueError: Invalid salt
+Internal Server Error: /accounts/login
+Traceback (most recent call last):
+  File "/home/ubuntu/dj/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/ubuntu/dj/lib/python3.6/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/ubuntu/dj/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/ubuntu/dj/lib/python3.6/site-packages/django/views/generic/base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/ubuntu/dj/lib/python3.6/site-packages/django/views/generic/base.py", line 97, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/home/ubuntu/introducedog/introducedog/accounts/views.py", line 61, in post
+    if bcrypt.checkpw(data['user_password'].encode('utf-8'), user.user_password.encode('utf-8')):
+  File "/home/ubuntu/dj/lib/python3.6/site-packages/bcrypt/__init__.py", line 127, in checkpw
+    ret = hashpw(password, hashed_password)
+  File "/home/ubuntu/dj/lib/python3.6/site-packages/bcrypt/__init__.py", line 105, in hashpw
+    raise ValueError("Invalid salt")
+ValueError: Invalid salt
+[2020-09-24 08:42:41 +0000] [25928] [CRITICAL] WORKER TIMEOUT (pid:26185)
+[2020-09-24 17:42:41 +0900] [26185] [INFO] Worker exiting (pid: 26185)
+full Dog List
+[2020-09-24 08:42:41 +0000] [27165] [INFO] Booting worker with pid: 27165
+Not Found: /
+Not Found: /favicon.ico
+usage: gunicorn [OPTIONS] [APP_MODULE]
+gunicorn: error: No application module specified.
+[2020-09-24 10:45:19 +0000] [27890] [INFO] Starting gunicorn 20.0.4
+[2020-09-24 10:45:19 +0000] [27890] [ERROR] Connection in use: ('0.0.0.0', 8000)
+[2020-09-24 10:45:19 +0000] [27890] [ERROR] Retrying in 1 second.
+[2020-09-24 10:45:20 +0000] [27890] [ERROR] Connection in use: ('0.0.0.0', 8000)
+[2020-09-24 10:45:20 +0000] [27890] [ERROR] Retrying in 1 second.
+[2020-09-24 10:45:21 +0000] [27890] [ERROR] Connection in use: ('0.0.0.0', 8000)
+[2020-09-24 10:45:21 +0000] [27890] [ERROR] Retrying in 1 second.
+[2020-09-24 10:45:22 +0000] [27890] [ERROR] Connection in use: ('0.0.0.0', 8000)
+[2020-09-24 10:45:22 +0000] [27890] [ERROR] Retrying in 1 second.
+[2020-09-24 10:45:23 +0000] [27890] [ERROR] Connection in use: ('0.0.0.0', 8000)
+[2020-09-24 10:45:23 +0000] [27890] [ERROR] Retrying in 1 second.
+[2020-09-24 10:45:24 +0000] [27890] [ERROR] Can't connect to ('0.0.0.0', 8000)
+[2020-09-24 11:13:09 +0000] [28304] [INFO] Starting gunicorn 20.0.4
+[2020-09-24 11:13:09 +0000] [28304] [ERROR] Connection in use: ('0.0.0.0', 8000)
+[2020-09-24 11:13:09 +0000] [28304] [ERROR] Retrying in 1 second.
+[2020-09-24 11:13:10 +0000] [28304] [ERROR] Connection in use: ('0.0.0.0', 8000)
+[2020-09-24 11:13:10 +0000] [28304] [ERROR] Retrying in 1 second.
+[2020-09-24 11:13:11 +0000] [28304] [ERROR] Connection in use: ('0.0.0.0', 8000)
+[2020-09-24 11:13:11 +0000] [28304] [ERROR] Retrying in 1 second.
+[2020-09-24 11:13:12 +0000] [28304] [ERROR] Connection in use: ('0.0.0.0', 8000)
+[2020-09-24 11:13:12 +0000] [28304] [ERROR] Retrying in 1 second.
+[2020-09-24 11:13:13 +0000] [28304] [ERROR] Connection in use: ('0.0.0.0', 8000)
+[2020-09-24 11:13:13 +0000] [28304] [ERROR] Retrying in 1 second.
+[2020-09-24 11:13:14 +0000] [28304] [ERROR] Can't connect to ('0.0.0.0', 8000)
+[2020-09-24 20:17:17 +0900] [27165] [INFO] Parent changed, shutting down: <Worker 27165>
+[2020-09-24 20:17:17 +0900] [27165] [INFO] Worker exiting (pid: 27165)
