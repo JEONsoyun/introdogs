@@ -19,25 +19,23 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-def FindDogByImg(request):
-    print("findDogByImg")
-    if request.method == 'POST':
-        # Do not forget to add: request.FILES
-        print("post")
-        form = UploadDocumentForm(request.POST, request.FILES)
-        print(form)
-        print(type(form))
-        print(form.__dict__)
-        if form.is_valid():
-            print("이건 되니")
-            img = form['Img']
-            logger.info(img)
-            return JsonResponse({'message': img}, status=200)
-            form.save()
-    return JsonResponse({'message': "에러"}, status=200)
+# def FindDogByImg(request):
+#     print("findDogByImg")
+#     if request.method == 'POST':
+#         # Do not forget to add: request.FILES
+#         print("post")
+#         form = UploadDocumentForm(request.POST, request.FILES)
+#         print(form)
+#         print(type(form))
+#         print(form.__dict__)
+#         if form.is_valid():
+#             print("이건 되니")
+#             img = form['Img']
+#             logger.info(img)
+#             return JsonResponse({'message': img}, status=200)
+#             form.save()
+#     return JsonResponse({'message': "에러"}, status=200)
 
-
-'''
 class FindDogByImg(request):
     def post(self, request):
         logger.info("findDog")
@@ -96,4 +94,3 @@ class FindDogByImg(request):
             # 즉 얘랑, 나중에 카테고리 데이터 불러와서 카테고리랑 비교를 해서 같으면 맞는거고, 아니면 틀린거로 취급하면 된다.
             # 이걸 한 것은 _4.py에.
             return JsonResponse({"data": pre_ans_str}, status=200)
-'''

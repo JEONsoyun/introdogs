@@ -6,9 +6,8 @@ import re
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "introducedog.settings")
 django.setup()
-
-CSV_PATH = 'shelter2.csv'
 from arrounds.models import Shelter
+CSV_PATH = 'shelterU.csv'
 
 with open(CSV_PATH, newline='', encoding='utf-8') as csvfile:
     data_reader = csv.DictReader(csvfile)
