@@ -61,7 +61,7 @@ class DogMatch(APIView):
 
         dog_list = Dog.objects.all()
         serializer = DogSerializer(dog_list, many=True)
-
+        
         result = self.recommend_dog('N447520202000218')
         for col in result['color']:
             print(col)
