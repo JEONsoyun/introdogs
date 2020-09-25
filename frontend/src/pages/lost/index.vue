@@ -15,16 +15,8 @@
           :style="`background-image:url(${previewImage})`"
         />
       </div>
-      <div class="d-flex" style="margin-top: 32px;">
-        <v-text-field style="border-top-right-radius:0;border-bottom-right-radius:0;border-bottom-left-radius:0;" label="잃어버린 위치 검색" v-model="location" dense outlined solo flat hide-details></v-text-field>
-        <div class="d-flex flex-grow-0">
-          <s-button style="border-top-left-radius:0;border-bottom-left-radius:0;border-bottom-right-radius:0;">
-            <v-icon color="#fff">search</v-icon>
-          </s-button>
-        </div>
-      </div>
-      <div class="lost-page-map">
-        <s-map />
+      <div class="lost-page-map" style="margin-top: 32px;">
+        <s-map noList />
       </div>
       <s-button @click="onConfirmClick" style="margin-top: 32px;">입력 완료</s-button>
     </div>
@@ -106,10 +98,8 @@ export default {
 }
 
 .lost-page-map {
-  border-bottom-right-radius: 4px;
-  border-bottom-left-radius: 4px;
+  border-radius: 4px;
   overflow: hidden;
   border: solid 1px #ffd501;
-  border-top: 0;
 }
 </style>

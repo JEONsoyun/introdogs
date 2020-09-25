@@ -8,7 +8,7 @@
         <img style="max-width: 50%;" src="/static/images/adopt_me.png" />
         <s-button style="margin-top:-8px;">나와 어울리는 멍멍이 매칭</s-button>
       </div>
-      <div class="d-flex flex-column align-center justify-center first-page-item">
+      <div @click="$router.push('/lost')" class="d-flex flex-column align-center justify-center first-page-item">
         <img style="max-width: 50%" src="/static/images/lost_dog.png" />
         <s-button style="margin-top:-8px;">잃어버린 멍멍이 찾기</s-button>
       </div>

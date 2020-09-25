@@ -2,7 +2,7 @@
   <s-main-layout title="내 주변 멍멍이 찾기">
     <div class="nearby-page">
       <div class="nearby-page-map">
-        <s-map />
+        <s-map noToolbar />
       </div>
       <s-dog-profile-small
         style="margin-top:-1px;border-top-right-radius:0;border-top-left-radius:0;"
@@ -23,16 +23,16 @@ export default {
   data: () => ({
     dog: {
       dog_id: 'N448548202000333',
-      age: '2018(년생)',
-      weight: '10(Kg)',
-      sex: 'M',
+      age: '2020(년생)',
+      weight: '1(Kg)',
+      sex: 'W',
       kind: '진도견',
       color: '흰색',
       neuter: 'N',
       thumnail:
         'http://www.animal.go.kr/files/shelter/2020/07/202009151909319_s.jpg',
       profile:
-        'http://www.animal.go.kr/files/shelter/2020/07/202009151909319.jpg',
+        'http://www.animal.go.kr/files/shelter/2020/07/202009092009658.jpg',
       careAddr:
         '경상남도 합천군 합천읍 옥산로 16 (합천읍/ 까치빌라) 태민동물병원',
       careNm: '태민동물병원',

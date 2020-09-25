@@ -10,7 +10,7 @@
           <img class="my-similar-page-empty-image" src="/static/images/question_dog.png"/>
           <div class="my-similar-page-empty-text">나와 닮은 멍멍이 기록이 없네요!</div>
           </div>
-          <s-button style="margin-top: 24px;">나와 닮은 멍멍이 찾으러 가기</s-button>
+          <s-button @click="$router.push('/similar')" style="margin-top: 24px;">나와 닮은 멍멍이 찾으러 가기</s-button>
       </template>
     </div>
   </s-main-layout>

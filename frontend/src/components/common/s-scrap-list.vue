@@ -12,7 +12,7 @@
             <v-icon color="red">favorite</v-icon>
           </div>
         </div>
-        <div class="s-scrap-list-content">
+        <div class="d-flex flex-column flex-grow-1 s-scrap-list-content">
           <div style="margin-bottom: 4px;">{{dog.dog_id}}</div>
           <div class="d-flex s-scrap-list-row">
             <div class="s-scrap-list-title">나이</div>
