@@ -22,4 +22,6 @@ urlpatterns = [
     path('likes', include('likes.urls')),
     path('dogs', include('dogs.urls')),
     path('details', include('details.urls')),
+    path('losts/', include('losts.urls')),
+    path('arrounds', include('arrounds.urls'))
 ]
