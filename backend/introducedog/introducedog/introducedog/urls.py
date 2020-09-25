@@ -17,19 +17,12 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-<<<<<<< HEAD
     # path('admin/', admin.site.urls),
     path('accounts', include('accounts.urls')),
     path('likes', include('likes.urls')),
     path('dogs', include('dogs.urls')),
     path('details', include('details.urls')),
     path('losts/', include('losts.urls')),
-    path('arrounds', include('arrounds.urls'))
-=======
-    #path('admin/', admin.site.urls),
-    path('accounts/', include('accounts.urls')),
-    path('dogs/', include('dogs.urls')),
-    path('likes/', include('likes.urls')),
+    path('arrounds', include('arrounds.urls')),
     path('matches/', include('matches.urls')),
->>>>>>> develop_ssh_data
 ]

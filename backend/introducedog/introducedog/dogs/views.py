@@ -39,10 +39,6 @@ class DogList(generics.ListCreateAPIView):
 class DogFilter(View):
     def get(self, request, user_id):
         print(user_id)
-<<<<<<< HEAD
-        return True
-
-=======
         return user_id
 
 class DogDetail(APIView):
@@ -129,4 +125,3 @@ class FindDogByImg(View):
             # 이걸 한 것은 _4.py에.
             return JsonResponse({"data": pre_ans_str}, status=200)
             
->>>>>>> develop_ssh_data

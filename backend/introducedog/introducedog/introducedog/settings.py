@@ -44,8 +44,8 @@ INSTALLED_APPS = [
     'details',
     'losts',
     'arrounds',
-    'dogs.apps.DogsConfig',
     'rest_framework',
+    'matches',
 ]
 
 MIDDLEWARE = [
