@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'dogs',
     'details',
     'losts',
+    'arrounds',
 ]
 
 MIDDLEWARE = [
