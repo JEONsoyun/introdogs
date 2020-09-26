@@ -18,6 +18,7 @@ from django.urls import path, include
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
+<<<<<<< HEAD
     path('accounts', include('accounts.urls')),
     path('likes', include('likes.urls')),
     path('dogs', include('dogs.urls')),
@@ -30,4 +31,13 @@ urlpatterns = [
     path('arrounds', include('arrounds.urls')),
     path('matches/', include('matches.urls')),
 >>>>>>> origin/develop-cj
+=======
+    path('accounts/', include('accounts.urls')),
+    path('likes/', include('likes.urls')),
+    path('dogs/', include('dogs.urls')),
+    path('details/', include('details.urls')),
+    path('losts/', include('losts.urls')),
+    path('arrounds/', include('arrounds.urls')),
+    path('matches/', include('matches.urls')),
+>>>>>>> origin/develop_ssh_data
 ]

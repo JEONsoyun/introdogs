@@ -42,6 +42,7 @@ class MakelikeView(View):
                 for now_dog_info in doginfo:
                     now_user['dog_info'].append(now_dog_info)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
         return JsonResponse({'user': list(myuser)}, status=200)
 
@@ -57,6 +58,8 @@ class DeletelikeView(View):
         else:
             return JsonResponse({'message': '뭔가 이상해'}, status=400)
 =======
+=======
+>>>>>>> origin/develop_ssh_data
         
         return JsonResponse({'user':list(myuser)}, status = 200)
 
@@ -70,4 +73,7 @@ class DeletelikeView(View):
         else:
             return JsonResponse({'message':'뭔가 이상해'}, status=400)
         
+<<<<<<< HEAD
 >>>>>>> origin/develop-cj
+=======
+>>>>>>> origin/develop_ssh_data

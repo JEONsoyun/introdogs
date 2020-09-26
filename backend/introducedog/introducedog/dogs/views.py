@@ -132,4 +132,7 @@ class FindDogByImg(View):
 <<<<<<< HEAD
 =======
             
+<<<<<<< HEAD
 >>>>>>> origin/develop-cj
+=======
+>>>>>>> origin/develop_ssh_data
