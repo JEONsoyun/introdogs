@@ -129,10 +129,3 @@ class FindDogByImg(View):
             # 즉 얘랑, 나중에 카테고리 데이터 불러와서 카테고리랑 비교를 해서 같으면 맞는거고, 아니면 틀린거로 취급하면 된다.
             # 이걸 한 것은 _4.py에.
             return JsonResponse({"data": pre_ans_str}, status=200)
-<<<<<<< HEAD
-=======
-            
-<<<<<<< HEAD
->>>>>>> origin/develop-cj
-=======
->>>>>>> origin/develop_ssh_data

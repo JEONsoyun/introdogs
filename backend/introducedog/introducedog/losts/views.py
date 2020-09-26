@@ -7,36 +7,24 @@ from django.shortcuts import get_object_or_404, render
 from django.shortcuts import render
 from django.views import View
 from django.http import HttpResponse, JsonResponse
+from django.core import serializers
 from io import BytesIO
 # Create your views here.
 from dogs.models import Dog
-from .forms import UploadDocumentForm
+from dogs.serializers import DogSerializer
+
 import urllib
+from rest_framework import generics
+from django.http import Http404
+from rest_framework.views import APIView
+from rest_framework.decorators import api_view
+from rest_framework import status
+from rest_framework.response import Response
 
 import json
-import logging
 from skimage import io
 import matplotlib.pyplot as plt
 
-logger = logging.getLogger(__name__)
-
-
-# def FindDogByImg(request):
-#     print("findDogByImg")
-#     if request.method == 'POST':
-#         # Do not forget to add: request.FILES
-#         print("post")
-#         form = UploadDocumentForm(request.POST, request.FILES)
-#         print(form)
-#         print(type(form))
-#         print(form.__dict__)
-#         if form.is_valid():
-#             print("이건 되니")
-#             img = form['Img']
-#             logger.info(img)
-#             return JsonResponse({'message': img}, status=200)
-#             form.save()
-#     return JsonResponse({'message': "에러"}, status=200)
 
 class FindDogByImg(View):
     def post(self, request):
@@ -79,4 +67,6 @@ class FindDogByImg(View):
                 pre_ans_str = "골든리트리버"
             print(pre_ans_str)
             cnt += 1
-        return JsonResponse({"data": pre_ans_str}, status=200)
+
+            dogList = Dog.objects.filter(kind__contains=pre_ans_str).values()
+        return JsonResponse({"data": list(dogList)}, status=200)
