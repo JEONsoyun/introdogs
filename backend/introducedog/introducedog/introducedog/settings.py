@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'losts',
     'arrounds',
     'rest_framework',
+    'matches',
 ]
 
 MIDDLEWARE = [

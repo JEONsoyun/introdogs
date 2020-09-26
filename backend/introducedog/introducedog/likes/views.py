@@ -41,6 +41,7 @@ class MakelikeView(View):
                 doginfo = Dog.objects.filter(dog_id=dogid).values()
                 for now_dog_info in doginfo:
                     now_user['dog_info'].append(now_dog_info)
+<<<<<<< HEAD
 
         return JsonResponse({'user': list(myuser)}, status=200)
 
@@ -55,3 +56,18 @@ class DeletelikeView(View):
             return JsonResponse({'message': '좋아요 취소.. 되었다! 음하하'}, status=200)
         else:
             return JsonResponse({'message': '뭔가 이상해'}, status=400)
+=======
+        
+        return JsonResponse({'user':list(myuser)}, status = 200)
+
+class DeletelikeView(View):
+    def delete(self, request, dog_id):
+        myuser = User.objects.filter(user_name = request.session.get('username')).values()
+        userid = myuser[0]['user_id']
+        if Like.objects.filter(dog_id = dog_id, user_id = userid).exists(): #이미 있을 때만! 삭제하기
+            Like.objects.filter(dog_id = dog_id, user_id = userid).delete()
+            return JsonResponse({'message':'좋아요 취소.. 되었다! 음하하'}, status =200)
+        else:
+            return JsonResponse({'message':'뭔가 이상해'}, status=400)
+        
+>>>>>>> origin/develop-cj

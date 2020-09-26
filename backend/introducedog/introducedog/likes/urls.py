@@ -5,4 +5,8 @@ urlpatterns = [
     path('', MakelikeView.as_view()),
     path('/<str:dog_id>', DeletelikeView.as_view()),
     # path('', LikelistView.as_view()),
+<<<<<<< HEAD
 ]
+=======
+]
+>>>>>>> origin/develop-cj
