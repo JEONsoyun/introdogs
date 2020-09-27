@@ -1,79 +1,43 @@
 <template>
-  <s-main-layout>
-    <v-expansion-panels class="main-page-filter-container">
-      <v-expansion-panel>
-        <v-expansion-panel-header>
-          <div class="d-flex" />
-          <v-icon class="d-flex flex-grow-0" size="14px">pets</v-icon>
-          <div
-            class="d-flex flex-grow-0"
-            style="margin-left:4px;color:rgba(0,0,0,.54);font-weight:bold;font-size: 12px;margin-right: 4px;"
-          >멍멍이 스타일</div>
-          <template v-slot:actions>
-            <v-icon>expand_more</v-icon>
-          </template>
-        </v-expansion-panel-header>
-        <v-expansion-panel-content>
-          <div class="d-flex align-center" style="margin-bottom:12px;">
-            <div
-              v-for="(color, ci) in colors"
-              :key="`color-${ci}`"
-              class="d-flex flex-grow-0 main-page-filter-color"
-              :style="`background: ${color.code}`"
-            ></div>
-          </div>
-          <div class="d-flex align-center" style="margin-bottom:8px;">
-            <img class="d-flex flex-grow-0 main-page-filter-gender" src="/static/images/male.png" />
-            <img class="d-flex flex-grow-0 main-page-filter-gender" src="/static/images/female.png" />
-            <div class="d-flex" />
-            <div class="d-flex flex-grow-0">
-              <s-button size="small">확인</s-button>
-            </div>
-          </div>
-        </v-expansion-panel-content>
-      </v-expansion-panel>
-    </v-expansion-panels>
-
-    <div class="main-page-item-container">
-      <div class="d-flex" style="flex-wrap: wrap;">
+  <s-main-layout title="나와 닮은 멍멍이 찾기">
+    <div class="my-similar-page">
+      <div @click.stop="$refs.image.click">
+        <s-button>
+          <v-icon color="#fff">photo_camera</v-icon>
+          <div style="margin-left:4px;">내 사진 업로드</div>
+        </s-button>
+        <input accept="image/*" class="d-none" ref="image" type="file" @input="pickFile" />
+      </div>
+      <div class="d-flex justify-center my-similar-page-image-container">
         <div
-          @click="onDetailClick(dog.dog_id)"
-          v-for="(dog, di) in dogs"
-          class="d-flex main-page-item"
-          :key="`dog-${di}`"
-        >
-          <div class="d-flex flex-column flex-grow-1">
+          class="my-similar-page-image"
+          v-if="previewImage"
+          :style="`background-image:url(${previewImage})`"
+        />
+      </div>
+      <s-button v-if="previewImage" @click="onConfirmClick(1)" style="margin-top: 32px;">업로드 완료</s-button>
+      <s-button v-else @click="onConfirmClick(0)" type="gray" style="margin-top: 32px;">업로드 완료</s-button>
+      <div v-if="isUploaded" class="similar-page-box">
+        <div class="d-flex align-center similar-page-section">나와 닮은 멍멍이들</div>
+        <div class="d-flex" style="flex-wrap: wrap;">
+          <div
+            @click="onDetailClick(dog.dog_id)"
+            v-for="(dog, di) in dogs"
+            :key="`dog-${di}`"
+            class="d-flex flex-column flex-grow-1 similar-page-item"
+          >
             <div
-              class="d-flex flex-shrink-1 main-page-item-image"
+              class="d-flex similar-page-item-image"
               :style="`background-image:url(${dog.profile})`"
             >
               <div
                 v-if="Math.random() > 0.7"
-                class="d-flex justify-center align-center main-page-item-scrap"
+                class="d-flex justify-center align-center similar-page-item-scrap"
               >
                 <v-icon color="red">favorite</v-icon>
               </div>
             </div>
-            <div class="main-page-item-content">
-              <div class="main-page-item-id-container">
-                <div class="main-page-item-id">{{dog.dog_id}}</div>
-              </div>
-              <div class="d-flex align-center">
-                <div>{{dog.age}}</div>
-                <div class="d-flex" />
-                <img
-                  v-if="dog.sex == 'M'"
-                  src="/static/images/male.png"
-                  style="width: 25px;height:25px"
-                />
-                <img v-else src="/static/images/female.png" style="width: 25px;height:25px" />
-              </div>
-            </div>
           </div>
-        </div>
-        <div class="d-flex align-center justify-center main-page-more">
-          더 보기
-          <v-icon color="#616161">expand_more</v-icon>
         </div>
       </div>
     </div>
@@ -82,32 +46,11 @@
 
 <script>
 export default {
-  name: 'main-page',
+  name: 'my-similar-page',
   data: () => ({
-    colors: {
-      white: { tag: ['흰', '하양', '백'], code: '#fff' },
-      cream: { tag: ['크림', '아이보리', '미'], code: 'rgb(255, 249, 223)' },
-      beige: {
-        tag: ['베이지', '황백', '살구', '연갈'],
-        code: 'rgb(197, 181, 146)',
-      },
-      yellow: {
-        tag: ['황', '노', '주황', '금', '골드', '누렁'],
-        code: 'rgb(163, 120, 26)',
-      },
-      brown: {
-        tag: ['갈', '초코', '고동', '밤', '레드'],
-        code: 'rgb(59, 28, 3)',
-      },
-      black: { tag: ['검', '블랙', '흑', '탄'], code: '#000' },
-      gray: { tag: ['회', '실버', '잿빛'], code: 'rgb(68, 68, 68)' },
-      spotted: {
-        tag: ['얼룩', '점박이', '호피', ' 바둑'],
-        code:
-          'linear-gradient(rgb(255, 255, 255),rgb(138, 85, 49),rgb(0, 0, 0))',
-      },
-    },
-        dogs: [
+    previewImage: null,
+    location: '',
+    dogs: [
       {
         dog_id: 'N448548202000333',
         age: '2018(년생)',
@@ -289,101 +232,89 @@ export default {
         end_date: '20200925',
       },
     ],
-    isFilterVisible: false,
+    isUploaded: false,
   }),
   methods: {
-    // async getBest(cnt) {
-    //   try {
-    //     if (cnt != 0) {
-    //       this.cnt += cnt;
-    //     }
-    //     let temp = await this.$api.getBest(this.startNum, this.cnt);
-    //     this.best = temp;
-    //     for (let i = 0; i < this.best.length; i++) {}
-    //   } catch (e) {
-    //     console.error(e);
-    //   }
-    // }
-    onFilterClick() {
-      this.isFilterVisible = !this.isFilterVisible;
+    pickFile(e) {
+      this.isUploaded = false;
+      let input = this.$refs.image;
+      let file = input.files;
+      if (file && file[0]) {
+        let reader = new FileReader();
+        reader.onload = (e) => (this.previewImage = e.target.result);
+        reader.readAsDataURL(file[0]);
+      } else {
+        this.previewImage = null;
+      }
     },
-    onDetailClick(id) {
-      this.$router.push(`/detail/${id}`);
+    onConfirmClick(code) {
+      if (code == 0) {
+        alert('사진을 업로드해주세요.');
+        this.isUploaded = false;
+        return;
+      }
+
+      this.isUploaded = true;
     },
   },
   async created() {
     // this.getBest(0);
-    for (var i = 0; i < 9; ++i) {
-      this.dogs.push(this.dogs[i]);
-    }
-  },
-  mounted() {
-    if (this.$store.state.ISSKIP) {
-      return;
-    }
-    if (!localStorage.getItem('isChecked')) {
-      this.$router.push('/first');
-    }
   },
 };
 </script>
 
 <style>
-.main-page-filter-container {
-  position: fixed !important;
-  top: 48px !important;
-  left: 0 !important;
-  width: 100% !important;
-  z-index: 2 !important;
-  background: #fbfbfb !important;
-  border-radius: 0 !important;
+.my-similar-page {
+  padding: 24px 16px;
+  padding-bottom: 40px;
 }
 
-.main-page-filter-color {
-  margin-right: 2px;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: solid 2px #ffd501;
+.my-similar-page-image-container {
+  padding-top: 24px;
+  max-width: 20%;
+  height: 120px;
+  display: flex;
+  margin: 0 auto;
 }
 
-.main-page-filter-gender {
-  margin-right: 2px;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: solid 2px #ffd501;
-}
-
-.main-page-item-container {
+.my-similar-page-image {
   width: 100%;
-  padding-top: 48px;
+  height: 100%;
+  background-size: cover;
+  background-position: center center;
 }
 
-.main-page-item {
+.similar-page-box {
+  width: 100%;
+  margin-top: 32px;
+  border-radius: 4px;
+  border: solid 1px #ffd501;
+  background-color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: -0.48px;
+  color: #1e1e1e;
+  overflow: hidden;
+}
+
+.similar-page-section {
+  padding: 0 16px;
+  background: #fff;
+  height: 40px;
+  color: #ffd501;
+  font-size: 16px;
+  font-weight: bold;
+  border-bottom: solid 1px #ffd501;
+}
+
+.similar-page-item {
   width: 33%;
 }
 
-.main-page-item-id-container {
-  position: relative;
-  height: 16px;
-  overflow: hidden;
-}
-
-.main-page-item-id {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-
-.main-page-item-image {
+.similar-page-item-image {
   position: relative;
   width: 100%;
-  min-height: 100px;
+  min-height: 120px;
   height: 30vw;
   max-height: 200px;
   background-size: cover;
@@ -391,7 +322,7 @@ export default {
   opacity: 0.8;
 }
 
-.main-page-item-scrap {
+.similar-page-item-scrap {
   position: absolute;
   top: 4px;
   left: 4px;
@@ -400,23 +331,4 @@ export default {
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.61);
 }
-
-.main-page-item-content {
-  padding: 4px;
-  width: 100%;
-  font-size: 10px;
-  font-weight: bold;
-  background: #fff9dc;
-  border: solid 1px #fff;
-}
-
-.main-page-more {
-  border-top: solid 1px #eee;
-  font-size: 14px;
-  font-weight: bold;
-  height: 70px;
-  color: #616161;
-  padding-bottom: 8px;
-}
 </style>
-

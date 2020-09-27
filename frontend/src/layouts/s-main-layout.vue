@@ -1,24 +1,33 @@
 <template>
-  <div class="d-flex flex-column" :class="{'s-main-layout': title != ''}">
-    <s-header
-      @toggleMenu="onToggleEvent($event, 'navigationDrawer')"
-      @toggleMypage="onToggleEvent($event, 'mypageDrawer')"
-    />
-    <s-navigation-drawer
-      @toggleMenu="onToggleEvent($event, 'navigationDrawer')"
-      :drawer="navigationDrawer"
-    />
-    <s-mypage-drawer @toggleMypage="onToggleEvent($event, 'mypageDrawer')" :drawer="mypageDrawer" />
-    <div class="s-main-layout-content">
-      <div class="s-main-layout-header-container">
-        <div class="d-flex justify-center align-center s-main-layout-header" v-if="title != ''">
-          <div v-if="!noArrow" @click="$router.go(-1)" class="d-flex justify-center align-center s-main-layout-header-arrow">
-            <v-icon size="28" color="#ffd501">keyboard_arrow_left</v-icon>
+  <div class="mobile-layout-container">
+    <div class="d-flex flex-column mobile-layout" :class="{'s-main-layout': title != ''}">
+      <s-header
+        @toggleMenu="onToggleEvent($event, 'navigationDrawer')"
+        @toggleMypage="onToggleEvent($event, 'mypageDrawer')"
+      />
+      <s-navigation-drawer
+        @toggleMenu="onToggleEvent($event, 'navigationDrawer')"
+        :drawer="navigationDrawer"
+      />
+      <s-mypage-drawer
+        @toggleMypage="onToggleEvent($event, 'mypageDrawer')"
+        :drawer="mypageDrawer"
+      />
+      <div class="s-main-layout-content">
+        <div class="s-main-layout-header-container">
+          <div class="d-flex justify-center align-center s-main-layout-header" v-if="title != ''">
+            <div
+              v-if="!noArrow"
+              @click="$router.go(-1)"
+              class="d-flex justify-center align-center s-main-layout-header-arrow"
+            >
+              <v-icon size="28" color="#ffd501">keyboard_arrow_left</v-icon>
+            </div>
+            <div>{{title}}</div>
           </div>
-          <div>{{title}}</div>
         </div>
+        <slot />
       </div>
-      <slot />
     </div>
   </div>
 </template>
@@ -27,9 +36,8 @@
 export default {
   name: 's-main-layout',
   props: {
-    noFooter: Boolean,
     title: { type: String, default: '' },
-    noArrow: Boolean
+    noArrow: Boolean,
   },
   data: () => ({
     navigationDrawer: false,
@@ -45,12 +53,12 @@ export default {
 
 <style>
 .s-main-layout {
-  padding-top: 48px;
+  padding-top: 40px;
 }
 
 .s-main-layout-content {
   position: relative;
-  padding-top: 40px;
+  padding-top: 48px;
   min-height: 100vh;
   background-color: #fbfbfb;
 }
@@ -62,7 +70,6 @@ export default {
   width: 100%;
   z-index: 10;
 }
-
 
 .s-main-layout-header {
   position: relative;
@@ -79,5 +86,4 @@ export default {
   top: 6px;
   left: 10px;
 }
-
 </style>

@@ -3,3 +3,28 @@
 
 로그인
 /login
+
+회원가입
+/signup
+
+첫번째 화면
+/first
+
+멍멍이 매칭
+/match
+/match/result
+
+잃어버린 멍멍이 찾기
+/lost
+/lost/result
+
+나와 닮은 멍멍이 찾기
+/similar
+
+관심 멍멍이
+/my/scrap
+나와 닮은 멍멍이
+/my/similar
+
+멍멍이 상세정보
+/detail/:dogId
