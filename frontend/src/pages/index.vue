@@ -14,11 +14,11 @@
           </template>
         </v-expansion-panel-header>
         <v-expansion-panel-content>
-          <div class="d-flex align-center" style="margin-bottom:12px;">
+          <div class="d-flex align-center" style="flex-wrap: wrap;margin-bottom:12px;">
             <div
               v-for="(color, ci) in colors"
               :key="`color-${ci}`"
-              class="d-flex flex-grow-0 main-page-filter-color"
+              class="d-flex flex-grow-0 flex-shrink-0 main-page-filter-color"
               :style="`background: ${color.code}`"
             ></div>
           </div>
@@ -341,6 +341,7 @@ export default {
 
 .main-page-filter-color {
   margin-right: 2px;
+  margin-bottom: 2px;
   width: 36px;
   height: 36px;
   border-radius: 50%;
@@ -362,6 +363,20 @@ export default {
 
 .main-page-item {
   width: 33%;
+  border-left: solid 1px #fff;
+  border-top: solid 1px #fff;
+}
+
+.main-page-item:nth-child(1) {
+  border: 0;
+}
+
+.main-page-item:nth-child(2) ,.main-page-item:nth-child(3) {
+  border-top: 0;
+}
+
+.main-page-item:nth-child(3n+1) {
+  border-left: 0;
 }
 
 .main-page-item-id-container {
@@ -388,7 +403,6 @@ export default {
   max-height: 200px;
   background-size: cover;
   background-position: center center;
-  opacity: 0.8;
 }
 
 .main-page-item-scrap {
@@ -407,11 +421,9 @@ export default {
   font-size: 10px;
   font-weight: bold;
   background: #fff9dc;
-  border: solid 1px #fff;
 }
 
 .main-page-more {
-  border-top: solid 1px #eee;
   font-size: 14px;
   font-weight: bold;
   height: 70px;

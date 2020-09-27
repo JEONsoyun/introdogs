@@ -309,17 +309,30 @@ export default {
 
 .similar-page-item {
   width: 33%;
+  border-left: solid 1px #fff;
+  border-top: solid 1px #fff;
+}
+
+.similar-page-item:nth-child(1) {
+  border: 0;
+}
+
+.similar-page-item:nth-child(2) ,.similar-page-item:nth-child(3) {
+  border-top: 0;
+}
+
+.similar-page-item:nth-child(3n+1) {
+  border-left: 0;
 }
 
 .similar-page-item-image {
   position: relative;
   width: 100%;
-  min-height: 120px;
+  min-height: 80px;
   height: 30vw;
   max-height: 200px;
   background-size: cover;
   background-position: center center;
-  opacity: 0.8;
 }
 
 .similar-page-item-scrap {

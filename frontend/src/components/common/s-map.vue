@@ -95,7 +95,7 @@ const DEFAULT_LONGITUDE = 126.9749625;
  */
 export default {
   props: {
-    width: { type: String, default: 'auto' },
+    width: { type: String, default: '100%' },
     height: { type: String, default: '250px' },
     zoom: { type: Number, default: 14 },
     isTourApi: { type: Boolean, default: false },

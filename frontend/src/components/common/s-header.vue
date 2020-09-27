@@ -1,11 +1,10 @@
 <template>
   <div class="d-flex justify-center align-center px-3 s-header">
-    <v-icon @click="onMenuClick" color="#ffd501" size="24">menu</v-icon>
+    <v-icon style="width:26px" @click="onMenuClick" color="#ffd501" size="24">menu</v-icon>
     <div class="d-flex" grow/>
-    <!-- <img class="s-header-logo" @click="$router.push('/').catch(()=>{})" src="/static/images/스팟_로고_웹용@2x.png" /> -->
-    <div style="font-weight:bold;font-size:16px;" @click="$router.push('/').catch(()=>{})">소개해듀개LOGO</div>
+    <img class="s-header-logo" @click="$router.push('/').catch(()=>{})" src="/static/images/logo.png" />
     <div class="d-flex" grow/>
-    <v-icon @click="onMypageClick" color="#ffd501" size="30">person</v-icon>
+    <v-icon style="width:26px" @click="onMypageClick" color="#ffd501" size="30">person</v-icon>
   </div>
 </template>
 
@@ -39,6 +38,6 @@ export default {
 }
 
 .s-header-logo {
-  height: 18px;
+  height: 22px;
 }
 </style>
