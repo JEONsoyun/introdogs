@@ -66,7 +66,7 @@
                   src="/static/images/male.png"
                   style="width: 25px;height:25px"
                 />
-                <img v-else src="/static/images/female.png" style="width: 30px;height:30px" />
+                <img v-else src="/static/images/female.png" style="width: 25px;height:25px" />
               </div>
             </div>
           </div>

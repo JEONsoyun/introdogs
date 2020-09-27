@@ -80,12 +80,13 @@ export default {
       }
     },
     async onLogoutClick() {
-      try {
-        await this.$api.logout();
-        location.href = '/tour';
-      } catch (e) {
-        console.error(e);
-      }
+      this.$router.push('/login')
+      // try {
+      //   await this.$api.logout();
+      //   location.href = '/tour';
+      // } catch (e) {
+      //   console.error(e);
+      // }
     },
     created() {
       const user = this.$store.state.USER;
