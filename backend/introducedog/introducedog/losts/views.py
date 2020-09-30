@@ -1,7 +1,7 @@
 import numpy as np
 import glob
 import os
-from keras.models import load_model
+from tensorflow.keras.models import load_model
 from PIL import Image
 from django.shortcuts import get_object_or_404, render
 from django.shortcuts import render
@@ -24,23 +24,32 @@ from rest_framework.response import Response
 import json
 from skimage import io
 import matplotlib.pyplot as plt
+import tensorflow as tf
 
 
 class FindDogByImg(View):
     def post(self, request):
         print("findDogByImg")
+        # print(os.getcwd())
+        config = tf.ConfigProto()
+        config.gpu_options.allow_growth = True
+        session = tf.Session(config=config)
+        print("여기까지 37")
         data = json.loads(request.body)
-        image_w = 64
-        image_h = 64
+        print("여기까지 data ")
+        image_w = 128
+        image_h = 128
 
         pixels = image_h * image_w * 3
-
         X = []
         filenames = []
+        print('모델 부르기 직전여기까지')
         model = load_model(
-            'C:\\Users\\multicampus\\Desktop\\jin\\s03p23a307\\backend\\introducedog\\introducedog\\losts\\dog_recog_model.h5')
+            'C:\\Users\\multicampus\\Desktop\\jin\\s03p23a307\\backend\\introducedog\\introducedog\\losts\\dog_recog_vgg150.h5')
+        print("모델 불러옴")
         res = urllib.request.urlopen(data['img_url']).read()
         img = Image.open(BytesIO(res))
+        print("이미지 불러옴")
         img = img.convert("RGB")
         img = img.resize((image_w, image_h))
         data = np.asarray(img)
