@@ -25,4 +25,5 @@ urlpatterns = [
     path('losts', include('losts.urls')),
     path('arrounds', include('arrounds.urls')),
     path('matches/', include('matches.urls')),
+    path('resemblances/', include('resemblances.urls')),
 ]

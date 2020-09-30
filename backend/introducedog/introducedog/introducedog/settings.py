@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'arrounds',
     'rest_framework',
     'matches',
+    'resemblances',
 ]
 
 MIDDLEWARE = [
