@@ -26,9 +26,12 @@ from skimage import io
 import matplotlib.pyplot as plt
 import tensorflow as tf
 
+from arrounds.models import Shelter
+
 
 class FindDogByImg(View):
     def post(self, request):
+
         print("findDogByImg")
         # print(os.getcwd())
         config = tf.ConfigProto()
@@ -36,6 +39,9 @@ class FindDogByImg(View):
         session = tf.Session(config=config)
         print("여기까지 37")
         data = json.loads(request.body)
+
+        my_lat = float(data['shelter_lat'])
+        my_lng = float(data['shelter_lng'])
         print("여기까지 data ")
         image_w = 128
         image_h = 128
@@ -78,4 +84,23 @@ class FindDogByImg(View):
             cnt += 1
 
             dogList = Dog.objects.filter(kind__contains=pre_ans_str).values()
-        return JsonResponse({"data": list(dogList)}, status=200)
+
+        shelters = Shelter.objects.values()
+
+        st = (my_lat, my_lng)
+        shelters = Shelter.objects.values()
+        # print(shelters)
+
+        shelList = sorted(shelters.items(), key=lambda x: (
+            (x['shelter_lat']-my_lat)**2) + ((x['shelter_lng']-my_lng)**2))
+
+        shelDog = {}
+        for shel in shelList[:4]:
+            shelter_name = shel['shelter_name']
+            sn = []
+            for d in dogList:
+                if(d['shelter_name'] == shelter_name):
+                    sn.append(d)
+            shelDog[shel['shelter_name']] = sn
+
+        return JsonResponse({"data": shelDog}, status=200)
