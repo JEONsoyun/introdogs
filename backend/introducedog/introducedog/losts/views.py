@@ -89,18 +89,27 @@ class FindDogByImg(View):
 
         st = (my_lat, my_lng)
         shelters = Shelter.objects.values()
-        # print(shelters)
+        shelList = []
+        for i in shelters.values():
+            shelList.append(i)
+        print(shelters)
+        print(type(shelters))
 
-        shelList = sorted(shelters.items(), key=lambda x: (
-            (x['shelter_lat']-my_lat)**2) + ((x['shelter_lng']-my_lng)**2))
+        shelList = sorted(shelList, key=lambda x: (
+            (float(x['shelter_lat'])-my_lat)**2) + ((float(x['shelter_lng'])-my_lng)**2))
 
         shelDog = {}
-        for shel in shelList[:4]:
+        cnt = 0
+        for shel in shelList:
             shelter_name = shel['shelter_name']
             sn = []
             for d in dogList:
                 if(d['shelter_name'] == shelter_name):
                     sn.append(d)
-            shelDog[shel['shelter_name']] = sn
+            if len(sn) > 0:
+                shelDog[shel['shelter_name']] = sn
+                cnt += 1
+            if cnt > 3:
+                break
 
         return JsonResponse({"data": shelDog}, status=200)
