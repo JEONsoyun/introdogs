@@ -7,14 +7,25 @@
           <v-icon class="d-flex flex-grow-0" size="14px">pets</v-icon>
           <div
             class="d-flex flex-grow-0"
-            style="margin-left:4px;color:rgba(0,0,0,.54);font-weight:bold;font-size: 12px;margin-right: 4px;"
-          >멍멍이 스타일</div>
+            style="
+              margin-left: 4px;
+              color: rgba(0, 0, 0, 0.54);
+              font-weight: bold;
+              font-size: 12px;
+              margin-right: 4px;
+            "
+          >
+            멍멍이 스타일
+          </div>
           <template v-slot:actions>
             <v-icon>expand_more</v-icon>
           </template>
         </v-expansion-panel-header>
         <v-expansion-panel-content>
-          <div class="d-flex align-center" style="flex-wrap: wrap;margin-bottom:12px;">
+          <div
+            class="d-flex align-center"
+            style="flex-wrap: wrap; margin-bottom: 12px"
+          >
             <div
               v-for="(color, ci) in colors"
               :key="`color-${ci}`"
@@ -22,9 +33,15 @@
               :style="`background: ${color.code}`"
             ></div>
           </div>
-          <div class="d-flex align-center" style="margin-bottom:8px;">
-            <img class="d-flex flex-grow-0 main-page-filter-gender" src="/static/images/male.png" />
-            <img class="d-flex flex-grow-0 main-page-filter-gender" src="/static/images/female.png" />
+          <div class="d-flex align-center" style="margin-bottom: 8px">
+            <img
+              class="d-flex flex-grow-0 main-page-filter-gender"
+              src="/static/images/male.png"
+            />
+            <img
+              class="d-flex flex-grow-0 main-page-filter-gender"
+              src="/static/images/female.png"
+            />
             <div class="d-flex" />
             <div class="d-flex flex-grow-0">
               <s-button size="small">확인</s-button>
@@ -35,7 +52,7 @@
     </v-expansion-panels>
 
     <div class="main-page-item-container">
-      <div class="d-flex" style="flex-wrap: wrap;">
+      <div class="d-flex" style="flex-wrap: wrap">
         <div
           @click="onDetailClick(dog.dog_id)"
           v-for="(dog, di) in dogs"
@@ -56,17 +73,21 @@
             </div>
             <div class="main-page-item-content">
               <div class="main-page-item-id-container">
-                <div class="main-page-item-id">{{dog.dog_id}}</div>
+                <div class="main-page-item-id">{{ dog.dog_id }}</div>
               </div>
               <div class="d-flex align-center">
-                <div>{{dog.age}}</div>
+                <div>{{ dog.age }}</div>
                 <div class="d-flex" />
                 <img
                   v-if="dog.sex == 'M'"
                   src="/static/images/male.png"
-                  style="width: 25px;height:25px"
+                  style="width: 25px; height: 25px"
                 />
-                <img v-else src="/static/images/female.png" style="width: 25px;height:25px" />
+                <img
+                  v-else
+                  src="/static/images/female.png"
+                  style="width: 25px; height: 25px"
+                />
               </div>
             </div>
           </div>
@@ -107,7 +128,11 @@ export default {
           'linear-gradient(rgb(255, 255, 255),rgb(138, 85, 49),rgb(0, 0, 0))',
       },
     },
-        dogs: [
+    data: {
+      color: [],
+      sex: 'X',
+    },
+    dogs: [
       {
         dog_id: 'N448548202000333',
         age: '2018(년생)',
@@ -292,18 +317,14 @@ export default {
     isFilterVisible: false,
   }),
   methods: {
-    // async getBest(cnt) {
-    //   try {
-    //     if (cnt != 0) {
-    //       this.cnt += cnt;
-    //     }
-    //     let temp = await this.$api.getBest(this.startNum, this.cnt);
-    //     this.best = temp;
-    //     for (let i = 0; i < this.best.length; i++) {}
-    //   } catch (e) {
-    //     console.error(e);
-    //   }
-    // }
+    async getDogs() {
+      try {
+        let res = await this.$api.getDogs(this.data);
+        this.dogs = res;
+      } catch (e) {
+        console.error(e);
+      }
+    },
     onFilterClick() {
       this.isFilterVisible = !this.isFilterVisible;
     },
@@ -312,8 +333,8 @@ export default {
     },
   },
   async created() {
-    // this.getBest(0);
-    for (var i = 0; i < 9; ++i) {
+    // this.getDogs();
+    for (let i = 0; i < 9; ++i) {
       this.dogs.push(this.dogs[i]);
     }
   },
@@ -371,11 +392,12 @@ export default {
   border: 0;
 }
 
-.main-page-item:nth-child(2) ,.main-page-item:nth-child(3) {
+.main-page-item:nth-child(2),
+.main-page-item:nth-child(3) {
   border-top: 0;
 }
 
-.main-page-item:nth-child(3n+1) {
+.main-page-item:nth-child(3n + 1) {
   border-left: 0;
 }
 

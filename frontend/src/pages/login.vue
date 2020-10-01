@@ -10,7 +10,7 @@
           <div class="login-page-id">
             <v-text-field
               label="이메일 입력"
-              v-model="data.memberEmail"
+              v-model="data.user_email"
               single-line
               solo
               flat
@@ -21,7 +21,7 @@
           <div class="login-page-pwd">
             <v-text-field
               label="비밀번호 입력"
-              v-model="data.memberPw"
+              v-model="data.user_password"
               single-line
               solo
               flat
@@ -48,7 +48,8 @@ export default {
   methods: {
     async onLoginClick() {
       try {
-        // await this.$api.login(this.data);
+        await this.$api.login(this.data);
+        this.$store.commit('ISSKIP', true);
         location.href = '/';
       } catch (e) {
         alert('아이디 또는 비밀번호를 확인해주세요.');

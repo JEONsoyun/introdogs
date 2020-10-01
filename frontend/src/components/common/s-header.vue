@@ -16,7 +16,7 @@ export default {
       this.$emit("toggleMenu", true)
     },
     onMypageClick() {
-      if (this.$store.state.ISLOGGEDIN) {
+      if (!this.$store.state.ISLOGGEDIN) {
         return this.$router.replace('/login')
       }
 
