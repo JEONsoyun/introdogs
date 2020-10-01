@@ -2,14 +2,19 @@
   <div class="mobile-layout-container">
     <div class="mobile-layout">
       <div class="d-flex flex-column">
-        <div class="s-first-layout-header-container">
-          <div @click="$router.push('/')" class="d-flex align-center s-first-layout-header">
-            <div style="padding-left: 16px;font-size:16px;color:#fff;font-weight:bold">소개해듀개LOGO</div>
-          </div>
+        <div class="d-flex align-center justify-center s-first-layout-header">
+          <img
+            src="/static/images/logo.png"
+            @click="$router.push('/first')"
+            class="s-first-layout-header-logo"
+          />
         </div>
         <div class="s-first-layout-content">
           <div class="s-first-layout-sub-container">
-            <div class="d-flex justify-center align-center s-first-layout-sub" v-if="title != ''">
+            <div
+              class="d-flex justify-center align-center s-first-layout-sub"
+              v-if="title != ''"
+            >
               <div
                 v-if="!noArrow"
                 @click="$router.go(-1)"
@@ -17,7 +22,7 @@
               >
                 <v-icon size="28" color="#ffd501">keyboard_arrow_left</v-icon>
               </div>
-              <div>{{title}}</div>
+              <div>{{ title }}</div>
             </div>
           </div>
           <slot />
@@ -44,25 +49,22 @@ export default {
   padding-top: 40px;
 }
 
-.s-first-layout-header-container {
+.s-first-layout-header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 10;
+  background: #ffd501;
+  height: 48px;
 }
 
-.s-first-layout-header {
-  position: relative;
-  height: 48px;
-  background: #ffd501;
-  font-size: 14px;
-  font-weight: 700;
-  color: #585858;
+.s-first-layout-header-logo {
+  padding: 0 16px;
+  height: 22px;
 }
 
 .s-first-layout-content {
-  position: relative;
   padding-top: 48px;
   min-height: 100vh;
   background-color: #fbfbfb;

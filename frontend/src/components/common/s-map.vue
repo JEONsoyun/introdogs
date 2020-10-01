@@ -27,7 +27,7 @@
           class="d-flex align-center s-map-searched-place"
           v-for="(searchedPlace, i) of searchedPlaces"
           :key="`searchedPlace-${i}`"
-          @click="onSearchedPlaceClick(searchedPlace)"
+          @click="onSearchedPlaceClick(searchedPlace), onPlaceSelect(searchedPlace)"
           :style="{
           background: selectedPlaceIndex == i ? '#ffd501' : null,
         }"
@@ -35,10 +35,10 @@
           <div class="d-flex" :style="{
           flexGrow: 1,
         }">{{ searchedPlace.name }}</div>
-          <button
+          <!-- <button
             @click.stop="onPlaceSelect(searchedPlace)"
             class="d-flex flex-grow-0 flex-shrink-0 btn btn-default"
-          >선택</button>
+          >선택</button> -->
         </div>
       </div>
 
@@ -57,16 +57,16 @@
       <div class="s-map-searched-place-list" v-if="dogs.length > 0">
         <div
           class="d-flex align-center s-map-searched-place"
-          v-for="(dog, di) of dogs"
-          :key="`dog-${di}`"
-          @click="onDogPick(dog)"
+          v-for="(dog, index) of dogs"
+          :key="`dog-${index}`"
+          @click="onDogClick(dog, index)"
           :style="{
-          background: selectedDogIndex == di ? '#ffd501' : null,
+          background: selectedDogIndex == index ? '#ffd501' : null,
         }"
         >
           <div class="d-flex" :style="{
           flexGrow: 1,
-        }">{{ dog.name }}</div>
+        }">{{ dog.dog_id }}</div>
         </div>
       </div>
     </template>
@@ -95,12 +95,14 @@ const DEFAULT_LONGITUDE = 126.9749625;
  */
 export default {
   props: {
-    width: { type: String, default: 'auto' },
+    width: { type: String, default: '100%' },
     height: { type: String, default: '250px' },
     zoom: { type: Number, default: 14 },
     isTourApi: { type: Boolean, default: false },
     noToolbar: { type: Boolean, default: false },
     noList: { type: Boolean, default: false },
+    draggable: { type: Boolean, default: false },
+    dogs: { type: Array, default: () => [] },
   },
   data() {
     return {
@@ -110,17 +112,21 @@ export default {
       lastSearchTime: null,
       searchedPlaces: [],
       selectedPlaceIndex: -1,
-      selectedDogIndex: -1,
+      selectedDogIndex: 0,
       isLoaded: false,
-      dogs: [
-        { name: '멍멍이1', index: 0 },
-        { name: '멍멍이2', index: 1 },
-        { name: '멍멍이3', index: 2 },
-        { name: '멍멍이4', index: 3 },
-        { name: '멍멍이5', index: 4 },
-        { name: '멍멍이6', index: 5 },
-      ],
+      markers: [],
     };
+  },
+  watch: {
+    dogs() {
+      if (this.dogs.length == 0) {
+        this.selectedDogIndex = -1;
+        this.$emit('pickDog', {});
+      } else {
+        this.selectedDogIndex = 0;
+        this.$emit('pickDog', this.dogs[0]);
+      }
+    },
   },
   methods: {
     loadResources() {
@@ -133,7 +139,9 @@ export default {
         width: this.width,
         height: this.height,
         zoom: this.zoom,
+        draggable: this.draggable,
       });
+      this.$emit("load");
     },
     async searchPlaces({ keyword, doSearchInKorea = false }) {
       const center = await this.getCenterPosition();
@@ -353,6 +361,7 @@ export default {
             position: new Tmapv2.LatLng(latitude, longitude),
             map: this.mapObject,
             title: item.name,
+            icon: '/static/images/location_default.png'
           });
 
           marker.addListener('click', (e) => {
@@ -383,17 +392,16 @@ export default {
     },
     async onPlaceSelect(searchedPlace) {
       this.selectedPlaceIndex = searchedPlace.index;
-
       let url, overview;
 
-      try {
-        const res = await this.getPlaceDetailInfo({
-          contentId: searchedPlace.contentId,
-        });
+      // try {
+      //   const res = await this.getPlaceDetailInfo({
+      //     contentId: searchedPlace.contentId,
+      //   });
 
-        url = res.url;
-        overview = res.overview;
-      } catch (e) {}
+      //   url = res.url;
+      //   overview = res.overview;
+      // } catch (e) {}
 
       const data = {
         id: searchedPlace.id,
@@ -403,28 +411,62 @@ export default {
         data: searchedPlace,
       };
 
-      if (this.isTourApi) {
-        Object.assign(data, {
-          addr1: searchedPlace.data.addr1,
-          firstimage: searchedPlace.data.firstimage,
-          url,
-          overview,
-        });
-      }
+      // if (this.isTourApi) {
+      //   Object.assign(data, {
+      //     addr1: searchedPlace.data.addr1,
+      //     firstimage: searchedPlace.data.firstimage,
+      //     url,
+      //     overview,
+      //   });
+      // }
 
       this.$emit('select', data);
     },
-    onDogPick({ index, latitude, longitude }) {
-      this.selectedDogIndex = index;
+    onDogClick(dog, index) {
+      this.selectedDogIndex = index
+      this.$emit('pickDog', dog);
+    },
+    addMyPosition(location) {
+      const { icon, latitude, longitude } = location;
+      const marker = new Tmapv2.Marker({
+        position: new Tmapv2.LatLng(latitude, longitude),
+        map: this.mapObject,
+        title: '내 위치',
+        icon,
+      });
+    },
+    addMarker(shellter) {
+      const { name, latitude, longitude } = shellter;
+      const marker = new Tmapv2.Marker({
+        position: new Tmapv2.LatLng(latitude, longitude),
+        map: this.mapObject,
+        icon: '/static/images/shelter.png',
+        title: name,
+      });
+      this.markers.push(Object.assign(marker, { shellter }));
+
+      marker.addListener('click', (e) => {
+        this.mapObject.setCenter(new Tmapv2.LatLng(latitude, longitude));
+        this.$emit('pickShellter', shellter);
+      });
+    },
+    clickMarker(index) {
+      const { shellter } = this.markers[index];
+      const { latitude, longitude } = shellter;
       this.mapObject.setCenter(new Tmapv2.LatLng(latitude, longitude));
-      this.mapObject.setZoom(14);
+      this.$emit('pickShellter', shellter);
     },
   },
   mounted() {
     this.loadResources();
     this.createMap();
-    this.$refs.placeNameKeyword.focus();
+    if (this.$refs.placeNameKeyword) {
+      this.$refs.placeNameKeyword.focus();
+    }
     this.isLoaded = true;
+    if(this.noToolbar) {
+
+    }
   },
 };
 </script>
@@ -468,8 +510,9 @@ export default {
   display: flex;
   padding: 0 12px;
   font-size: 14px;
-  letter-spacing: -0.39px;
+  letter-spacing: -0.48px;
   color: #585858;
+  font-weight: 700;
 }
 
 .s-map-searched-place:not(:last-child) {

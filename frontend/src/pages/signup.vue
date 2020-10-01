@@ -3,7 +3,7 @@
     <div class="signup-page">
       <div class="signup-page-title">이름</div>
       <v-text-field
-        v-model="data.memberName"
+        v-model="data.user_name"
         placeholder="이름 입력"
         class="signup-page-box"
         dense
@@ -13,7 +13,7 @@
       ></v-text-field>
       <div class="signup-page-title">이메일 (ID)</div>
       <v-text-field
-        v-model="data.memberEmail"
+        v-model="data.user_email"
         placeholder="이메일 입력 (예: introdogs@introdogs.com)"
         class="signup-page-box"
         dense
@@ -25,7 +25,7 @@
       <v-text-field
         type="password"
         class="signup-page-box"
-        v-model="data.memberPw"
+        v-model="data.user_password"
         dense
         hide-details
         required
@@ -38,14 +38,16 @@
         class="signup-page-box"
         type="password"
         placeholder="비밀번호 확인"
-        v-model="data.memberPwVerification"
+        v-model="data.user_password_verification"
         dense
         required
         hide-details
         outlined
       ></v-text-field>
 
-      <s-button style="margin-top:24px;" @click="onSignupClick">회원가입</s-button>
+      <s-button style="margin-top: 24px" @click="onSignupClick"
+        >회원가입</s-button
+      >
     </div>
   </s-main-layout>
 </template>
@@ -54,83 +56,54 @@
 export default {
   name: 'signup-page',
   data: () => ({
-    data: {}
+    data: {},
   }),
   methods: {
     async onSignupClick() {
       try {
-        const memberName = this.data.memberName;
-        const memberEmail = this.data.memberEmail;
-        const memberPw = this.data.memberPw;
-        const memberPwVerification = this.data.memberPwVerification;
-        let memberBirth = `${this.data.year}-${this.data.month}-${this.data.day}`;
-        const teamIdx = this.data.teamIdx;
+        const user_name = this.data.user_name;
+        const user_email = this.data.user_email;
+        const user_password = this.data.user_password;
+        const user_password_verification = this.data.user_password_verification;
 
         // 0. 이름 체크
-        if (!memberName || memberName.trim().length == 0) {
+        if (!user_name || user_name.trim().length == 0) {
           return alert('이름을 입력해주세요.');
         }
 
         // 1. 이메일 체크
-        if (!memberEmail || memberEmail.trim().length == 0) {
+        if (!user_email || user_email.trim().length == 0) {
           return alert('이메일 주소를 입력해주세요.');
         }
 
-        let checkEmailResult = await this.$api.postEmail({ memberEmail });
-
-        if (checkEmailResult.data.status != 200) {
-          return alert(
-            '이미 사용중인 이메일입니다. 다른 이메일 주소를 입력해주세요.'
-          );
-        }
-
         // 2. 이름 체크
-        if (!memberName || memberName.trim().length == 0) {
+        if (!user_name || user_name.trim().length == 0) {
           return alert('이름을 입력해주세요.');
         }
 
         // 3. 비밀번호 체크
-        if (!memberPw || memberPw.trim().length == 0) {
+        if (!user_password || user_password.trim().length == 0) {
           return alert('비밀번호를 입력해주세요.');
         }
 
-        if (memberPw != memberPwVerification) {
+        if (user_password != user_password_verification) {
           return alert('비밀번호가 일치하지 않습니다.');
         }
 
-        // 4. 약관 동의 체크
-        if (!this.data1.checkbox) {
-          return alert('약관에 동의해야 회원가입이 가능합니다.');
-        }
-
-        // 5. 생일 체크
-        if (!this.data.year && !this.data.month && !this.data.day) {
-          memberBirth = null;
-        }
-
-        await this.$api.postsignup({
-          memberEmail,
-          memberPw,
-          memberName,
-          memberBirth,
-          teamIdx,
+        await this.$api.signup({
+          user_email,
+          user_password,
+          user_name,
+          user_profile: "",
+          match_dog: "",
+          same_dog: ""
         });
 
+        alert("회원가입이 완료되었습니다.");
         this.$router.push('/');
       } catch (e) {
         console.error(e);
-      }
-    },
-    async postEmail() {
-      try {
-        const memberEmail = this.data.memberEmail;
-        const post = {
-          memberEmail,
-        };
-        let tmp = await this.$api.postEmail(post);
-        console.log(tmp.data.message);
-      } catch (e) {
-        console.error(e);
+        alert('회원가입 중 문제가 발생하였습니다.');
       }
     },
   },

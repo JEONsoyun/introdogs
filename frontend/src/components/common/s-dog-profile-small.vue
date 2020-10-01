@@ -2,14 +2,14 @@
   <div class="d-flex s-dog-profile-small">
     <div
       class="d-flex flex-grow-0 s-dog-profile-small-image"
-      :style="`background-image: url(${data.profile})`"
+      :style="`background-image: url(${data.profile ? data.profile : data.thumnail})`"
     >
       <div class="s-dog-profile-small-heart">
         <v-icon color="red">favorite</v-icon>
       </div>
     </div>
     <div class="d-flex flex-column flex-grow-1 s-dog-profile-small-content">
-      <div style="margin-bottom: 4px;">{{data.dog_id}}</div>
+      <div style="margin-bottom: 4px;font-size:10px">{{data.dog_id}}</div>
       <div class="d-flex s-dog-profile-small-row">
         <div class="s-dog-profile-small-title">나이</div>
         <div class="s-dog-profile-small-text">{{data.age}}</div>
@@ -62,7 +62,8 @@ export default {
   position: relative;
   margin-right: 16px;
   height: 150px;
-  width: 150px;
+  width: 50%;
+  max-width: 150px;
   background-size: cover;
   background-position: center center;
 }

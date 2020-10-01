@@ -1,12 +1,14 @@
 <template>
   <s-main-layout title="멍멍이 상세보기">
     <div class="detail-page">
-      <div class="d-flex align-center" style="margin-bottom: 8px;">
-        <div class="detail-page-title">{{dog.dog_id}}</div>
+      <div class="d-flex align-center" style="margin-bottom: 8px">
+        <div class="detail-page-title">{{ dog ? dog.dog_id : '' }}</div>
         <div class="d-flex" />
         <div @click="onScrapClick">
           <v-icon v-if="isScrapped" size="36" color="red">favorite</v-icon>
-          <v-icon v-if="!isScrapped" size="36" color="red">favorite_border</v-icon>
+          <v-icon v-if="!isScrapped" size="36" color="red"
+            >favorite_border</v-icon
+          >
         </div>
       </div>
       <s-dog-profile :data="dog" isDetail />
@@ -19,36 +21,27 @@ export default {
   name: 'detail-page',
   data: () => ({
     dogId: 0,
-    dog: {
-      dog_id: 'N448548202000333',
-      age: '2020(년생)',
-      weight: '1(Kg)',
-      sex: 'W',
-      kind: '진도견',
-      color: '흰색',
-      neuter: 'N',
-      thumnail:
-        'http://www.animal.go.kr/files/shelter/2020/07/202009151909319_s.jpg',
-      profile:
-        'http://www.animal.go.kr/files/shelter/2020/07/202009092009658.jpg',
-      careAddr:
-        '경상남도 합천군 합천읍 옥산로 16 (합천읍/ 까치빌라) 태민동물병원',
-      careNm: '태민동물병원',
-      special: '겁이 많고 경계심이 많아서 조심성이 많은 성격',
-      find_place: '합천읍 충효로',
-      find_date: '20200915',
-      end_date: '20200925',
-    },
+    dog: {},
     isScrapped: false,
   }),
   methods: {
     onScrapClick() {
-      this.isScrapped = !this.isScrapped
-    }
+      this.isScrapped = !this.isScrapped;
+    },
   },
-  created() {
+  async created() {
     this.dogId = this.$route.params.id;
+    if (this.dogId == 0) {
+      this.dogId = 'N448538202000489';
+    }
     // dog api 부르기
+    try {
+      let res = await this.$api.getDog(this.dogId);
+      this.dog = res.dog_info[0];
+      console.log(this.dog);
+    } catch (e) {
+      console.error(e);
+    }
   },
 };
 </script>
