@@ -361,6 +361,7 @@ export default {
             position: new Tmapv2.LatLng(latitude, longitude),
             map: this.mapObject,
             title: item.name,
+            icon: '/static/images/location_default.png'
           });
 
           marker.addListener('click', (e) => {
@@ -509,8 +510,9 @@ export default {
   display: flex;
   padding: 0 12px;
   font-size: 14px;
-  letter-spacing: -0.39px;
+  letter-spacing: -0.48px;
   color: #585858;
+  font-weight: 700;
 }
 
 .s-map-searched-place:not(:last-child) {

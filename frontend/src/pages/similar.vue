@@ -256,6 +256,9 @@ export default {
 
       this.isUploaded = true;
     },
+    onDetailClick(id) {
+      this.$router.push(`/detail/${id}`);
+    },
   },
   async created() {
     // this.getBest(0);

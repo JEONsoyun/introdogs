@@ -3,7 +3,6 @@
     <div class="lost-result-page">
       <div class="lost-result-page-map">
         <s-map
-          draggable 
           @load="onMapLoad"
           @pickDog="onPickDog"
           @pickShellter="onPickShellter" ref="map" noToolbar
@@ -14,7 +13,7 @@
         :data="dog"
       />
       <s-button
-        @click="onDetailClick"
+        @click="onDetailClick(dog.dog_id)"
         style="border-top-left-radius:0;border-top-right-radius:0;"
         size="small"
       >자세히 보기</s-button>
@@ -1561,8 +1560,8 @@ export default {
     },
   },
   methods: {
-    onDetailClick() {
-      this.$router.push(`/detail/${this.dog.dog_id}`);
+    onDetailClick(id) {
+      this.$router.push(`/detail/${id}`);
     },
     onMapLoad() {
       this.updateMapCenter();

@@ -2,7 +2,7 @@
   <div class="d-flex s-dog-profile-small">
     <div
       class="d-flex flex-grow-0 s-dog-profile-small-image"
-      :style="`background-image: url(${data.profile})`"
+      :style="`background-image: url(${data.profile ? data.profile : data.thumnail})`"
     >
       <div class="s-dog-profile-small-heart">
         <v-icon color="red">favorite</v-icon>

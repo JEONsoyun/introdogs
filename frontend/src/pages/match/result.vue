@@ -2,7 +2,7 @@
   <s-first-layout title="멍멍이 매칭 결과">
     <div class="match-result-page">
       <s-dog-profile :data="dog" />
-      <s-button @click="onDetailClick" style="margin-top: 24px;">더 자세히 보기</s-button>
+      <s-button @click="onDetailClick(dog.dog_id)" style="margin-top: 24px;">더 자세히 보기</s-button>
       <s-button @click="$router.push('/')" type="white" style="margin-top: 8px;">다른 멍멍이들 보러 가기</s-button>
     </div>
   </s-first-layout>
@@ -34,8 +34,8 @@ export default {
     },
   }),
   methods: {
-    onDetailClick() {
-      this.$router.push(`/detail/${this.dog.dog_id}`);
+    onDetailClick(id) {
+      this.$router.push(`/detail/${id}`);
     },
   }
 };
