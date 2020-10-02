@@ -108,6 +108,10 @@ class FindDogByImg(View):
                     sn.append(d)
             if len(sn) > 0:
                 shelDog[shel['shelter_name']] = sn
+                shelDog[shel['shelter_name']].append(
+                    {'shelter_lat': shel['shelter_lat']})
+                shelDog[shel['shelter_name']].append(
+                    {'shelter_lng': shel['shelter_lng']})
                 cnt += 1
             if cnt > 3:
                 break
