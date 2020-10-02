@@ -46,7 +46,7 @@ class FindDogByImg(View):
         filenames = []
         print('모델 부르기 직전여기까지')
         model = load_model(
-            'C:\\Users\\multicampus\\Desktop\\jin\\s03p23a307\\backend\\introducedog\\introducedog\\losts\\dog_recog_vgg150.h5')
+            '.\\losts\\dog_recog_vgg150.h5')
         print("모델 불러옴")
         res = urllib.request.urlopen(data['img_url']).read()
         img = Image.open(BytesIO(res))
