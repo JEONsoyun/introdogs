@@ -1,8 +1,9 @@
 from django.urls import path
-# from .views import DogList, DogFilter
+from .views import Aroundshelter, FindShelterDog
 
 urlpatterns = [
-    # path('/filter', DogList.as_view()),
-    # path('/<int:user_id>/', DogFilter.as_view()),
+    path('/shelters', Aroundshelter.as_view()),
+    path('/shelter', FindShelterDog.as_view()),
+    path('/<str:shelter_name>', FindShelterDog.as_view()),
 
 ]

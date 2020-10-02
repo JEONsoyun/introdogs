@@ -4,6 +4,7 @@ from dogs import views
 from .views import DogList, DogFilter, FindDogByImg
 
 urlpatterns = [
+
     path('dogs/', views.DogList.as_view()),
     path('details/<str:dog_id>/', views.DogDetail.as_view()),
     #path('/filter', DogList.as_view()),

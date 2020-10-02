@@ -97,15 +97,15 @@ class DogMatch(APIView):
         
         return result
 
-    #dog_id에 해당하는 dog를 return해준다, 없다면 http404
+    # dog_id에 해당하는 dog를 return해준다, 없다면 http404
     def get_object(self, dog_id):
         try:
             return Dog.objects.get(dog_id=dog_id)
         except Dog.DoesNotExist:
             raise Http404
-    
+
     def post(self, request, format=None):
-         #reqeust에서 넘어온 값에서 data을 뽑음
+        #reqeust에서 넘어온 값에서 data을 뽑음
         data = request.data
         '''
         {"pick" : {
@@ -203,3 +203,4 @@ class DogMatch(APIView):
         
         return Response({'qualification' : True, 'size' : size, 'list' : rere, 'num' : 11})
 
+        return Response(rere)
