@@ -73,13 +73,15 @@ class FindDogByImg(View):
             if pre_ans == 0:
                 pre_ans_str = "포메"
             elif pre_ans == 1:
-                pre_ans_str = "말티즈"
+                pre_ans_str = "말티"
             elif pre_ans == 2:
                 pre_ans_str = "치와와"
             elif pre_ans == 3:
-                pre_ans_str = "토이푸들"
+                pre_ans_str = "푸들"
+            elif pre_ans == 4:
+                pre_ans_str = "리트"
             else:
-                pre_ans_str = "골든리트리버"
+                pre_ans_str = "진"
             print(pre_ans_str)
             cnt += 1
 

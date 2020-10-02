@@ -76,7 +76,7 @@ class FindDogByImg(View):
             elif pre_ans == 4:
                 pre_ans_str = "골든리트리버"
             else:
-                pre_ans_str = "진돗개"
+                pre_ans_str = "진도견"
             print(pre_ans_str)
             cnt += 1
             dogList = Dog.objects.filter(kind__contains=pre_ans_str).values()
