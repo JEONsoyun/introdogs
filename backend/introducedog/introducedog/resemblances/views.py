@@ -1,4 +1,4 @@
-import numpy as np
+﻿import numpy as np
 import glob
 import os
 from tensorflow.keras.models import load_model
@@ -46,7 +46,7 @@ class FindDogByImg(View):
         filenames = []
         print('모델 부르기 직전여기까지')
         model = load_model(
-            '.\\losts\\dog_recog_vgg150.h5')
+            './losts/dog_recog_vgg150.h5')
         print("모델 불러옴")
         res = urllib.request.urlopen(data['img_url']).read()
         img = Image.open(BytesIO(res))
