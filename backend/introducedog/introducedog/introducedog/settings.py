@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
+import logging.config
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -25,19 +26,27 @@ SECRET_KEY = '2or4xzw31m+a*9nyh6(=k&drv_f0-9exd7ol@0sxc%dtv%7w!u'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
     # 'django.contrib.admin',
-    # 'django.contrib.auth',
+    'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts',
+    'likes',
+    'dogs',
+    'details',
+    'losts',
+    'arrounds',
+    'rest_framework',
+    'matches',
+    'resemblances',
 ]
 
 MIDDLEWARE = [
@@ -80,12 +89,12 @@ DATABASES = {
         "NAME": 'dog',
         "USER": 'root',
         "PASSWORD": 'throgoebro123',
-        "HOST":'j3a307.p.ssafy.io',
-        "PORT":'3306',
+        "HOST": 'j3a307.p.ssafy.io',
+        "PORT": '3306',
         "OPTIONS": {
             'init_command': 'SET sql_mode="STRICT_TRANS_TABLES"'
         }
-        
+
     }
 }
 
@@ -127,3 +136,46 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+'''
+LOGGING = {
+    'version': 1,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        },
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'file.log',
+            'formatter': 'simple'
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    }
+}
+
+if DEBUG:
+    # make all loggers use the console.
+    for logger in LOGGING['loggers']:
+        LOGGING['loggers'][logger]['handlers'] = ['console']
+'''
+
+# 사진 올리기 도저언!
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
