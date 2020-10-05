@@ -31,7 +31,6 @@ export default {
           user: [user],
         } = await this.$api.getMe();
         this.$store.commit('USER', user);
-        console.log(user)
       } catch (e) {
         if (!e || !e.response || e.response.status != 400) {
           console.error(e);

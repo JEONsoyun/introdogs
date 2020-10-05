@@ -74,7 +74,7 @@
                 :style="`background-image:url(${dog.profile})`"
               >
                 <div
-                  v-if="scraps[di]"
+                  v-if="scraps.length != 0 && scraps != null && scraps[di]"
                   class="d-flex justify-center align-center main-page-item-scrap"
                 >
                   <v-icon color="red">favorite</v-icon>
@@ -148,6 +148,7 @@ export default {
       sex: 'X',
     },
     dogs: [],
+    scrapDogs: [],
     isFilterVisible: false,
     scraps: [],
   }),
@@ -173,24 +174,26 @@ export default {
     async getScraps() {
       try {
         let res = await this.$api.getScraps();
-        this.dogs = res.user[0].dog_info;
-        for (let i in this.dogs) {
-          if (this.dogs[i].dog_id == this.dogId) {
-            this.scraps[i] = true;
-          } else {
-            this.scraps[i] = false;
-          }
+        if (!res.user) {
+          return;
         }
+        this.scrapDogs = res.user[0].dog_info;
       } catch (e) {
         console.error(e);
       }
     },
   },
   async created() {
-    if (this.$store.state.ISLOGGEDIN) {
-      this.getScraps();
+    await this.getScraps();
+    await this.getDogs();
+    for (let i in this.dogs) {
+      for (let j in this.scrapDogs) {
+        if (this.scrapDogs[j].dog_id == this.dogs[i].dog_id) {
+          this.scraps[i] = true;
+        }
+      }
     }
-    this.getDogs();
+    this.$forceUpdate();
   },
   mounted() {
     if (this.$store.state.ISSKIP) {
