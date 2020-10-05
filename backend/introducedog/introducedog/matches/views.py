@@ -188,6 +188,21 @@ class DogMatch(APIView):
             "q11" : 4
         }} 
         '''
+        #설문을 하지 않았을 경우 그냥 return 
+        if len(data['pick']) == 0 & len(data['survey']) == 0 :
+            dog_list = Dog.objects.all()
+            serializer = DogSerializer(dog_list, many=True)
+            data = serializer.data
+            df = pd.DataFrame(data)
+
+            df.sort_values(by=['age'], axis=0)
+
+            rere = []
+            for dog in df['dog_id']:
+                rere.append(DogSerializer(self.get_object(dog)).data)
+
+            return Response({'qualification' : True, 'size' : 0, 'list' : rere, 'num' : 0})        
+
         #사진 속 개 종의 성격을 합쳐 그에 비슷한 성격의 종들의 목록(breeds)를 준다.
         pick = data['pick']
         breeds = self.find_breed_list(pick)
@@ -206,14 +221,11 @@ class DogMatch(APIView):
         #size 1 : 소형견, 2 : 중형견이하, 3 : 대형견 이하        
         #사이즈, 성격의 코사인 유사도가 높은 목록을 result에 저장
         result = self.recommend_dog(size, breeds)
-        #print(result)
-        #result = result[30:]
 
         #리스트에 있는 아이디를 가진 개의 정보를 json형식으로 rere에 추가한후, return
         rere = []
         for dog in result:
             rere.append(DogSerializer(self.get_object(dog)).data)
         
-        return Response({'qualification' : True, 'size' : size, 'list' : rere, 'num' : 11})
+        return Response({'qualification' : True, 'size' : size, 'list' : rere, 'num' : num})
 
-        return Response(rere)

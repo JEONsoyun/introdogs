@@ -27,22 +27,26 @@ class DogColorMatch(APIView):
     def recommend_dog_with_color(self, req):
         colorin = req['color']
         sex = req['sex']
-
-        #사용자의 선택을 기준으로 선호하는 성격을 가진 종을 찾는다.
-        breeds = DogMatch.find_breed_list(self, req['pick'])
-
-        #설문조사를 기준으로 size를 찾는다.
-        size_qualification_num = DogMatch.check_qualification(self, req['survey'])
-        size = size_qualification_num[0]
-
-        #size 1 : 소형견, 2 : 중형견이하, 3 : 대형견 이하        
-        #사이즈, 성격의 코사인 유사도가 높은 목록을 result에 저장
-        result = DogMatch.recommend_dog(self, size, breeds)
-
-        #리스트에 있는 아이디를 가진 개의 정보를 json형식으로 rere에 추가한후, return
         dog_list = []
-        for dog in result:
-            dog_list.append(self.get_object(dog))
+
+        if len(req['pick']) == 0 & len(req['survey']) == 0 :
+            dog_list = Dog.objects.all()
+        else :
+            #사용자의 선택을 기준으로 선호하는 성격을 가진 종을 찾는다.
+            breeds = DogMatch.find_breed_list(self, req['pick'])
+
+            #설문조사를 기준으로 size를 찾는다.
+            size_qualification_num = DogMatch.check_qualification(self, req['survey'])
+            size = size_qualification_num[0]
+
+            #size 1 : 소형견, 2 : 중형견이하, 3 : 대형견 이하        
+            #사이즈, 성격의 코사인 유사도가 높은 목록을 result에 저장
+            result = DogMatch.recommend_dog(self, size, breeds)
+
+            #리스트에 있는 아이디를 가진 개의 정보를 json형식으로 rere에 추가한후, return
+            for dog in result:
+                dog_list.append(self.get_object(dog))
+
         serializer = DogSerializer(dog_list, many=True)
         data = serializer.data
         df = pd.DataFrame(data)
@@ -100,22 +104,25 @@ class DogColorContainMatch(APIView):
     def recommend_dog_with_color(self, req):
         colorin = req['color']
         sex = req['sex']
-
-        #사용자의 선택을 기준으로 선호하는 성격을 가진 종을 찾는다.
-        breeds = DogMatch.find_breed_list(self, req['pick'])
-
-        #설문조사를 기준으로 size를 찾는다.
-        size_qualification_num = DogMatch.check_qualification(self, req['survey'])
-        size = size_qualification_num[0]
-
-        #size 1 : 소형견, 2 : 중형견이하, 3 : 대형견 이하        
-        #사이즈, 성격의 코사인 유사도가 높은 목록을 result에 저장
-        result = DogMatch.recommend_dog(self, size, breeds)
-
-        #리스트에 있는 아이디를 가진 개의 정보를 json형식으로 rere에 추가한후, return
         dog_list = []
-        for dog in result:
-            dog_list.append(self.get_object(dog))
+
+        if len(req['pick']) == 0 & len(req['survey']) == 0 :
+            dog_list = Dog.objects.all()
+        else :
+            #사용자의 선택을 기준으로 선호하는 성격을 가진 종을 찾는다.
+            breeds = DogMatch.find_breed_list(self, req['pick'])
+
+            #설문조사를 기준으로 size를 찾는다.
+            size_qualification_num = DogMatch.check_qualification(self, req['survey'])
+            size = size_qualification_num[0]
+
+            #size 1 : 소형견, 2 : 중형견이하, 3 : 대형견 이하        
+            #사이즈, 성격의 코사인 유사도가 높은 목록을 result에 저장
+            result = DogMatch.recommend_dog(self, size, breeds)
+
+            #리스트에 있는 아이디를 가진 개의 정보를 json형식으로 rere에 추가한후, return
+            for dog in result:
+                dog_list.append(self.get_object(dog))
 
         #dog_list = Dog.objects.all()
         serializer = DogSerializer(dog_list, many=True)
@@ -123,7 +130,6 @@ class DogColorContainMatch(APIView):
         df = pd.DataFrame(data)
 
         df = df[['dog_id', 'kind', 'color', 'sex']]
-        print(df)
         #성별 조건이 있다면 F, M -> 그조건에 맞는 data만 남긴다.
         if sex == 'F' :
             is_sex = df['sex'] == 'F'
@@ -132,10 +138,8 @@ class DogColorContainMatch(APIView):
             is_sex = df['sex'] == 'M'
             df = df[is_sex]
 
-        print(df)
         #입력된 색을 포함하는 목록을 찾는다.
         contain_list = []
-        idx = 0
         for now_id, now_color in zip(df['dog_id'], df['color']):
             print(now_color)
             cnt = 0
@@ -145,16 +149,8 @@ class DogColorContainMatch(APIView):
                 if color in now_color:
                     cnt += 1
 
-                #for word in list(color):
-                    #if word in now_color:
-                    #    cnt += 1
+            contain_list.append((now_id, cnt))
 
-            if cnt != 0:
-                print(cnt)
-                contain_list.append((now_id, cnt))
-            idx += 1
-
-        print(contain_list)
         contain_list.sort(key= lambda node: node[1], reverse=True)
         print(contain_list)
         return contain_list
