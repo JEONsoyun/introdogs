@@ -10,21 +10,16 @@
   >
     <div class="d-flex flex-grow-0 s-mypage-drawer-header">
       <div class="d-flex" />
-      <v-icon @click="onToggleEvent" color="#d2d2d2" size="26">close</v-icon>
+      <v-icon @click="onToggleEvent" color="#ffd501" size="26">close</v-icon>
     </div>
     <div class="d-flex flex-grow-0 align-center">
-      <div class="s-mypage-drawer-img">
-        <img style="max-width: 100%" src="/static/images/user.png" />
+      <div class="d-flex flex-grow-0 justify-center align-center s-mypage-drawer-img">
+        <img style="max-width: 80%" src="/static/images/dog_profile.png" />
       </div>
-      <div class="s-mypage-drawer-id">{{$store.state.USER.memberName}}</div>
+      <div class="s-mypage-drawer-id">{{$store.state.USER.user_name || '익명'}}</div>
     </div>
     <div class="s-mypage-drawer-bar" />
     <div class="d-flex flex-column flex-grow-1 s-mypage-drawer-menu-container">
-      <div
-        @click="onProfileClick"
-        class="d-flex align-center justify-center flex-grow-0 s-mypage-drawer-button"
-      >회원 정보</div>
-      <div class="s-mypage-drawer-bar" />
       <template v-for="(menu, menuIndex) in items">
         <div
           @click="onMenuClick(menu.path)"
@@ -35,10 +30,7 @@
       </template>
     </div>
     <div class="d-flex flex-column s-mypage-drawer-footer">
-      <div
-        @click="onLogoutClick"
-        class="d-flex align-center justify-center s-mypage-drawer-button-gray"
-      >로그아웃</div>
+      <s-button @click="onLogoutClick">로그아웃</s-button>
     </div>
   </v-navigation-drawer>
 </template>
@@ -52,9 +44,8 @@ export default {
   data() {
     return {
       items: [
-        { title: '예약 내역', path: '/mypage/reservations' },
-        { title: '나의 투어 리뷰', path: '/mypage/review' },
-        { title: '내가 작성한 글', path: '/mypage/article' },
+        { title: '관심 멍멍이 목록', path: '/my/scrap' },
+        { title: '나와 닮은 멍멍이', path: '/my/similar' },
       ],
       mDrawer: this.drawer,
     };
@@ -91,7 +82,7 @@ export default {
     async onLogoutClick() {
       try {
         await this.$api.logout();
-        location.href = '/tour';
+        location.href = '/';
       } catch (e) {
         console.error(e);
       }
@@ -169,6 +160,7 @@ export default {
 .s-mypage-drawer-footer {
   border-top: solid 1px rgb(234, 234, 234);
   background: #fbfbfb;
+  padding: 12px;
 }
 
 .s-mypage-drawer-button-gray {

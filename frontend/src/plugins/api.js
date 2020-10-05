@@ -3,33 +3,52 @@ import axios from 'axios'
 const baseURL = '/api'
 
 export default {
-    // async getHealth() {
-    //     return (await axios.get(`${baseURL}/health`)).data
-    // },
-    // async login(data) {
-    //     return (await axios.post(`${baseURL}/users/login`, data))
-    // },
-    // async logout() {
-    //     return (await axios.post(`${baseURL}/users/logout`))
-    // },
-    // async isLoggedIn() {
-    //     return (await axios.get(`${baseURL}/users/is-logged-in`)).data
-    // },
-    // async getMe() {
-    //     return (await axios.get(`${baseURL}/users`)).data
-    // },
-    // async postEmail(data) {
-    //     return (await axios.post(`${baseURL}/users/email`, data, {
-    //         headers: {
-    //             'Content-Type': "application/json"
-    //         }
-    //     }))
-    // },
-    // async profileEdit(data) {
-    //     return (await axios.put(`${baseURL}/users`, data, {
-    //         headers: {
-    //             'Content-Type': "application/json"
-    //         }
-    //     }))
-    // },
+    async login(data) {
+        return (await axios.post(`${baseURL}/accounts/login/`, data))
+    },
+    async logout() {
+        return (await axios.post(`${baseURL}/accounts/logout/`))
+    },
+    async isLoggedIn() {
+        return (await axios.get(`${baseURL}/accounts/islogin/`)).data
+    },
+    async getMe() {
+        return (await axios.get(`${baseURL}/accounts/mypage/`)).data
+    },
+    async signup(data) {
+        return (await axios.post(`${baseURL}/accounts/signup/`, data))
+    },
+    async getDog(dogId) {
+        return (await axios.get(`${baseURL}/details/${dogId}/`)).data
+    },
+    async getDogs(data) {
+        return (await axios.post(`${baseURL}/filters/`, data))
+    },
+    async getScraps() {
+        return (await axios.get(`${baseURL}/likes/`)).data
+    },
+    async postScrap(data) {
+        return (await axios.post(`${baseURL}/likes/`, data))
+    },
+    async deleteScrap(userId) {
+        return (await axios.delete(`${baseURL}/likes/${userId}/`)).data
+    },
+    async postMatch(data) {
+        return (await axios.post(`${baseURL}/matches/`, data))
+    },
+    async postMyimage(data) {
+        return (await axios.post(`${baseURL}/resemblances/`, data))
+    },
+    async postLost(data) {
+        return (await axios.post(`${baseURL}/losts/`, data))
+    },
+    async getShelters(data) {
+        return (await axios.post(`${baseURL}/arrounds/shelters/`, data))
+    },
+    async getArroundDogs(shelterName) {
+        return (await axios.get(`${baseURL}/arrounds/${shelterName}/`)).data
+    },
+    async getShelter(data) {
+        return (await axios.post(`${baseURL}/arrounds/shelter/`, data))
+    },
 }

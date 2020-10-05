@@ -1,16 +1,16 @@
 <template>
   <s-main-layout title="프로필" noArrow>
     <div class="d-flex flex-column">
-      <div class="login-top">
-        <div class="login-text1">로그인이 필요합니다</div>
-        <div class="login-text2">나와 잘 맞는 멍멍이 추천 시스템을 경험해보세요!</div>
+      <div class="login-page-top">
+        <div class="login-page-text1">로그인이 필요합니다</div>
+        <div class="login-page-text2">나와 잘 맞는 멍멍이 추천 시스템을 경험해보세요!</div>
       </div>
-      <div class="login-content">
-        <div class="login-container">
-          <div class="login-id">
+      <div class="login-page-content">
+        <div class="login-page-container">
+          <div class="login-page-id">
             <v-text-field
               label="이메일 입력"
-              v-model="data.memberEmail"
+              v-model="data.user_email"
               single-line
               solo
               flat
@@ -18,31 +18,22 @@
               hide-details
             ></v-text-field>
           </div>
-          <div class="login-pwd">
+          <div class="login-page-pwd">
             <v-text-field
               label="비밀번호 입력"
-              v-model="data.memberPw"
+              v-model="data.user_password"
               single-line
               solo
               flat
               height="44px"
               type="password"
-              class="login-password"
+              class="login-page-password"
               hide-details
             ></v-text-field>
           </div>
         </div>
-        <div class="login-btns">
-          <div @click="onLoginClick" class="login-button">로그인</div>
-          <div class="login-create" @click="onSignupClick">회원가입</div>
-        </div>
-        <!-- 
-        <div class="login-find">
-          <div class="login-findid" onclick="location.href='findId'">아이디 찾기</div>
-          <div class="login-findline"></div>
-          <div class="login-findpwd" onclick="location.href='findPw'">비밀번호 찾기</div>
-        </div>
-        -->
+        <s-button style="margin-top: 24px;" @click="onLoginClick">로그인</s-button>
+        <s-button style="margin-top: 8px;" type="white" @click="onSignupClick">회원가입</s-button>
       </div>
     </div>
   </s-main-layout>
@@ -50,21 +41,22 @@
 
 <script>
 export default {
-  name: 'login',
+  name: 'login-page',
   data: () => ({
     data: {},
   }),
   methods: {
     async onLoginClick() {
       try {
-        // await this.$api.login(this.data);
+        await this.$api.login(this.data);
+        this.$store.commit('ISSKIP', true);
         location.href = '/';
       } catch (e) {
         alert('아이디 또는 비밀번호를 확인해주세요.');
       }
     },
     onSignupClick() {
-      this.$router.push('/signUp');
+      this.$router.push('/signup');
     },
   },
 };
@@ -72,14 +64,14 @@ export default {
 
 
 <style>
-.login-top {
+.login-page-top {
   width: 100%;
   height: 120px;
   padding-top: 1px;
   background-color: #e9e9e9;
 }
 
-.login-text1 {
+.login-page-text1 {
   width: 100%;
   height: 20px;
   margin-top: 34px;
@@ -90,7 +82,7 @@ export default {
   text-align: center;
   color: #585858;
 }
-.login-text2 {
+.login-page-text2 {
   width: 100%;
   height: 16px;
   margin-top: 16px;
@@ -102,28 +94,28 @@ export default {
   color: #585858;
 }
 
-.login-content {
+.login-page-content {
   width: 100%;
   height: 604px;
   padding: 0 16px;
   background-color: bfbfb;
 }
 
-.login-enter {
+.login-page-enter {
   height: 134px;
   width: 100%;
   margin-top: 24px;
 }
 
-.login-id {
+.login-page-id {
   margin-bottom: 6px;
 }
 
-.login-pwd {
+.login-page-pwd {
   margin-bottom: 24px;
 }
 
-.login-container .v-input__slot {
+.login-page-container .v-input__slot {
   height: 44px;
   width: 100% !important;
   padding-left: 12px;
@@ -135,34 +127,29 @@ export default {
   background-color: #ffffff;
 }
 
-.login-container {
+.login-page-container {
   padding-top: 24px;
   width: 100%;
 }
 
-.login-enter .v-text-field {
-  font-family: NanumSquareR;
+.login-page-enter .v-text-field {
+  font-weight: 400;
   font-size: 14px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.29;
   letter-spacing: -0.39px;
-  text-align: left;
   color: #c5c5c5;
 }
 
-.login-content .v-col .v-row {
+.login-page-content .v-col .v-row {
   border-radius: 6px;
   border: solid 1px #e1e1e1;
   background-color: #ffffff;
 }
 
-.login-btns {
+.login-page-btns {
   margin-top: 0px;
 }
 
-.login-button {
+.login-page-button {
   width: 100%;
   height: 44px;
   border-radius: 6px;
@@ -176,7 +163,7 @@ export default {
   color: #fff;
 }
 
-.login-create {
+.login-page-create {
   width: 100%;
   height: 44px;
   border-radius: 6px;
@@ -191,7 +178,7 @@ export default {
   color: #ffd501;
 }
 
-.login-find {
+.login-page-find {
   margin-top: 16px;
   width: 100%;
   height: 16px;
@@ -201,7 +188,7 @@ export default {
   flex-wrap: wrap;
 }
 
-.login-findid {
+.login-page-findid {
   width: 66px;
   height: 16px;
   font-size: 14px;
@@ -212,14 +199,14 @@ export default {
   color: #616161;
 }
 
-.login-findline {
+.login-page-findline {
   width: 2px;
   height: 16px;
   background-color: #e9e9e9;
   margin-left: 59px;
 }
 
-.login-findpwd {
+.login-page-findpwd {
   width: 78px;
   height: 16px;
   font-size: 14px;
@@ -235,7 +222,7 @@ export default {
   padding-top: 40px;
 }
 
-.login-password * {
+.login-page-password * {
   font-family: Arial, Helvetica, sans-serif !important;
 }
 </style>
