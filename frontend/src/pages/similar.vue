@@ -4,9 +4,15 @@
       <div @click.stop="$refs.image.click">
         <s-button>
           <v-icon color="#fff">photo_camera</v-icon>
-          <div style="margin-left:4px;">내 사진 업로드</div>
+          <div style="margin-left: 4px">내 사진 업로드</div>
         </s-button>
-        <input accept="image/*" class="d-none" ref="image" type="file" @input="pickFile" />
+        <input
+          accept="image/*"
+          class="d-none"
+          ref="image"
+          type="file"
+          @input="pickFile"
+        />
       </div>
       <div class="d-flex justify-center my-similar-page-image-container">
         <div
@@ -15,11 +21,24 @@
           :style="`background-image:url(${previewImage})`"
         />
       </div>
-      <s-button v-if="previewImage" @click="onConfirmClick(1)" style="margin-top: 32px;">업로드 완료</s-button>
-      <s-button v-else @click="onConfirmClick(0)" type="gray" style="margin-top: 32px;">업로드 완료</s-button>
+      <s-button
+        v-if="previewImage"
+        @click="onConfirmClick(1)"
+        style="margin-top: 32px"
+        >업로드 완료</s-button
+      >
+      <s-button
+        v-else
+        @click="onConfirmClick(0)"
+        type="gray"
+        style="margin-top: 32px"
+        >업로드 완료</s-button
+      >
       <div v-if="isUploaded" class="similar-page-box">
-        <div class="d-flex align-center similar-page-section">나와 닮은 멍멍이들</div>
-        <div class="d-flex" style="flex-wrap: wrap;">
+        <div class="d-flex align-center similar-page-section">
+          나와 닮은 멍멍이들
+        </div>
+        <div class="d-flex" style="flex-wrap: wrap">
           <div
             @click="onDetailClick(dog.dog_id)"
             v-for="(dog, di) in dogs"
@@ -45,9 +64,15 @@
 </template>
 
 <script>
+import AWS from 'aws-sdk';
+import axios from 'axios';
 export default {
   name: 'my-similar-page',
   data: () => ({
+    img_url: '',
+    albumBucketName: 'photo-album-dog',
+    bucketRegion: 'ap-northeast-2',
+    IdentityPoolId: 'ap-northeast-2:caca59ba-9483-43b5-a923-f9e5c6eb3229',
     previewImage: null,
     location: '',
     dogs: [
@@ -243,6 +268,40 @@ export default {
         let reader = new FileReader();
         reader.onload = (e) => (this.previewImage = e.target.result);
         reader.readAsDataURL(file[0]);
+        AWS.config.update({
+          region: this.bucketRegion,
+          credentials: new AWS.CognitoIdentityCredentials({
+            IdentityPoolId: this.IdentityPoolId,
+          }),
+        });
+        const s3 = new AWS.S3({
+          apiVersion: '2006-03-01',
+          params: {
+            Bucket: this.albumBucketName,
+          },
+        });
+        let photoKey = file[0].name;
+        this.img_url =
+          'https://photo-album-dog.s3.ap-northeast-2.amazonaws.com/' +
+          encodeURIComponent(photoKey);
+        console.log(photoKey);
+        s3.upload(
+          {
+            Key: photoKey,
+            Body: file[0],
+            ACL: 'public-read',
+          },
+          (err, data) => {
+            if (err) {
+              return alert(
+                'There was an error uploading your photo: ',
+                err.message
+              );
+            }
+            alert('Successfully uploaded photo.');
+            console.log(this.img_url);
+          }
+        );
       } else {
         this.previewImage = null;
       }
@@ -255,9 +314,6 @@ export default {
       }
 
       this.isUploaded = true;
-    },
-    onDetailClick(id) {
-      this.$router.push(`/detail/${id}`);
     },
   },
   async created() {
@@ -312,30 +368,17 @@ export default {
 
 .similar-page-item {
   width: 33%;
-  border-left: solid 1px #fff;
-  border-top: solid 1px #fff;
-}
-
-.similar-page-item:nth-child(1) {
-  border: 0;
-}
-
-.similar-page-item:nth-child(2) ,.similar-page-item:nth-child(3) {
-  border-top: 0;
-}
-
-.similar-page-item:nth-child(3n+1) {
-  border-left: 0;
 }
 
 .similar-page-item-image {
   position: relative;
   width: 100%;
-  min-height: 80px;
+  min-height: 120px;
   height: 30vw;
   max-height: 200px;
   background-size: cover;
   background-position: center center;
+  opacity: 0.8;
 }
 
 .similar-page-item-scrap {

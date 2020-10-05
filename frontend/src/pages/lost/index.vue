@@ -4,9 +4,15 @@
       <div @click.stop="$refs.image.click">
         <s-button>
           <v-icon color="#fff">photo_camera</v-icon>
-          <div style="margin-left:4px;">멍멍이 사진 업로드</div>
+          <div style="margin-left: 4px">멍멍이 사진 업로드</div>
         </s-button>
-        <input accept="image/*" class="d-none" ref="image" type="file" @input="pickFile" />
+        <input
+          accept="image/*"
+          class="d-none"
+          ref="image"
+          type="file"
+          @input="pickFile"
+        />
       </div>
       <div class="d-flex justify-center lost-page-image-container">
         <div
@@ -15,46 +21,90 @@
           :style="`background-image:url(${previewImage})`"
         />
       </div>
-      <div class="lost-page-map" style="margin-top: 32px;">
-        <s-map noList @select="onSelectSearchedPlace"/>
+      <div class="lost-page-map" style="margin-top: 32px">
+        <s-map noList />
       </div>
-      <s-button @click="onConfirmClick" style="margin-top: 32px;">입력 완료</s-button>
+      <s-button @click="onConfirmClick" style="margin-top: 32px"
+        >입력 완료</s-button
+      >
     </div>
   </s-first-layout>
 </template>
 
 <script>
+import AWS from 'aws-sdk';
+import axios from 'axios';
 export default {
   name: 'lost-page',
   data: () => ({
     previewImage: null,
     location: '',
-    searchedPlace: {},
+    img_url: '',
+    albumBucketName: 'photo-album-dog',
+    bucketRegion: 'ap-northeast-2',
+    IdentityPoolId: 'ap-northeast-2:caca59ba-9483-43b5-a923-f9e5c6eb3229',
   }),
   methods: {
     pickFile(e) {
       let input = this.$refs.image;
       let file = input.files;
+      console.dir(file[0]);
       if (file && file[0]) {
+        //console.log('if로그 ');
+        // console.log(file[0]);
         let reader = new FileReader();
         reader.onload = (e) => (this.previewImage = e.target.result);
         reader.readAsDataURL(file[0]);
+        AWS.config.update({
+          region: this.bucketRegion,
+          credentials: new AWS.CognitoIdentityCredentials({
+            IdentityPoolId: this.IdentityPoolId,
+          }),
+        });
+        const s3 = new AWS.S3({
+          apiVersion: '2006-03-01',
+          params: {
+            Bucket: this.albumBucketName,
+          },
+        });
+        let photoKey = file[0].name;
+        this.img_url =
+          'https://photo-album-dog.s3.ap-northeast-2.amazonaws.com/' +
+          encodeURIComponent(photoKey);
+        console.log(photoKey);
+        s3.upload(
+          {
+            Key: photoKey,
+            Body: file[0],
+            ACL: 'public-read',
+          },
+          (err, data) => {
+            if (err) {
+              return alert(
+                'There was an error uploading your photo: ',
+                err.message
+              );
+            }
+            alert('Successfully uploaded photo.');
+            console.log(this.img_url);
+          }
+        );
       } else {
         this.previewImage = null;
       }
     },
     onConfirmClick() {
-      this.$router.push({
-        path: '/lost/result',
-        query: {
-          name: this.searchedPlace.name || '',
-          latitude: this.searchedPlace.latitude || '',
-          longitude: this.searchedPlace.longitude || '', 
-        }
+      axios({
+        method: 'post',
+        url: 'http://j3a307.p.ssafy.io:8000/losts/',
+        data: {
+          img_url: this.img_url,
+          shelter_lat: '37.544846922',
+          shelter_lng: '126.939479132',
+        },
+      }).then((res) => {
+        this.$router.push('/lost/result');
       });
-    },
-    onSelectSearchedPlace(searchedPlace) {
-      this.searchedPlace = searchedPlace
     },
   },
 };
@@ -93,7 +143,6 @@ export default {
   height: 44px;
   font-size: 12px;
   color: #8a8a8a !important;
-  
 }
 .lost-page fieldset {
   border-color: #ffd501 !important;
