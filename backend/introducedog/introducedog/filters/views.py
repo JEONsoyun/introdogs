@@ -151,9 +151,12 @@ class DogColorContainMatch(APIView):
 
             if cnt != 0:
                 print(cnt)
-                contain_list.append([now_id, cnt])
+                contain_list.append((now_id, cnt))
             idx += 1
 
+        print(contain_list)
+        contain_list.sort(key= lambda node: node[1], reverse=True)
+        print(contain_list)
         return contain_list
 
     #dog_id에 해당하는 dog를 return해준다, 없다면 http404
