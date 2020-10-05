@@ -103,6 +103,67 @@ class DogMatch(APIView):
             return Dog.objects.get(dog_id=dog_id)
         except Dog.DoesNotExist:
             raise Http404
+    
+    def check_qualification(self, survey):
+        rere = []
+
+        # 반려동물 입양 자격 미달자를 거르는 과정
+        # q1 : 반려동물을 해외 입양 or 외국인 여부
+        if survey['q1'] :
+            return [0, False, 1]
+
+        # q2 : 알러지에 대해 충분한 고려 여부
+        if not survey['q2']:
+            return [0, False, 2]
+        
+        # q3 : 강아지가 혼자 지내는 시간 8시간 이상인가
+        if survey['q3'] :
+            return [0, False, 3]
+
+        # q4 : 3세 미만의 자녀가 있어요
+        if survey['q4'] : 
+            return [0, False, 4]
+
+        # q5 : 반려동물을 기를 곳 여부
+        if survey['q5'] != 4 :
+            return [0, False, 5]
+
+        # q6 : 반려 동물에 대한 가족 간 합의 여부
+        if not survey['q6'] :
+            return [0, False, 6]
+
+        # q7 : 우울증 여부
+        if survey['q7'] : 
+            return [0, False, 7]
+
+        # q8 : 이전 반려동물 중도포기 2회이상인가?
+        if survey['q8'] :
+            return [0, False, 8]
+        
+        # q9 : 3인 이상의 가족, 실평수 10평이하 인가?
+        if not survey['q9']:
+            return [0, False, 9]
+
+        size = 0
+        # q10 : 주거형태
+        if survey['q10'] == 1:
+            size = 1
+        elif survey['q10'] == 2:
+            size = 2
+        elif survey['q10'] == 3:
+            size = 3
+        
+        # q11 : 지출 가능 비용
+        if survey['q11'] == 1:
+            return [0, False, 10]
+        elif survey['q11'] == 2:
+            size = 1
+        elif survey['q11'] == 3:
+            size = 2
+        else:
+            size = 3
+        
+        return [size, True , 11]
 
     def post(self, request, format=None):
         #reqeust에서 넘어온 값에서 data을 뽑음
@@ -133,63 +194,14 @@ class DogMatch(APIView):
         #print(breeds)
 
         survey = data['survey']
-        rere = []
+        size_qualification_num = self.check_qualification(survey)
 
-        # 반려동물 입양 자격 미달자를 거르는 과정
-        # q1 : 반려동물을 해외 입양 or 외국인 여부
-        if survey['q1'] :
-            return Response({'qualification' : False, 'list' : rere, 'num' : 1})
+        size = size_qualification_num[0]
+        qualification = size_qualification_num[1]
+        num = size_qualification_num[2]
 
-        # q2 : 알러지에 대해 충분한 고려 여부
-        if not survey['q2']:
-            return Response({'qualification' : False, 'list' : rere, 'num' : 2})
-        
-        # q3 : 강아지가 혼자 지내는 시간 8시간 이상인가
-        if survey['q3'] :
-            return Response({'qualification' : False, 'list' : rere, 'num' : 3})
-
-        # q4 : 3세 미만의 자녀가 있어요
-        if survey['q4'] : 
-            return Response({'qualification' : False, 'list' : rere, 'num' : 4})
-
-        # q5 : 반려동물을 기를 곳 여부
-        if survey['q5'] != 4 :
-            return Response({'qualification' : False, 'list' : rere, 'num' : 5})
-
-        # q6 : 반려 동물에 대한 가족 간 합의 여부
-        if not survey['q6'] :
-            return Response({'qualification' : False, 'list' : rere, 'num' : 6})
-
-        # q7 : 우울증 여부
-        if survey['q7'] : 
-            return Response({'qualification' : False, 'list' : rere, 'num' : 7})
-
-        # q8 : 이전 반려동물 중도포기 2회이상인가?
-        if survey['q8'] :
-            return Response({'qualification' : False, 'list' : rere, 'num' : 8})
-        
-        # q9 : 3인 이상의 가족, 실평수 10평이하 인가?
-        if not survey['q9']:
-            return Response({'qualification' : False, 'list' : rere, 'num' : 9})
-
-        size = 0
-        # q10 : 주거형태
-        if survey['q10'] == 1:
-            size = 1
-        elif survey['q10'] == 2:
-            size = 2
-        elif survey['q10'] == 3:
-            size = 3
-        
-        # q11 : 지출 가능 비용
-        if survey['q11'] == 1:
-            return Response({'qualification' : False, 'list' : rere, 'num' : 10})
-        elif survey['q11'] == 2:
-            size = 1
-        elif survey['q11'] == 3:
-            size = 2
-        else:
-            size = 3
+        if not qualification:
+            return Response({'qualification' : False, 'list' : [], 'num' : num})
 
         #size 1 : 소형견, 2 : 중형견이하, 3 : 대형견 이하        
         #사이즈, 성격의 코사인 유사도가 높은 목록을 result에 저장
@@ -198,6 +210,7 @@ class DogMatch(APIView):
         result = result[30:]
 
         #리스트에 있는 아이디를 가진 개의 정보를 json형식으로 rere에 추가한후, return
+        rere = []
         for dog in result:
             rere.append(DogSerializer(self.get_object(dog)).data)
         
