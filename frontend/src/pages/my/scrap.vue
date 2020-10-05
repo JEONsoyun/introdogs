@@ -14,8 +14,8 @@ export default {
   }),
   async created() {
     try {
-      this.dogs = await this.$api.getScraps();
-      console.log(this.dogs);
+      let res = await this.$api.getScraps();
+      this.dogs = res.user[0].dog_info;
     } catch (e) {
       console.error(e);
     }
