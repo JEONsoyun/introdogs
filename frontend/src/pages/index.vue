@@ -174,6 +174,9 @@ export default {
     async getScraps() {
       try {
         let res = await this.$api.getScraps();
+        if (!res.user) {
+          return;
+        }
         this.scrapDogs = res.user[0].dog_info;
       } catch (e) {
         console.error(e);
