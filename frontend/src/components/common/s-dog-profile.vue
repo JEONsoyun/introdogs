@@ -88,7 +88,15 @@
           <div class="s-dog-profile-text">{{ data.careAddr }}</div>
         </div>
         <div class="s-dog-proflie-map">
-          <s-map height="200px" ref="map" @load="onMapLoad" noToolbar noList />
+          <s-map
+            v-if="data.shelter"
+            height="200px"
+            ref="map"
+            :zoom="16"
+            @load="onMapLoad"
+            noToolbar
+            noList
+          />
         </div>
       </template>
     </div>
@@ -107,13 +115,21 @@ export default {
     onMapLoad() {
       this.$refs.map.addMyPosition({
         icon: '/static/images/location.png',
-        latitude: this.data.shelter_lat || 37.8701158122,
-        longitude: this.data.shelter_lon || 126.9835430508,
+        latitude: this.data.shelter
+          ? this.data.shelter[0].shelter_lat
+          : 37.8701158122,
+        longitude: this.data.shelter
+          ? this.data.shelter[0].shelter_lng
+          : 126.9835430508,
       });
       this.$refs.map.mapObject.setCenter(
         new Tmapv2.LatLng(
-          Number(this.data.shelter_lat) || 37.8701158122,
-          Number(this.data.shelter_lon) || 126.9835430508
+          this.data.shelter
+            ? Number(this.data.shelter[0].shelter_lat)
+            : 37.8701158122,
+          this.data.shelter
+            ? Number(this.data.shelter[0].shelter_lng)
+            : 126.9835430508
         )
       );
     },

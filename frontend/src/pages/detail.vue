@@ -22,26 +22,70 @@ export default {
   data: () => ({
     dogId: 0,
     dog: {},
+    dogs: [],
     isScrapped: false,
   }),
   methods: {
     onScrapClick() {
+      if (!this.$store.state.ISLOGGEDIN) {
+        alert('로그인 후 사용 가능합니다.');
+        return;
+      }
       this.isScrapped = !this.isScrapped;
+      if (this.isScrapped) {
+        this.postScrap();
+      } else {
+        this.deleteScrap();
+      }
+    },
+    async postScrap() {
+      try {
+        await this.$api.postScrap({ dog_id: this.dogId });
+      } catch (e) {
+        console.error(e);
+      }
+    },
+    async deleteScrap() {
+      try {
+        await this.$api.deleteScrap(this.dogId);
+      } catch (e) {
+        console.error(e);
+      }
+    },
+    async getScraps() {
+      try {
+        let res = await this.$api.getScraps();
+        this.dogs = res.user[0].dog_info;
+        for (let i in this.dogs) {
+          if (this.dogs[i].dog_id == this.dogId) {
+            this.isScrapped = true;
+            this.$forceUpdate();
+            return;
+          }
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    },
+    async getDog() {
+      try {
+        let res = await this.$api.getDog(this.dogId);
+        this.dog = res.dog_info[0];
+      } catch (e) {
+        console.error(e);
+        alert('잘못된 접근입니다.');
+        this.$router.push('/');
+      }
     },
   },
   async created() {
     this.dogId = this.$route.params.id;
     if (this.dogId == 0) {
-      this.dogId = 'N448538202000489';
+      alert('잘못된 접근입니다.');
+      this.$router.push('/');
     }
-    // dog api 부르기
-    try {
-      let res = await this.$api.getDog(this.dogId);
-      this.dog = res.dog_info[0];
-      console.log(this.dog);
-    } catch (e) {
-      console.error(e);
-    }
+    await this.getScraps();
+    this.getDog();
   },
 };
 </script>
