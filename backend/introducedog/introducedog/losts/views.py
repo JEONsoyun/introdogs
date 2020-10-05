@@ -1,4 +1,4 @@
-import numpy as np
+﻿import numpy as np
 import glob
 import os
 from tensorflow.keras.models import load_model
@@ -37,7 +37,6 @@ class FindDogByImg(View):
         config = tf.ConfigProto()
         config.gpu_options.allow_growth = True
         session = tf.Session(config=config)
-        print("여기까지 37")
         data = json.loads(request.body)
 
         my_lat = float(data['shelter_lat'])
@@ -51,7 +50,7 @@ class FindDogByImg(View):
         filenames = []
         print('모델 부르기 직전여기까지')
         model = load_model(
-            '.\\losts\\dog_recog_vgg150.h5')
+            './losts/dog_recog_vgg150.h5')
         print("모델 불러옴")
         res = urllib.request.urlopen(data['img_url']).read()
         img = Image.open(BytesIO(res))
@@ -109,6 +108,7 @@ class FindDogByImg(View):
                 if(d['shelter_name'] == shelter_name):
                     sn.append(d)
             if len(sn) > 0:
+                sn = sorted(sn, key=lambda x: x['end_date'])
                 shelDog[shel['shelter_name']] = sn
                 shelDog[shel['shelter_name']].append(
                     {'shelter_lat': shel['shelter_lat']})
