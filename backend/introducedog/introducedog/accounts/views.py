@@ -11,6 +11,11 @@ from django.views import View
 from django.http import HttpResponse, JsonResponse
 
 from .models import User
+from likes.models import Like
+from dogs.models import Dog
+
+from rest_framework.viewsets import ModelViewSet
+from .serializers import UserSerializer
 
 class SignupView(View):
     def post(self, request):
@@ -45,6 +50,7 @@ class SignupView(View):
         users = User.objects.values()
         return JsonResponse({"data" : list(users)}, status = 200)
 
+
 class LoginView(View):
     def post(self, request):
         data = json.loads(request.body)
@@ -60,7 +66,7 @@ class LoginView(View):
                     token = jwt.encode({'user_email' : data['user_email']}, SECRET_KEY, algorithm = "HS256")
                     token = token.decode('utf-8')                          # 유니코드 문자열로 디코딩
                     request.session['username'] = user.user_name
-                    print(request.session.get('username'))
+                    # print(request.session.get('username'))
                     return JsonResponse({"token" : token }, status=200)
                 else:
                     return HttpResponse(status = 401)
@@ -78,6 +84,7 @@ class LoginView(View):
 
         # return JsonResponse({'message':'등록되지 않은 이메일 입니다.'},status=200)
 
+
 class TokenCheckView(View):
     def post(self,request):
         data = json.loads(request.body)
@@ -88,7 +95,8 @@ class TokenCheckView(View):
             return HttpResponse(status=200)
 
         return HttpResponse(status=403)
-    
+
+
 class LogoutView(View):
     def post(self, request):
         # print(request.session.get('username'))
@@ -97,13 +105,33 @@ class LogoutView(View):
         
         return JsonResponse({'message': '로그아웃되었습니다.'}, status = 200)
 
+
 class MypageView(View) :
     def get(self, request):
         myuser = User.objects.filter(user_name = request.session.get('username')).values()
+        ret = []
+        userid = myuser[0]['user_id']
+        like_dog_list = Like.objects.filter(user_id = userid).values()
+        for now_user in myuser:
+            now_user['dog_info'] = []
+            for now_dog in like_dog_list:
+                dogid = now_dog['dog_id']
+                doginfo = Dog.objects.filter(dog_id = dogid).values()
+                for now_dog_info in doginfo:
+                    now_user['dog_info'].append(now_dog_info)
+        
         return JsonResponse({'user':list(myuser)}, status = 200)
 
 class ApicheckView(View):
     def get(self, request):
         if request.session['username'] :
             return JsonResponse({'message': 'true'})
+
+class FileTestViewSet(ModelViewSet):
+    queryset = User.objects.all()
+    serialize_class = UserSerializer
+
+    def create(self, request, *args, **kwargs):
+        return super(FileTestViewSet, self).create(request, *args, **kwargs)
+
     
