@@ -207,7 +207,7 @@ class DogMatch(APIView):
         #사이즈, 성격의 코사인 유사도가 높은 목록을 result에 저장
         result = self.recommend_dog(size, breeds)
         #print(result)
-        result = result[30:]
+        #result = result[30:]
 
         #리스트에 있는 아이디를 가진 개의 정보를 json형식으로 rere에 추가한후, return
         rere = []
