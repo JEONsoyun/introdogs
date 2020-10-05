@@ -1,12 +1,14 @@
 <template>
   <s-main-layout title="멍멍이 상세보기">
     <div class="detail-page">
-      <div class="d-flex align-center" style="margin-bottom: 8px;">
-        <div class="detail-page-title">{{dog.dog_id}}</div>
+      <div class="d-flex align-center" style="margin-bottom: 8px">
+        <div class="detail-page-title">{{ dog ? dog.dog_id : '' }}</div>
         <div class="d-flex" />
         <div @click="onScrapClick">
           <v-icon v-if="isScrapped" size="36" color="red">favorite</v-icon>
-          <v-icon v-if="!isScrapped" size="36" color="red">favorite_border</v-icon>
+          <v-icon v-if="!isScrapped" size="36" color="red"
+            >favorite_border</v-icon
+          >
         </div>
       </div>
       <s-dog-profile :data="dog" isDetail />
@@ -19,36 +21,71 @@ export default {
   name: 'detail-page',
   data: () => ({
     dogId: 0,
-    dog: {
-      dog_id: 'N448548202000333',
-      age: '2020(년생)',
-      weight: '1(Kg)',
-      sex: 'W',
-      kind: '진도견',
-      color: '흰색',
-      neuter: 'N',
-      thumnail:
-        'http://www.animal.go.kr/files/shelter/2020/07/202009151909319_s.jpg',
-      profile:
-        'http://www.animal.go.kr/files/shelter/2020/07/202009092009658.jpg',
-      careAddr:
-        '경상남도 합천군 합천읍 옥산로 16 (합천읍/ 까치빌라) 태민동물병원',
-      careNm: '태민동물병원',
-      special: '겁이 많고 경계심이 많아서 조심성이 많은 성격',
-      find_place: '합천읍 충효로',
-      find_date: '20200915',
-      end_date: '20200925',
-    },
+    dog: {},
+    dogs: [],
     isScrapped: false,
   }),
   methods: {
     onScrapClick() {
-      this.isScrapped = !this.isScrapped
-    }
+      if (!this.$store.state.ISLOGGEDIN) {
+        alert('로그인 후 사용 가능합니다.');
+        return;
+      }
+      this.isScrapped = !this.isScrapped;
+      if (this.isScrapped) {
+        this.postScrap();
+      } else {
+        this.deleteScrap();
+      }
+    },
+    async postScrap() {
+      try {
+        await this.$api.postScrap({ dog_id: this.dogId });
+      } catch (e) {
+        console.error(e);
+      }
+    },
+    async deleteScrap() {
+      try {
+        await this.$api.deleteScrap(this.dogId);
+      } catch (e) {
+        console.error(e);
+      }
+    },
+    async getScraps() {
+      try {
+        let res = await this.$api.getScraps();
+        this.dogs = res.user[0].dog_info;
+        for (let i in this.dogs) {
+          if (this.dogs[i].dog_id == this.dogId) {
+            this.isScrapped = true;
+            this.$forceUpdate();
+            return;
+          }
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    },
+    async getDog() {
+      try {
+        let res = await this.$api.getDog(this.dogId);
+        this.dog = res.dog_info[0];
+      } catch (e) {
+        console.error(e);
+        alert('잘못된 접근입니다.');
+        this.$router.push('/');
+      }
+    },
   },
-  created() {
+  async created() {
     this.dogId = this.$route.params.id;
-    // dog api 부르기
+    if (this.dogId == 0) {
+      alert('잘못된 접근입니다.');
+      this.$router.push('/');
+    }
+    await this.getScraps();
+    this.getDog();
   },
 };
 </script>

@@ -16,7 +16,7 @@
       <div class="d-flex flex-grow-0 justify-center align-center s-mypage-drawer-img">
         <img style="max-width: 80%" src="/static/images/dog_profile.png" />
       </div>
-      <div class="s-mypage-drawer-id">{{$store.state.USER.memberName || '사용자ID'}}</div>
+      <div class="s-mypage-drawer-id">{{$store.state.USER.user_name || '익명'}}</div>
     </div>
     <div class="s-mypage-drawer-bar" />
     <div class="d-flex flex-column flex-grow-1 s-mypage-drawer-menu-container">
@@ -30,7 +30,7 @@
       </template>
     </div>
     <div class="d-flex flex-column s-mypage-drawer-footer">
-      <s-button @click="onLogoutClick" type="gray">로그아웃</s-button>
+      <s-button @click="onLogoutClick">로그아웃</s-button>
     </div>
   </v-navigation-drawer>
 </template>
@@ -80,13 +80,12 @@ export default {
       }
     },
     async onLogoutClick() {
-      this.$router.push('/login')
-      // try {
-      //   await this.$api.logout();
-      //   location.href = '/tour';
-      // } catch (e) {
-      //   console.error(e);
-      // }
+      try {
+        await this.$api.logout();
+        location.href = '/';
+      } catch (e) {
+        console.error(e);
+      }
     },
     created() {
       const user = this.$store.state.USER;

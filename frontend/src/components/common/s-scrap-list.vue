@@ -7,38 +7,46 @@
         v-for="(dog, di) in data"
         :key="`dog-${di}`"
       >
-        <div class="s-scrap-list-image" :style="`background-image: url(${dog.profile})`">
+        <div
+          class="s-scrap-list-image"
+          :style="`background-image: url(${dog.profile})`"
+        >
           <div class="s-scrap-list-heart">
             <v-icon color="red">favorite</v-icon>
           </div>
         </div>
         <div class="d-flex flex-column flex-grow-1 s-scrap-list-content">
-          <div style="margin-bottom: 4px;">{{dog.dog_id}}</div>
+          <div style="margin-bottom: 4px">{{ dog.dog_id }}</div>
           <div class="d-flex s-scrap-list-row">
             <div class="s-scrap-list-title">나이</div>
-            <div class="s-scrap-list-text">{{dog.age}}</div>
+            <div class="s-scrap-list-text">{{ dog.age }}</div>
           </div>
           <div class="s-scrap-list-bar" />
           <div class="d-flex s-scrap-list-row">
             <div class="s-scrap-list-title">성별</div>
-            <div class="s-scrap-list-text">{{dog.sex == 'M' ? '남' : '여'}}</div>
+            <div class="s-scrap-list-text">
+              {{ dog.sex == 'M' ? '남' : '여' }}
+            </div>
           </div>
           <div class="s-scrap-list-bar" />
           <div class="d-flex s-scrap-list-row">
             <div class="s-scrap-list-title">견종</div>
-            <div class="s-scrap-list-text">{{dog.kind}}</div>
+            <div class="s-scrap-list-text">{{ dog.kind }}</div>
           </div>
           <div class="s-scrap-list-bar" />
           <div class="d-flex s-scrap-list-row">
             <div class="s-scrap-list-title">털색</div>
-            <div class="s-scrap-list-text">{{dog.color}}</div>
+            <div class="s-scrap-list-text">{{ dog.color }}</div>
           </div>
         </div>
       </div>
     </template>
     <template v-else>
       <div class="d-flex flex-column justify-center align-center">
-        <img class="s-scrap-list-empty-image" src="/static/images/question_dog.png" />
+        <img
+          class="s-scrap-list-empty-image"
+          src="/static/images/question_dog.png"
+        />
         <div class="s-scrap-list-empty-text">관심 멍멍이 목록이 없네요!</div>
       </div>
     </template>

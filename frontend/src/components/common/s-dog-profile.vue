@@ -1,30 +1,40 @@
 <template>
   <div class="s-dog-profile-box">
     <template v-if="isDetail">
-      <div class="d-flex align-center s-dog-profile-section" style="margin-top:-16px;">멍멍이 정보</div>
+      <div
+        class="d-flex align-center s-dog-profile-section"
+        style="margin-top: -16px"
+      >
+        멍멍이 정보
+      </div>
     </template>
-    <div class="s-dog-profile-image" :style="`background-image: url(${data.profile})`" />
+    <div
+      class="s-dog-profile-image"
+      :style="`background-image: url(${data.profile})`"
+    />
     <div class="s-dog-profile-content">
-      <div style="padding: 0 16px;">{{data.dog_id}}</div>
+      <div style="padding: 0 16px">{{ data.dog_id }}</div>
       <div class="d-flex">
         <div class="d-flex s-dog-profile-row">
           <div class="s-dog-profile-title">나이</div>
-          <div class="s-dog-profile-text">{{data.age}}</div>
+          <div class="s-dog-profile-text">{{ data.age }}</div>
         </div>
         <div class="d-flex s-dog-profile-row">
           <div class="s-dog-profile-title">성별</div>
-          <div class="s-dog-profile-text">{{data.sex == 'M' ? '남' : '여'}}</div>
+          <div class="s-dog-profile-text">
+            {{ data.sex == 'M' ? '남' : '여' }}
+          </div>
         </div>
       </div>
       <div class="s-dog-profile-bar" />
       <div class="d-flex">
         <div class="d-flex s-dog-profile-row">
           <div class="s-dog-profile-title">견종</div>
-          <div class="s-dog-profile-text">{{data.kind}}</div>
+          <div class="s-dog-profile-text">{{ data.kind }}</div>
         </div>
         <div class="d-flex s-dog-profile-row">
           <div class="s-dog-profile-title">털색</div>
-          <div class="s-dog-profile-text">{{data.color}}</div>
+          <div class="s-dog-profile-text">{{ data.color }}</div>
         </div>
       </div>
 
@@ -32,46 +42,61 @@
       <div class="d-flex">
         <div class="d-flex s-dog-profile-row">
           <div class="s-dog-profile-title">무게</div>
-          <div class="s-dog-profile-text">{{data.weight}}</div>
+          <div class="s-dog-profile-text">{{ data.weight }}</div>
         </div>
         <div class="d-flex s-dog-profile-row">
           <div class="s-dog-profile-title">중성화 여부</div>
-          <div class="s-dog-profile-text">{{data.neuter}}</div>
+          <div class="s-dog-profile-text">{{ data.neuter }}</div>
         </div>
       </div>
       <div class="s-dog-profile-bar" />
       <div class="d-flex s-dog-profile-row">
         <div class="s-dog-profile-title">특징</div>
-        <div class="s-dog-profile-text">{{data.special}}</div>
+        <div class="s-dog-profile-text">{{ data.special }}</div>
       </div>
       <template v-if="isDetail">
-        <div class="d-flex align-center s-dog-profile-section" style="margin-top: 16px;margin-bottom:0;">보호소 정보</div>
+        <div
+          class="d-flex align-center s-dog-profile-section"
+          style="margin-top: 16px; margin-bottom: 0"
+        >
+          보호소 정보
+        </div>
         <div class="d-flex s-dog-profile-row">
           <div class="s-dog-profile-title">보호소</div>
-          <div class="s-dog-profile-text">{{data.careNm}}</div>
+          <div class="s-dog-profile-text">{{ data.shelter_name }}</div>
         </div>
         <div class="s-dog-profile-bar" />
         <div class="d-flex s-dog-profile-row">
           <div class="s-dog-profile-title">발견 장소</div>
-          <div class="s-dog-profile-text">{{data.find_place}}</div>
+          <div class="s-dog-profile-text">{{ data.find_place }}</div>
         </div>
         <div class="s-dog-profile-bar" />
         <div class="d-flex s-dog-profile-row">
           <div class="s-dog-profile-title">발견 날짜</div>
-          <div class="s-dog-profile-text">{{data.find_date}}</div>
+          <div class="s-dog-profile-text">{{ data.find_date }}</div>
         </div>
         <div class="s-dog-profile-bar" />
         <div class="d-flex s-dog-profile-row">
           <div class="s-dog-profile-title">보호 기간</div>
-          <div class="s-dog-profile-text">{{data.find_date}} ~ {{data.end_date}}</div>
+          <div class="s-dog-profile-text">
+            {{ data.find_date }} ~ {{ data.end_date }}
+          </div>
         </div>
         <div class="s-dog-profile-bar" />
         <div class="d-flex s-dog-profile-row">
           <div class="s-dog-profile-title">보호소 주소</div>
-          <div class="s-dog-profile-text">{{data.careAddr}}</div>
+          <div class="s-dog-profile-text">{{ data.careAddr }}</div>
         </div>
         <div class="s-dog-proflie-map">
-          <s-map height="200px" noToolbar noList />
+          <s-map
+            v-if="data.shelter"
+            height="200px"
+            ref="map"
+            :zoom="16"
+            @load="onMapLoad"
+            noToolbar
+            noList
+          />
         </div>
       </template>
     </div>
@@ -86,6 +111,29 @@ export default {
     isDetail: { type: Boolean, default: false },
   },
   data: () => ({}),
+  methods: {
+    onMapLoad() {
+      this.$refs.map.addMyPosition({
+        icon: '/static/images/location.png',
+        latitude: this.data.shelter
+          ? this.data.shelter[0].shelter_lat
+          : 37.8701158122,
+        longitude: this.data.shelter
+          ? this.data.shelter[0].shelter_lng
+          : 126.9835430508,
+      });
+      this.$refs.map.mapObject.setCenter(
+        new Tmapv2.LatLng(
+          this.data.shelter
+            ? Number(this.data.shelter[0].shelter_lat)
+            : 37.8701158122,
+          this.data.shelter
+            ? Number(this.data.shelter[0].shelter_lng)
+            : 126.9835430508
+        )
+      );
+    },
+  },
 };
 </script>
 

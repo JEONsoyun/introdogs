@@ -16,7 +16,7 @@
         />
       </div>
       <div class="lost-page-map" style="margin-top: 32px;">
-        <s-map noList />
+        <s-map noList @select="onSelectSearchedPlace"/>
       </div>
       <s-button @click="onConfirmClick" style="margin-top: 32px;">입력 완료</s-button>
     </div>
@@ -29,6 +29,7 @@ export default {
   data: () => ({
     previewImage: null,
     location: '',
+    searchedPlace: {},
   }),
   methods: {
     pickFile(e) {
@@ -43,7 +44,17 @@ export default {
       }
     },
     onConfirmClick() {
-      this.$router.push('/lost/result');
+      this.$router.push({
+        path: '/lost/result',
+        query: {
+          name: this.searchedPlace.name || '',
+          latitude: this.searchedPlace.latitude || '',
+          longitude: this.searchedPlace.longitude || '', 
+        }
+      });
+    },
+    onSelectSearchedPlace(searchedPlace) {
+      this.searchedPlace = searchedPlace
     },
   },
 };

@@ -7,24 +7,41 @@
           <v-icon class="d-flex flex-grow-0" size="14px">pets</v-icon>
           <div
             class="d-flex flex-grow-0"
-            style="margin-left:4px;color:rgba(0,0,0,.54);font-weight:bold;font-size: 12px;margin-right: 4px;"
-          >멍멍이 스타일</div>
+            style="
+              margin-left: 4px;
+              color: rgba(0, 0, 0, 0.54);
+              font-weight: bold;
+              font-size: 12px;
+              margin-right: 4px;
+            "
+          >
+            멍멍이 스타일
+          </div>
           <template v-slot:actions>
             <v-icon>expand_more</v-icon>
           </template>
         </v-expansion-panel-header>
         <v-expansion-panel-content>
-          <div class="d-flex align-center" style="margin-bottom:12px;">
+          <div
+            class="d-flex align-center"
+            style="flex-wrap: wrap; margin-bottom: 12px"
+          >
             <div
               v-for="(color, ci) in colors"
               :key="`color-${ci}`"
-              class="d-flex flex-grow-0 main-page-filter-color"
+              class="d-flex flex-grow-0 flex-shrink-0 main-page-filter-color"
               :style="`background: ${color.code}`"
             ></div>
           </div>
-          <div class="d-flex align-center" style="margin-bottom:8px;">
-            <img class="d-flex flex-grow-0 main-page-filter-gender" src="/static/images/male.png" />
-            <img class="d-flex flex-grow-0 main-page-filter-gender" src="/static/images/female.png" />
+          <div class="d-flex align-center" style="margin-bottom: 8px">
+            <img
+              class="d-flex flex-grow-0 main-page-filter-gender"
+              src="/static/images/male.png"
+            />
+            <img
+              class="d-flex flex-grow-0 main-page-filter-gender"
+              src="/static/images/female.png"
+            />
             <div class="d-flex" />
             <div class="d-flex flex-grow-0">
               <s-button size="small">확인</s-button>
@@ -35,46 +52,64 @@
     </v-expansion-panels>
 
     <div class="main-page-item-container">
-      <div class="d-flex" style="flex-wrap: wrap;">
-        <div
-          @click="onDetailClick(dog.dog_id)"
-          v-for="(dog, di) in dogs"
-          class="d-flex main-page-item"
-          :key="`dog-${di}`"
-        >
-          <div class="d-flex flex-column flex-grow-1">
-            <div
-              class="d-flex flex-shrink-1 main-page-item-image"
-              :style="`background-image:url(${dog.profile})`"
-            >
+      <template v-if="loading">
+        <div class="d-flex justify-center align-center">
+          <img
+            style="margin-top: 70px; width: 60vw"
+            src="/static/images/loading.gif"
+          />
+        </div>
+      </template>
+      <template v-else>
+        <div class="d-flex" style="flex-wrap: wrap">
+          <div
+            @click="onDetailClick(dog.dog_id)"
+            v-for="(dog, di) in dogs"
+            class="d-flex main-page-item"
+            :key="`dog-${di}`"
+          >
+            <div class="d-flex flex-column flex-grow-1">
               <div
-                v-if="Math.random() > 0.7"
-                class="d-flex justify-center align-center main-page-item-scrap"
+                class="d-flex flex-shrink-1 main-page-item-image"
+                :style="`background-image:url(${dog.profile})`"
               >
-                <v-icon color="red">favorite</v-icon>
+                <div
+                  v-if="scraps[di]"
+                  class="d-flex justify-center align-center main-page-item-scrap"
+                >
+                  <v-icon color="red">favorite</v-icon>
+                </div>
               </div>
-            </div>
-            <div class="main-page-item-content">
-              <div class="main-page-item-id-container">
-                <div class="main-page-item-id">{{dog.dog_id}}</div>
-              </div>
-              <div class="d-flex align-center">
-                <div>{{dog.age}}</div>
-                <div class="d-flex" />
-                <img
-                  v-if="dog.sex == 'M'"
-                  src="/static/images/male.png"
-                  style="width: 25px;height:25px"
-                />
-                <img v-else src="/static/images/female.png" style="width: 25px;height:25px" />
+              <div class="main-page-item-content">
+                <div class="main-page-item-id-container">
+                  <div class="main-page-item-id">{{ dog.dog_id }}</div>
+                </div>
+                <div class="d-flex align-center">
+                  <div>{{ dog.age }}</div>
+                  <div class="d-flex" />
+                  <img
+                    v-if="dog.sex == 'M'"
+                    src="/static/images/male.png"
+                    style="width: 25px; height: 25px"
+                  />
+                  <img
+                    v-else
+                    src="/static/images/female.png"
+                    style="width: 25px; height: 25px"
+                  />
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="d-flex align-center justify-center main-page-more">
-          더 보기
-          <v-icon color="#616161">expand_more</v-icon>
-        </div>
+      </template>
+      <div
+        v-if="!loading && dogs.length != 0 && dogs != null"
+        @click="onMoreClick"
+        class="d-flex align-center justify-center main-page-more"
+      >
+        더 보기
+        <v-icon color="#616161">expand_more</v-icon>
       </div>
     </div>
   </s-main-layout>
@@ -84,6 +119,7 @@
 export default {
   name: 'main-page',
   data: () => ({
+    loading: true,
     colors: {
       white: { tag: ['흰', '하양', '백'], code: '#fff' },
       cream: { tag: ['크림', '아이보리', '미'], code: 'rgb(255, 249, 223)' },
@@ -107,215 +143,54 @@ export default {
           'linear-gradient(rgb(255, 255, 255),rgb(138, 85, 49),rgb(0, 0, 0))',
       },
     },
-        dogs: [
-      {
-        dog_id: 'N448548202000333',
-        age: '2018(년생)',
-        weight: '10(Kg)',
-        sex: 'W',
-        kind: '진도견',
-        color: '흰색',
-        neuter: 'N',
-        thumnail:
-          'http://www.animal.go.kr/files/shelter/2020/07/202009151909319_s.jpg',
-        profile:
-          'http://www.animal.go.kr/files/shelter/2020/07/202009092009658.jpg',
-        careAddr:
-          '경상남도 합천군 합천읍 옥산로 16 (합천읍/ 까치빌라) 태민동물병원',
-        careNm: '태민동물병원',
-        special: '겁이 많고 경계심이 많아서 조심성이 많은 성격',
-        find_place: '합천읍 충효로',
-        find_date: '20200915',
-        end_date: '20200925',
-      },
-      {
-        dog_id: 'N442418202000563',
-        age: '2017(년생)',
-        weight: '4(Kg)',
-        sex: 'M',
-        kind: '푸들',
-        color: '연갈색',
-        neuter: 'U',
-        thumnail:
-          'http://www.animal.go.kr/files/shelter/2020/07/202009141009390_s.jpg',
-        profile:
-          'http://www.animal.go.kr/files/shelter/2020/07/202009141009390.jpg',
-        careAddr:
-          '강원도 춘천시 신북읍 영서로 3282 (신북읍) (전)102보충대 주차장',
-        careNm: '춘천시 동물보호센터',
-        special: '온순 / 미용됨',
-        find_place: '퇴계주공7차아파트 4단지부근',
-        find_date: '20200914',
-        end_date: '20200924',
-      },
-      {
-        dog_id: 'N448548202000332',
-        age: '2016(년생)',
-        weight: '7(Kg)',
-        sex: 'M',
-        kind: '아메리칸 에스키모',
-        color: '갈색 흰색',
-        neuter: 'N',
-        thumnail:
-          'http://www.animal.go.kr/files/shelter/2020/07/202009151909418_s.jpg',
-        profile:
-          'http://www.animal.go.kr/files/shelter/2020/07/202008172108194.jpg',
-        careAddr:
-          '경상남도 합천군 합천읍 옥산로 16 (합천읍/ 까치빌라) 태민동물병원',
-        careNm: '태민동물병원',
-        special: '사람을 잘따르고 온순하며 밝은성격',
-        find_place: '율곡면 노양3길9-1',
-        find_date: '20200915',
-        end_date: '20200925',
-      },
-      {
-        dog_id: 'N442418202000563',
-        age: '2017(년생)',
-        weight: '4(Kg)',
-        sex: 'W',
-        kind: '푸들',
-        color: '연갈색',
-        neuter: 'U',
-        thumnail:
-          'http://www.animal.go.kr/files/shelter/2020/07/202009141009390_s.jpg',
-        profile:
-          'http://www.animal.go.kr/files/shelter/2020/07/202008191508641.jpg',
-        careAddr:
-          '강원도 춘천시 신북읍 영서로 3282 (신북읍) (전)102보충대 주차장',
-        careNm: '춘천시 동물보호센터',
-        special: '온순 / 미용됨',
-        find_place: '퇴계주공7차아파트 4단지부근',
-        find_date: '20200914',
-        end_date: '20200924',
-      },
-      {
-        dog_id: 'N448548202000333',
-        age: '2018(년생)',
-        weight: '10(Kg)',
-        sex: 'W',
-        kind: '진도견',
-        color: '흰색',
-        neuter: 'N',
-        thumnail:
-          'http://www.animal.go.kr/files/shelter/2020/07/202009151909319_s.jpg',
-        profile:
-          'http://www.animal.go.kr/files/shelter/2020/07/202008221608615.jpg',
-        careAddr:
-          '경상남도 합천군 합천읍 옥산로 16 (합천읍/ 까치빌라) 태민동물병원',
-        careNm: '태민동물병원',
-        special: '겁이 많고 경계심이 많아서 조심성이 많은 성격',
-        find_place: '합천읍 충효로',
-        find_date: '20200915',
-        end_date: '20200925',
-      },
-      {
-        dog_id: 'N448548202000332',
-        age: '2016(년생)',
-        weight: '7(Kg)',
-        sex: 'M',
-        kind: '아메리칸 에스키모',
-        color: '갈색 흰색',
-        neuter: 'N',
-        thumnail:
-          'http://www.animal.go.kr/files/shelter/2020/07/202009151909418_s.jpg',
-        profile:
-          'http://www.animal.go.kr/files/shelter/2020/07/202008311508255.jpg',
-        careAddr:
-          '경상남도 합천군 합천읍 옥산로 16 (합천읍/ 까치빌라) 태민동물병원',
-        careNm: '태민동물병원',
-        special: '사람을 잘따르고 온순하며 밝은성격',
-        find_place: '율곡면 노양3길9-1',
-        find_date: '20200915',
-        end_date: '20200925',
-      },
-      {
-        dog_id: 'N448548202000332',
-        age: '2016(년생)',
-        weight: '7(Kg)',
-        sex: 'M',
-        kind: '아메리칸 에스키모',
-        color: '갈색 흰색',
-        neuter: 'N',
-        thumnail:
-          'http://www.animal.go.kr/files/shelter/2020/07/202009151909418_s.jpg',
-        profile:
-          'http://www.animal.go.kr/files/shelter/2020/07/202009151909418.jpg',
-        careAddr:
-          '경상남도 합천군 합천읍 옥산로 16 (합천읍/ 까치빌라) 태민동물병원',
-        careNm: '태민동물병원',
-        special: '사람을 잘따르고 온순하며 밝은성격',
-        find_place: '율곡면 노양3길9-1',
-        find_date: '20200915',
-        end_date: '20200925',
-      },
-      {
-        dog_id: 'N442418202000563',
-        age: '2017(년생)',
-        weight: '4(Kg)',
-        sex: 'W',
-        kind: '푸들',
-        color: '연갈색',
-        neuter: 'U',
-        thumnail:
-          'http://www.animal.go.kr/files/shelter/2020/07/202009141009390_s.jpg',
-        profile:
-          'http://www.animal.go.kr/files/shelter/2020/07/202009040709503.jpg',
-        careAddr:
-          '강원도 춘천시 신북읍 영서로 3282 (신북읍) (전)102보충대 주차장',
-        careNm: '춘천시 동물보호센터',
-        special: '온순 / 미용됨',
-        find_place: '퇴계주공7차아파트 4단지부근',
-        find_date: '20200914',
-        end_date: '20200924',
-      },
-      {
-        dog_id: 'N448548202000333',
-        age: '2018(년생)',
-        weight: '10(Kg)',
-        sex: 'W',
-        kind: '진도견',
-        color: '흰색',
-        neuter: 'N',
-        thumnail:
-          'http://www.animal.go.kr/files/shelter/2020/07/202009151909319_s.jpg',
-        profile:
-          'http://www.animal.go.kr/files/shelter/2020/07/202009151909319.jpg',
-        careAddr:
-          '경상남도 합천군 합천읍 옥산로 16 (합천읍/ 까치빌라) 태민동물병원',
-        careNm: '태민동물병원',
-        special: '겁이 많고 경계심이 많아서 조심성이 많은 성격',
-        find_place: '합천읍 충효로',
-        find_date: '20200915',
-        end_date: '20200925',
-      },
-    ],
+    data: {
+      color: [],
+      sex: 'X',
+    },
+    dogs: [],
     isFilterVisible: false,
+    scraps: [],
   }),
   methods: {
-    // async getBest(cnt) {
-    //   try {
-    //     if (cnt != 0) {
-    //       this.cnt += cnt;
-    //     }
-    //     let temp = await this.$api.getBest(this.startNum, this.cnt);
-    //     this.best = temp;
-    //     for (let i = 0; i < this.best.length; i++) {}
-    //   } catch (e) {
-    //     console.error(e);
-    //   }
-    // }
+    async getDogs() {
+      try {
+        let res = await this.$api.getDogs(this.data);
+        this.dogs = res.data;
+        this.loading = false;
+      } catch (e) {
+        console.error(e);
+      }
+    },
     onFilterClick() {
       this.isFilterVisible = !this.isFilterVisible;
     },
     onDetailClick(id) {
       this.$router.push(`/detail/${id}`);
     },
+    onMoreClick() {
+      alert('더 불러올 데이터가 없습니다.');
+    },
+    async getScraps() {
+      try {
+        let res = await this.$api.getScraps();
+        this.dogs = res.user[0].dog_info;
+        for (let i in this.dogs) {
+          if (this.dogs[i].dog_id == this.dogId) {
+            this.scraps[i] = true;
+          } else {
+            this.scraps[i] = false;
+          }
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    },
   },
   async created() {
-    // this.getBest(0);
-    for (var i = 0; i < 9; ++i) {
-      this.dogs.push(this.dogs[i]);
+    if (this.$store.state.ISLOGGEDIN) {
+      this.getScraps();
     }
+    this.getDogs();
   },
   mounted() {
     if (this.$store.state.ISSKIP) {
@@ -341,6 +216,7 @@ export default {
 
 .main-page-filter-color {
   margin-right: 2px;
+  margin-bottom: 2px;
   width: 36px;
   height: 36px;
   border-radius: 50%;
@@ -362,6 +238,21 @@ export default {
 
 .main-page-item {
   width: 33%;
+  border-left: solid 1px #fff;
+  border-top: solid 1px #fff;
+}
+
+.main-page-item:nth-child(1) {
+  border: 0;
+}
+
+.main-page-item:nth-child(2),
+.main-page-item:nth-child(3) {
+  border-top: 0;
+}
+
+.main-page-item:nth-child(3n + 1) {
+  border-left: 0;
 }
 
 .main-page-item-id-container {
@@ -388,7 +279,6 @@ export default {
   max-height: 200px;
   background-size: cover;
   background-position: center center;
-  opacity: 0.8;
 }
 
 .main-page-item-scrap {
@@ -407,11 +297,9 @@ export default {
   font-size: 10px;
   font-weight: bold;
   background: #fff9dc;
-  border: solid 1px #fff;
 }
 
 .main-page-more {
-  border-top: solid 1px #eee;
   font-size: 14px;
   font-weight: bold;
   height: 70px;

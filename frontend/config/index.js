@@ -4,7 +4,7 @@
 
 const path = require('path')
 
-const URL = 'http://localhost:8080' // local backend server
+const URL = 'http://j3a307.p.ssafy.io:8000'
 
 module.exports = {
   dev: {
