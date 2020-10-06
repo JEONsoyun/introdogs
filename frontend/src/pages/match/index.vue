@@ -206,39 +206,39 @@ export default {
     dogs: [
       {
         kind: '말티즈',
-        profile: '/static/images/dog_m.PNG',
+        profile: '/static/images/dog_m.png',
       },
       {
         kind: '진도견',
-        profile: '/static/images/dog_j.PNG',
+        profile: '/static/images/dog_j.png',
       },
       {
         kind: '포메',
-        profile: '/static/images/dog_pm.PNG',
+        profile: '/static/images/dog_pm.png',
       },
       {
         kind: '푸들',
-        profile: '/static/images/dog_pd.PNG',
+        profile: '/static/images/dog_pd.png',
       },
       {
         kind: '치와와',
-        profile: '/static/images/dog_c.PNG',
+        profile: '/static/images/dog_c.png',
       },
       {
         kind: '닥스훈트',
-        profile: '/static/images/dog_d.PNG',
+        profile: '/static/images/dog_d.png',
       },
       {
         kind: '요크셔테리어',
-        profile: '/static/images/dog_y.PNG',
+        profile: '/static/images/dog_y.png',
       },
       {
         kind: '리트리버',
-        profile: '/static/images/dog_r.PNG',
+        profile: '/static/images/dog_r.png',
       },
       {
         kind: '시츄',
-        profile: '/static/images/dog_s.PNG',
+        profile: '/static/images/dog_s.png',
       },
     ],
   }),
@@ -358,16 +358,16 @@ export default {
 }
 
 .match-page-selectbox {
-  margin-top: 0px;
-  width: 100%;
-  height: 44px;
-  border-radius: 4px;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.29;
-  letter-spacing: -0.39px;
-  text-align: left;
-  color: #1e1e1e;
+  margin-top: 0px !important;
+  width: 100% !important;
+  height: 44px !important;
+  border-radius: 4px !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height: 1.29 !important;
+  letter-spacing: -0.39px !important;
+  text-align: left !important;
+  color: #1e1e1e !important;
 }
 
 .v-application .primary--text {
@@ -377,7 +377,7 @@ export default {
 .match-page-selectbox fieldset {
   border-color: #e1e1e1 !important;
   height: 48px;
-  border-width: 0.1px !important;
+  border-width: 1px !important;
   background: #fff;
 }
 </style>
