@@ -22,7 +22,7 @@
         />
       </div>
       <div class="lost-page-map" style="margin-top: 32px">
-        <s-map noList />
+        <s-map @select="selectLocation" noList />
       </div>
       <s-button @click="onConfirmClick" style="margin-top: 32px"
         >입력 완료</s-button
@@ -43,6 +43,7 @@ export default {
     albumBucketName: 'photo-album-dog',
     bucketRegion: 'ap-northeast-2',
     IdentityPoolId: 'ap-northeast-2:caca59ba-9483-43b5-a923-f9e5c6eb3229',
+    selectedLocation: {},
   }),
   methods: {
     pickFile(e) {
@@ -81,11 +82,11 @@ export default {
           (err, data) => {
             if (err) {
               return alert(
-                'There was an error uploading your photo: ',
+                '사진을 업로드하는 중 오류가 발생했습니다.',
                 err.message
               );
             }
-            alert('Successfully uploaded photo.');
+            // alert('사진이 성공적으로 업로드 되었습니다.');
             console.log(this.img_url);
           }
         );
@@ -93,18 +94,17 @@ export default {
         this.previewImage = null;
       }
     },
-    onConfirmClick() {
-      axios({
-        method: 'post',
-        url: 'http://j3a307.p.ssafy.io:8000/losts/',
-        data: {
-          img_url: this.img_url,
-          shelter_lat: '37.544846922',
-          shelter_lng: '126.939479132',
-        },
-      }).then((res) => {
-        this.$router.push('/lost/result');
+    async onConfirmClick() {
+      let img_url = this.img_url;
+      let shelter_lat = this.selectedLocation.latitude;
+      let shelter_lng = this.selectedLocation.longitude;
+      this.$router.push({
+        path: '/lost/result',
+        query: { img_url, shelter_lat, shelter_lng },
       });
+    },
+    selectLocation(data) {
+      this.selectedLocation = data;
     },
   },
 };

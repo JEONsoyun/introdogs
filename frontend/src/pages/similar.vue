@@ -294,11 +294,11 @@ export default {
           (err, data) => {
             if (err) {
               return alert(
-                'There was an error uploading your photo: ',
+                '사진을 업로드하는 중 오류가 발생했습니다.',
                 err.message
               );
             }
-            alert('Successfully uploaded photo.');
+            // alert('사진이 성공적으로 업로드 되었습니다.');
             console.log(this.img_url);
           }
         );
@@ -314,6 +314,9 @@ export default {
       }
 
       this.isUploaded = true;
+    },
+    onDetailClick(id) {
+      this.$router.push(`/detail/${id}`);
     },
   },
   async created() {
@@ -378,7 +381,7 @@ export default {
   max-height: 200px;
   background-size: cover;
   background-position: center center;
-  opacity: 0.8;
+  border: solid 1px #fff;
 }
 
 .similar-page-item-scrap {
