@@ -274,7 +274,7 @@ export default {
     // }
     // console.log("***", this.selectedColor);
     // this.$forceUpdate();
-    await this.getScraps();
+    // await this.getScraps();
     await this.getDogs();
     for (let i in this.dogs) {
       for (let j in this.scrapDogs) {

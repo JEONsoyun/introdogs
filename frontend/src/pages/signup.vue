@@ -100,7 +100,7 @@ export default {
         });
 
         alert("회원가입이 완료되었습니다.");
-        this.$router.push('/');
+        this.$router.push('/login');
       } catch (e) {
         console.error(e);
         alert('회원가입 중 문제가 발생하였습니다.');
