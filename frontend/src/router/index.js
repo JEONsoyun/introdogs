@@ -26,6 +26,10 @@ const router = new Router({
       component: index
     },
     {
+      path: '/filter',
+      component: index
+    },
+    {
       path: '/login',
       component: login
     },

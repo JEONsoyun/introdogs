@@ -30,21 +30,42 @@
               v-for="(color, ci) in colors"
               :key="`color-${ci}`"
               class="d-flex flex-grow-0 flex-shrink-0 main-page-filter-color"
-              :style="`background: ${color.code}`"
-            ></div>
+            >
+              <div
+                @click="onColorClick(ci)"
+                :style="`width:100%;height:100%;border-radius:50%;background: ${color.code}`"
+                :class="{
+                  'main-page-filter-color--selected': selectedColor[ci],
+                }"
+              ></div>
+            </div>
           </div>
           <div class="d-flex align-center" style="margin-bottom: 8px">
-            <img
+            <div
               class="d-flex flex-grow-0 main-page-filter-gender"
-              src="/static/images/male.png"
-            />
-            <img
+              style="background-image: url('/static/images/male.png')"
+              @click="onGenderClick(0)"
+            >
+              <div
+                :class="{
+                  'main-page-filter-gender--selected': selectedGender[0],
+                }"
+              ></div>
+            </div>
+            <div
               class="d-flex flex-grow-0 main-page-filter-gender"
-              src="/static/images/female.png"
-            />
+              style="background-image: url('/static/images/female.png')"
+              @click="onGenderClick(1)"
+            >
+              <div
+                :class="{
+                  'main-page-filter-gender--selected': selectedGender[1],
+                }"
+              ></div>
+            </div>
             <div class="d-flex" />
             <div class="d-flex flex-grow-0">
-              <s-button size="small">확인</s-button>
+              <s-button @click="onFilterChange" size="small">확인</s-button>
             </div>
           </div>
         </v-expansion-panel-content>
@@ -73,12 +94,12 @@
                 class="d-flex flex-shrink-1 main-page-item-image"
                 :style="`background-image:url(${dog.profile})`"
               >
-                <div
+                <!-- <div
                   v-if="scraps.length != 0 && scraps != null && scraps[di]"
                   class="d-flex justify-center align-center main-page-item-scrap"
                 >
                   <v-icon color="red">favorite</v-icon>
-                </div>
+                </div> -->
               </div>
               <div class="main-page-item-content">
                 <div class="main-page-item-id-container">
@@ -153,9 +174,25 @@ export default {
     scrapDogs: [],
     isFilterVisible: false,
     scraps: [],
+    selectedColor: [],
+    selectedGender: [],
   }),
   methods: {
     async getDogs() {
+      let q = this.$route.query;
+      for (let i in q.color) {
+        this.data.color.push(this.colors[q.color[i]].tag);
+      }
+
+      if (!q.gender || q.gender.length != 1) {
+        this.data.sex = 'X';
+      } else {
+        if (q.gender[0] == 0) {
+          this.data.sex = 'M';
+        } else {
+          this.data.sex = 'F';
+        }
+      }
       try {
         let res = await this.$api.getDogs(this.data);
         this.dogs = res.data;
@@ -184,8 +221,47 @@ export default {
         console.error(e);
       }
     },
+    onColorClick(index) {
+      this.selectedColor[index] = !this.selectedColor[index];
+      this.$forceUpdate();
+    },
+    onGenderClick(index) {
+      this.selectedGender[index] = !this.selectedGender[index];
+      this.$forceUpdate();
+    },
+    onFilterChange() {
+      let selectedColors = [];
+      for (let i in this.selectedColor) {
+        if (this.selectedColor[i]) {
+          selectedColors.push(i);
+        }
+      }
+      let selectedGenders = [];
+      for (let i in this.selectedGender) {
+        if (this.selectedGender[i]) {
+          selectedGenders.push(i);
+        }
+      }
+      this.$router.push({
+        path: '/filter',
+        query: { color: selectedColors, gender: selectedGenders },
+      });
+
+      this.getDogs();
+    },
   },
   async created() {
+    // let q = this.$route.query;
+    // for (let color in q.color) {
+    //   for (let j in this.colors) {
+    //     if (color == this.colors[j].key) {
+    //       this.selectedColor[j] = true;
+    //       return;
+    //     }
+    //   }
+    // }
+    // console.log("***", this.selectedColor);
+    // this.$forceUpdate();
     await this.getScraps();
     await this.getDogs();
     for (let i in this.dogs) {
@@ -225,7 +301,13 @@ export default {
   width: 36px;
   height: 36px;
   border-radius: 50%;
+  background: #ffd501;
   border: solid 2px #ffd501;
+  overflow: hidden;
+}
+
+.main-page-filter-color--selected {
+  opacity: 0.3;
 }
 
 .main-page-filter-gender {
@@ -234,6 +316,17 @@ export default {
   height: 36px;
   border-radius: 50%;
   border: solid 2px #ffd501;
+  background-size: cover;
+  background-position: center center;
+  overflow: hidden;
+}
+
+.main-page-filter-gender--selected {
+  width: 100%;
+  height: 100%;
+  background: #ffd501;
+  opacity: 0.7;
+  border-radius: 50%;
 }
 
 .main-page-item-container {
