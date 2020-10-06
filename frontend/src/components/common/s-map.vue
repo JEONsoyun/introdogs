@@ -9,7 +9,7 @@
           type="text"
           class="d-flex"
           style="margin-left: 8px;"
-          placeholder="장소를 입력해주세요."
+          placeholder="잃어버린 장소를 입력해주세요."
           @keydown.enter="onPlaceSearch"
         />
         <span
