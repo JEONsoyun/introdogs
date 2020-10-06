@@ -55,7 +55,7 @@
       <template v-if="loading">
         <div class="d-flex justify-center align-center">
           <img
-            style="margin-top: 70px; width: 60vw;max-width: 300px;"
+            style="margin-top: 70px; width: 60vw; max-width: 300px"
             src="/static/images/loading.gif"
           />
         </div>
@@ -144,6 +144,8 @@ export default {
       },
     },
     data: {
+      pick: {},
+      survey: {},
       color: [],
       sex: 'X',
     },

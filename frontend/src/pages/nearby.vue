@@ -1636,19 +1636,23 @@ export default {
   data: () => ({
     dogs: [],
     dog: {},
+    clatitude: null,
+    clongitude: null,
   }),
   methods: {
     onDetailClick(id) {
       this.$router.push(`/detail/${id}`);
     },
     onMapLoad() {
-      this.updateMapCenter();
-      this.initShellters();
-      this.$refs.map.addMyPosition({
-        icon: '/static/images/location.png',
-        latitude: 37.8701158122,
-        longitude: 126.9835430508,
-      });
+      if (this.clatitude) {
+        this.updateMapCenter();
+        this.initShellters();
+        this.$refs.map.addMyPosition({
+          icon: '/static/images/location.png',
+          latitude: this.clatitude ? this.clatitude : 37.8701158122,
+          longitude: this.clongitude ? this.clongitude : 126.9835430508,
+        });
+      }
     },
     updateMapCenter(useRouteParam = true) {
       let latLng = null;
@@ -1695,6 +1699,17 @@ export default {
     onPickDog(dog) {
       this.dog = dog;
     },
+    getCurrentPositionSuccess(pos) {
+      console.log(pos);
+      this.clatitude = pos.coords.latitude;
+      this.clongitude = pos.coords.longitude;
+      this.$forceUpdate();
+    },
+  },
+  created() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(this.getCurrentPositionSuccess);
+    }
   },
 };
 </script>
