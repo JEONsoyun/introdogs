@@ -435,26 +435,26 @@ export default {
         icon,
       });
     },
-    addMarker(shellter) {
-      const { name, latitude, longitude } = shellter;
+    addMarker(shelter) {
+      const { name, latitude, longitude } = shelter;
       const marker = new Tmapv2.Marker({
         position: new Tmapv2.LatLng(latitude, longitude),
         map: this.mapObject,
         icon: '/static/images/shelter.png',
         title: name,
       });
-      this.markers.push(Object.assign(marker, { shellter }));
+      this.markers.push(Object.assign(marker, { shelter }));
 
       marker.addListener('click', (e) => {
         this.mapObject.setCenter(new Tmapv2.LatLng(latitude, longitude));
-        this.$emit('pickShellter', shellter);
+        this.$emit('pickShelter', shelter);
       });
     },
     clickMarker(index) {
-      const { shellter } = this.markers[index];
-      const { latitude, longitude } = shellter;
+      const { shelter } = this.markers[index];
+      const { latitude, longitude } = shelter;
       this.mapObject.setCenter(new Tmapv2.LatLng(latitude, longitude));
-      this.$emit('pickShellter', shellter);
+      this.$emit('pickShelter', shelter);
     },
   },
   mounted() {
