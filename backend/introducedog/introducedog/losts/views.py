@@ -99,7 +99,7 @@ class FindDogByImg(View):
         shelList = sorted(shelList, key=lambda x: (
             (float(x['shelter_lat'])-my_lat)**2) + ((float(x['shelter_lng'])-my_lng)**2))
 
-        shelDog = {}
+        SD = []
         cnt = 0
         for shel in shelList:
             shelter_name = shel['shelter_name']
@@ -109,15 +109,14 @@ class FindDogByImg(View):
                     sn.append(d)
             if len(sn) > 0:
                 sn = sorted(sn, key=lambda x: x['end_date'])
-                shelDog[shel['shelter_name']] = []
-                shelDog[shel['shelter_name']].append(
-                    {'dogs': sn})
-                shelDog[shel['shelter_name']].append(
-                    {'shelter_lat': shel['shelter_lat']})
-                shelDog[shel['shelter_name']].append(
-                    {'shelter_lng': shel['shelter_lng']})
+                shelDog = {}
+                shelDog['shelter_name'] = shel['shelter_name']
+                shelDog['dogs'] = sn
+                shelDog['shelter_lat'] = shel['shelter_lat']
+                shelDog['shelter_lng'] = shel['shelter_lng']
                 cnt += 1
+                SD.append(shelDog)
             if cnt > 3:
                 break
 
-        return JsonResponse({"data": shelDog}, status=200)
+        return JsonResponse({"data": SD}, status=200)
