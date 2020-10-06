@@ -65,7 +65,6 @@
 
 <script>
 import AWS from 'aws-sdk';
-import axios from 'axios';
 export default {
   name: 'my-similar-page',
   data: () => ({
@@ -306,19 +305,25 @@ export default {
         this.previewImage = null;
       }
     },
-    onConfirmClick(code) {
+    async onConfirmClick(code) {
       if (code == 0) {
         alert('사진을 업로드해주세요.');
         this.isUploaded = false;
         return;
       }
-
       this.isUploaded = true;
+      try {
+        let d = { img_url: this.img_url };
+        console.log(d);
+        let res = await this.$api.postMyimage(d);
+        console.log(res);
+        this.dogs = res.data.data;
+      } catch (e) {
+        console.error(e);
+      }
     },
   },
-  async created() {
-    // this.getBest(0);
-  },
+  async created() {},
 };
 </script>
 

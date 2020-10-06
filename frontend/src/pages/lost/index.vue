@@ -40,6 +40,8 @@ export default {
     previewImage: null,
     location: '',
     img_url: '',
+    clatitude: null,
+    clongitude: null,
     albumBucketName: 'photo-album-dog',
     bucketRegion: 'ap-northeast-2',
     IdentityPoolId: 'ap-northeast-2:caca59ba-9483-43b5-a923-f9e5c6eb3229',
@@ -99,8 +101,8 @@ export default {
         url: 'http://j3a307.p.ssafy.io:8000/losts/',
         data: {
           img_url: this.img_url,
-          shelter_lat: '37.544846922',
-          shelter_lng: '126.939479132',
+          shelter_lat: this.clatitude,
+          shelter_lng: this.clongitude,
         },
       }).then((res) => {
         this.$router.push('/lost/result');
