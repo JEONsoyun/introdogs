@@ -32,7 +32,7 @@
           <s-button
             @click="$router.push('/')"
             type="white"
-            style="margin-top: 16px"
+            style="margin-top: 12px"
             >다른 멍멍이들 보러 가기</s-button
           >
         </template>
