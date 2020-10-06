@@ -7,6 +7,7 @@
           @pickDog="onPickDog"
           @pickShellter="onPickShellter"
           ref="map"
+          :zoom="10"
           noToolbar
           :dogs="dogs"
         />
@@ -30,7 +31,7 @@
 </template>
 
 <script>
-const SHELLTERS_SAMPLE = [
+const shelters_SAMPLE = [
   {
     shelter_id: '311300201300001',
     shelter_name: '한국동물구조관리협회',
@@ -1644,9 +1645,10 @@ export default {
       this.$router.push(`/detail/${id}`);
     },
     onMapLoad() {
+      console.log(this.clatitude);
       if (this.clatitude) {
         this.updateMapCenter();
-        this.initShellters();
+        this.initshelters();
         this.$refs.map.addMyPosition({
           icon: '/static/images/location.png',
           latitude: this.clatitude ? this.clatitude : 37.8701158122,
@@ -1654,20 +1656,11 @@ export default {
         });
       }
     },
-    updateMapCenter(useRouteParam = true) {
-      let latLng = null;
-
-      if (useRouteParam) {
-        latLng = new Tmapv2.LatLng(
-          Number(this.$route.query.latitude) || 0,
-          Number(this.$route.query.longitude) || 0
-        );
-      } else {
-        latLng = new Tmapv2.LatLng(
-          Number(this.dog.latitude) || 0,
-          Number(this.dog.longitude) || 0
-        );
-      }
+    updateMapCenter() {
+      let latLng = new Tmapv2.LatLng(
+        Number(this.clatitude) || 0,
+        Number(this.clongitude) || 0
+      );
 
       this.$refs.map.mapObject.setCenter(latLng);
     },
@@ -1677,11 +1670,15 @@ export default {
       const randOffset = Math.floor(Math.random() * DOGS_SAMPLE.length);
       this.dogs = DOGS_SAMPLE.slice(randOffset, randOffset + 3);
     },
-    async initShellters() {
+    async initshelters() {
       try {
-        // TODO API 붙여주세요.
-        this.shellters = SHELLTERS_SAMPLE;
-        this.shellters.forEach(({ shelter_name, shelter_lat, shelter_lng }) => {
+        let res = await this.$api.getShelters({
+          shelter_lat: this.clatitude,
+          shelter_lng: this.clongitude,
+        });
+        this.shelters = res.data;
+        console.log(this.shelters);
+        this.shelters.forEach(({ shelter_name, shelter_lat, shelter_lng }) => {
           this.$refs.map.addMarker({
             name: shelter_name,
             latitude: shelter_lat,
@@ -1689,7 +1686,7 @@ export default {
           });
         });
 
-        if (this.shellters.length > 0) {
+        if (this.shelters.length > 0) {
           this.$refs.map.clickMarker(0);
         }
       } catch (e) {
@@ -1703,6 +1700,7 @@ export default {
       console.log(pos);
       this.clatitude = pos.coords.latitude;
       this.clongitude = pos.coords.longitude;
+      this.onMapLoad();
       this.$forceUpdate();
     },
   },
