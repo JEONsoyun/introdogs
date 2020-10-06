@@ -109,7 +109,9 @@ class FindDogByImg(View):
                     sn.append(d)
             if len(sn) > 0:
                 sn = sorted(sn, key=lambda x: x['end_date'])
-                shelDog[shel['shelter_name']] = sn
+                shelDog[shel['shelter_name']] = []
+                shelDog[shel['shelter_name']].append(
+                    {'dogs': sn})
                 shelDog[shel['shelter_name']].append(
                     {'shelter_lat': shel['shelter_lat']})
                 shelDog[shel['shelter_name']].append(
