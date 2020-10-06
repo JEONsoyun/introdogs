@@ -89,7 +89,7 @@
         </div>
         <div class="s-dog-proflie-map">
           <s-map
-            v-if="data.shelter"
+            v-if="data.shelter && data.shelter.length != 0"
             height="200px"
             ref="map"
             :zoom="16"
@@ -113,6 +113,7 @@ export default {
   data: () => ({}),
   methods: {
     onMapLoad() {
+      console.log(this.data);
       this.$refs.map.addMyPosition({
         icon: '/static/images/location.png',
         latitude: this.data.shelter

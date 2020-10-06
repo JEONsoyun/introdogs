@@ -2,7 +2,7 @@
   <s-main-layout title="멍멍이 상세보기">
     <div class="detail-page">
       <div class="d-flex align-center" style="margin-bottom: 8px">
-        <div class="detail-page-title">{{ dog ? dog.dog_id : '' }}</div>
+        <div class="detail-page-title">{{ dog ? '[' + dog.dog_id + ']' : '' }}</div>
         <div class="d-flex" />
         <div @click="onScrapClick">
           <v-icon v-if="isScrapped" size="36" color="red">favorite</v-icon>

@@ -47,7 +47,8 @@
           </div>
           <div
             style="
-              margin: 24px 0;
+              margin-top: 24px;
+              margin-bottom: 60px;
               font-size: 16px;
               letter-space: -0.4px;
               font-weight: 700;
@@ -126,7 +127,7 @@ export default {
         this.img_url =
           'https://photo-album-dog.s3.ap-northeast-2.amazonaws.com/' +
           encodeURIComponent(photoKey);
-        console.log(photoKey);
+        // console.log(photoKey);
         s3.upload(
           {
             Key: photoKey,
@@ -141,7 +142,7 @@ export default {
               );
             }
             // alert('사진이 성공적으로 업로드 되었습니다.');
-            console.log(this.img_url);
+            // console.log(this.img_url);
           }
         );
       } else {
@@ -165,15 +166,11 @@ export default {
       try {
         let res = await this.$api.postMyimage({ img_url: this.img_url });
         this.dogs = res.data.data.slice(0, 9);
-        console.log(this.dogs);
         this.loading = false;
       } catch (e) {
         console.error(e);
       }
     },
-  },
-  async created() {
-    // this.getBest(0);
   },
 };
 </script>

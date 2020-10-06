@@ -80,6 +80,18 @@
             src="/static/images/loading.gif"
           />
         </div>
+        <div
+          style="
+            margin: 24px 0;
+            font-size: 16px;
+            letter-space: -0.4px;
+            font-weight: 700;
+            text-align: center;
+            color: #585858;
+          "
+        >
+          멍멍이들을 데려오는 중입니다!<br />잠시만 기다려주세요.
+        </div>
       </template>
       <template v-else>
         <div class="d-flex" style="flex-wrap: wrap">
