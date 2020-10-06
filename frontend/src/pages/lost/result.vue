@@ -1,59 +1,82 @@
 <template>
   <s-first-layout title="잃어버린 멍멍이 찾기 결과">
     <div class="lost-result-page">
-      <div class="lost-result-page-map">
-        <s-map
-          @load="onMapLoad"
-          @pickDog="onPickDog"
-          @pickShelter="onPickShelter"
-          ref="map"
-          :zoom="10"
-          noToolbar
-          :dogs="dogs"
-        />
-      </div>
-      <div v-if="selectedShelter" class="lost-result-page-shelter">
-        {{ selectedShelter }}
-      </div>
-      <template v-if="dog.dog_id != null">
-        <s-dog-profile-small
+      <template v-if="loading">
+        <div class="d-flex justify-center align-center">
+          <img
+            style="margin-top: 70px; width: 60vw; max-width: 300px"
+            src="/static/images/loading.gif"
+          />
+        </div>
+        <div
           style="
-            margin-top: -1px;
-            border-top-right-radius: 0;
-            border-top-left-radius: 0;
+            margin-top: 24px;
+            font-size: 16px;
+            letter-space: -0.4px;
+            font-weight: 700;
+            text-align: center;
           "
-          :data="dog"
-        />
-        <s-button
-          @click="onDetailClick(dog.dog_id)"
-          style="border-top-left-radius: 0; border-top-right-radius: 0"
-          size="small"
-          >자세히 보기</s-button
         >
+          검색중입니다.<br>최대 1분의 시간이 소요될 수 있습니다.
+        </div>
       </template>
-      <template
-        v-if="shelters.length != 0 && shelters != null && dog.dog_id == null"
-      >
-        <div class="d-flex flex-column justify-center align-center">
-          <img
-            class="lost-result-page-empty-image"
-            src="/static/images/question_dog.png"
-            style="margin-top: 24px"
+      <template v-if="!loading">
+        <div class="lost-result-page-map">
+          <s-map
+            @load="onMapLoad"
+            @pickDog="onPickDog"
+            @pickShelter="onPickShelter"
+            ref="map"
+            :zoom="10"
+            noToolbar
+            :dogs="dogs"
           />
-          <div class="lost-result-page-empty-text">
-            {{ selectedShelter }}에 정보가 없습니다.<br />
-            다른 보호소를 선택해주세요.
+        </div>
+        <div v-if="selectedShelter" class="lost-result-page-shelter">
+          {{ selectedShelter }}
+        </div>
+        <template v-if="dog.dog_id != null">
+          <s-dog-profile-small
+            style="
+              margin-top: -1px;
+              border-top-right-radius: 0;
+              border-top-left-radius: 0;
+            "
+            :data="dog"
+          />
+          <s-button
+            @click="onDetailClick(dog.dog_id)"
+            style="border-top-left-radius: 0; border-top-right-radius: 0"
+            size="small"
+            >자세히 보기</s-button
+          >
+        </template>
+        <template
+          v-if="shelters.length != 0 && shelters != null && dog.dog_id == null"
+        >
+          <div class="d-flex flex-column justify-center align-center">
+            <img
+              class="lost-result-page-empty-image"
+              src="/static/images/question_dog.png"
+              style="margin-top: 24px"
+            />
+            <div class="lost-result-page-empty-text">
+              {{ selectedShelter }}에 정보가 없습니다.<br />
+              다른 보호소를 선택해주세요.
+            </div>
           </div>
-        </div>
-      </template>
-      <template v-if="shelters.length == 0 || shelters == null">
-        <div class="d-flex flex-column justify-center align-center">
-          <img
-            class="lost-result-page-empty-image"
-            src="/static/images/question_house.png"
-          />
-          <div class="lost-result-page-empty-text">보호소 정보가 없습니다.</div>
-        </div>
+        </template>
+        <template v-if="shelters.length == 0 || shelters == null">
+          <div class="d-flex flex-column justify-center align-center">
+            <img
+              class="lost-result-page-empty-image"
+              src="/static/images/question_house.png"
+            />
+            <div class="lost-result-page-empty-text">
+              보호소 정보가 없습니다.
+            </div>
+          </div>
+        </template>
       </template>
     </div>
   </s-first-layout>
@@ -69,6 +92,7 @@ export default {
     clatitude: null,
     clongitude: null,
     selectedShelter: '',
+    loading: true,
   }),
   methods: {
     onDetailClick(id) {
@@ -95,13 +119,12 @@ export default {
     },
     async onPickShelter(shelter) {
       this.selectedShelter = shelter.name;
-      try {
-        let res = await this.$api.getArroundDogs(shelter.name);
-        console.log(res);
-        this.dogs = res.dogs;
-      } catch (e) {
-        console.error(e);
-      }
+      this.shelters.forEach(({ shelter_name, dogs }) => {
+        if (shelter_name == this.selectedShelter) {
+          this.dogs = dogs;
+          return;
+        }
+      });
     },
     async initshelters() {
       try {
@@ -126,21 +149,22 @@ export default {
   },
   async created() {
     let q = this.$route.query;
-    console.log(q);
-    this.clatitude = q.shelter_lat;
-    this.clongitude = q.shelter_lng;
-    this.onMapLoad();
+
     try {
       let res = await this.$api.postLost({
         img_url: q.img_url,
         shelter_lat: q.shelter_lat,
         shelter_lng: q.shelter_lng,
       });
-      this.shelters = res.data;
-      console.log(this.shelters);
+      this.shelters = res.data.data;
+      this.loading = false;
     } catch (e) {
       console.error(e);
     }
+    console.log(q);
+    this.clatitude = q.shelter_lat;
+    this.clongitude = q.shelter_lng;
+    this.onMapLoad();
   },
 };
 </script>
@@ -148,6 +172,7 @@ export default {
 <style>
 .lost-result-page {
   padding: 24px 16px;
+  padding-top: 64px;
   padding-bottom: 80px;
 }
 
