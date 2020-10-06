@@ -56,8 +56,8 @@ class SignupView(View):
 class LoginView(View):
     def post(self, request):
         print("start LoginView:Post")
-        password_crypt = bcrypt.hashpw(
-                '00', bcrypt.gensalt())  # 암호화
+        user_password = 'user_password'.encode('utf-8')  # 바이트 코드로 변환
+        password_crypt = bcrypt.hashpw(user_password, bcrypt.gensalt())  # 암호화
         data = json.loads(request.body)
         # User(
         #     user_email = data['user_email'],

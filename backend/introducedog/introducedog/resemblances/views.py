@@ -82,13 +82,14 @@ class FindDogByImg(View):
             dogList = Dog.objects.filter(kind__contains=pre_ans_str).values()
 
 
-        try :
-            nowuser = User.objects.get(user_email=request.session.get('userEmail'))
-            print(nowuser)
-            nowuser.same_dog = dogList[0]['dog_id']
-            nowuser.save()
-        except : 
-            print("사용자 없다")
+            try :
+                print(request.session.get('userEmail'))
+                nowuser = User.objects.get(user_email=request.session.get('userEmail'))
+                print(nowuser)
+                nowuser.same_dog = dogList[0]['dog_id']
+                nowuser.save()
+            except : 
+                print("사용자 없다")
 
         
         
