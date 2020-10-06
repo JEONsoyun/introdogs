@@ -56,6 +56,8 @@ class SignupView(View):
 class LoginView(View):
     def post(self, request):
         print("start LoginView:Post")
+        password_crypt = bcrypt.hashpw(
+                '00', bcrypt.gensalt())  # 암호화
         data = json.loads(request.body)
         # User(
         #     user_email = data['user_email'],
@@ -70,6 +72,7 @@ class LoginView(View):
                     # 유니코드 문자열로 디코딩
                     token = token.decode('utf-8')
                     request.session['username'] = user.user_name
+                    request.session['userEmail'] = user.user_email
                     # print(request.session.get('username'))
                     return JsonResponse({"token": token}, status=200)
                 else:

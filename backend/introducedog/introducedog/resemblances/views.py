@@ -12,7 +12,7 @@ from io import BytesIO
 # Create your views here.
 from dogs.models import Dog
 from dogs.serializers import DogSerializer
-
+from accounts.models import User
 import urllib
 from rest_framework import generics
 from django.http import Http404
@@ -80,4 +80,17 @@ class FindDogByImg(View):
             print(pre_ans_str)
             cnt += 1
             dogList = Dog.objects.filter(kind__contains=pre_ans_str).values()
+
+
+        try :
+            nowuser = User.objects.get(user_email=request.session.get('userEmail'))
+            print(nowuser)
+            nowuser.same_dog = dogList[0]['dog_id']
+            nowuser.save()
+        except : 
+            print("사용자 없다")
+
+        
+        
+
         return JsonResponse({"data": list(dogList)}, status=200)
