@@ -3,11 +3,12 @@ import csv
 import os
 import django
 import re
-
-print("첫줄은 되나")
+# 실행방법 : 현재 위치로 이동 한다 .
+# python manage.py shell을 친다
+# 복붙 한다ㅋㅋㅋㅋㅋㅋ
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "introducedog.settings")
 django.setup()
-print("이거는 됬나")
+
 
 CSV_PATH = 'dog_tel_20201007.csv'
 
