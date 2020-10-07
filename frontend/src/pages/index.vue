@@ -105,7 +105,7 @@
             <div class="d-flex flex-column flex-grow-1">
               <div
                 class="d-flex flex-shrink-1 main-page-item-image"
-                :style="`background-image:url(${dog.profile})`"
+                :style="`background-image:url(${dog.profile ? dog.profile : '/static/images/empty_dog.png'})`"
               >
                 <!-- <div
                   v-if="scraps.length != 0 && scraps != null && scraps[di]"

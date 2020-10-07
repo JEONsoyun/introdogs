@@ -10,7 +10,7 @@
     </template>
     <div
       class="s-dog-profile-image"
-      :style="`background-image: url(${data.profile})`"
+      :style="`background-image: url(${data.profile ? data.profile : '/static/images/empty_dog.png'})`"
     />
     <div class="s-dog-profile-content">
       <div style="padding: 0 16px">{{ data.dog_id }}</div>
@@ -165,8 +165,8 @@ export default {
 .s-dog-profile-image {
   margin: 0 16px 16px 16px;
   min-height: 214px;
-  height: 50vw;
-  max-height: 400px;
+  height: 40vh;
+  max-height: 500px;
   background-size: cover;
   background-position: center center;
 }

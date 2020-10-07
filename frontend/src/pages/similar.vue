@@ -56,30 +56,46 @@
               color: #585858;
             "
           >
-            나와 닮은 멍멍이를 찾고있어요!<br />최대 1분의 시간이 소요될 수 있습니다.
+            나와 닮은 멍멍이를 찾고있어요!<br />최대 1분의 시간이 소요될 수
+            있습니다.
           </div>
         </template>
         <template v-else>
-          <div class="d-flex" style="flex-wrap: wrap">
-            <div
-              @click="onDetailClick(dog.dog_id)"
-              v-for="(dog, di) in dogs"
-              :key="`dog-${di}`"
-              class="d-flex flex-column flex-grow-1 similar-page-item"
-            >
+          <template v-if="dogs.length != 0 && dogs != null">
+            <div class="d-flex" style="flex-wrap: wrap">
               <div
-                class="d-flex similar-page-item-image"
-                :style="`background-image:url(${dog.profile})`"
+                @click="onDetailClick(dog.dog_id)"
+                v-for="(dog, di) in dogs"
+                :key="`dog-${di}`"
+                class="d-flex flex-column flex-grow-1 similar-page-item"
               >
-                <!-- <div
+                <div
+                  class="d-flex similar-page-item-image"
+                  :style="`background-image:url(${dog.profile})`"
+                >
+                  <!-- <div
                 v-if="Math.random() > 0.7"
                 class="d-flex justify-center align-center similar-page-item-scrap"
               >
                 <v-icon color="red">favorite</v-icon>
               </div> -->
+                </div>
               </div>
             </div>
-          </div>
+          </template>
+          <template v-else>
+            <div class="d-flex flex-column justify-center align-center">
+              <img
+                class="similar-page-empty-image"
+                src="/static/images/question_dog.png"
+                style="margin-top: 24px"
+              />
+              <div class="similar-page-empty-text">
+                나와 닮은 멍멍이 정보가 없어요!<br />
+                다른 사진을 선택해주세요.
+              </div>
+            </div>
+          </template>
         </template>
       </div>
     </div>
@@ -155,7 +171,7 @@ export default {
         this.isUploaded = false;
         return;
       }
-
+      this.loading = true;
       this.postMyimage();
       this.isUploaded = true;
     },
@@ -242,5 +258,18 @@ export default {
   height: 30px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.61);
+}
+
+.similar-page-empty-image {
+  margin-top: 32px;
+  width: 120px;
+  opacity: 0.4;
+}
+
+.similar-page-empty-text {
+  margin: 32px;
+  font-size: 16px;
+  color: #585858;
+  text-align: center;
 }
 </style>
