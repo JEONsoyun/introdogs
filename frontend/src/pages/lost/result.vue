@@ -10,14 +10,16 @@
         </div>
         <div
           style="
-            margin-top: 24px;
+            margin: 24px 0;
+            margin-top: 48px;
             font-size: 16px;
             letter-space: -0.4px;
             font-weight: 700;
             text-align: center;
+            color: #585858;
           "
         >
-          검색중입니다.<br>최대 1분의 시간이 소요될 수 있습니다.
+          검색중입니다.<br />최대 1분의 시간이 소요될 수 있습니다.
         </div>
       </template>
       <template v-if="!loading">

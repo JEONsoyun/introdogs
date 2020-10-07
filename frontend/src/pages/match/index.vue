@@ -2,7 +2,7 @@
   <s-first-layout title="나와 어울리는 멍멍이 매칭">
     <div class="match-page-container">
       <div class="match-page-box">
-        <div>1. 관심이 가는 멍멍이 사진을 눌러주세요.</div>
+        <div>1. 관심있는 멍멍이 사진을 선택해주세요.</div>
         <div style="margin-top: 24px">
           <div class="d-flex justify-center align-center match-page-number">
             1
@@ -17,9 +17,9 @@
                 <div
                   class="d-flex match-page-item-image"
                   :style="`background-image: url(${dog.profile})`"
-                  @click="onSelectDog(0, di)"
+                  @click="onSelectDog(0, di + 1)"
                   :class="{
-                    'match-page-item--selected': selectedDog[0] == di,
+                    'match-page-item--selected': pick.p1 == di + 1,
                   }"
                 ></div>
               </div>
@@ -42,9 +42,9 @@
               <div
                 class="d-flex match-page-item-image"
                 :style="`background-image: url(${dog.profile})`"
-                @click="onSelectDog(1, dii)"
+                @click="onSelectDog(1, (dii % 3) + 1)"
                 :class="{
-                  'match-page-item--selected': selectedDog[1] == dii,
+                  'match-page-item--selected': pick.p2 == (dii % 3) + 1,
                 }"
               ></div>
             </div>
@@ -66,9 +66,9 @@
               <div
                 class="d-flex match-page-item-image"
                 :style="`background-image: url(${dog.profile})`"
-                @click="onSelectDog(2, diii)"
+                @click="onSelectDog(2, (diii % 3) + 1)"
                 :class="{
-                  'match-page-item--selected': selectedDog[2] == diii,
+                  'match-page-item--selected': pick.p3 == (diii % 3) + 1,
                 }"
               ></div>
             </div>
@@ -78,55 +78,55 @@
       <div class="match-page-box" style="margin-top: 24px">
         <div>2. 해당사항에 체크해주세요.</div>
         <v-checkbox
-          v-model="pick.q1"
+          v-model="survey.q1"
           color="#ffd501"
           hide-details
           label="반려견을 해외 입양하길 원하거나 한국에 거주하는 외국인인가요?"
         />
         <v-checkbox
-          v-model="pick.q2"
+          v-model="survey.q2"
           color="#ffd501"
           hide-details
           label="반려견으로 인한 알러지에 대해 충분하게 고려를 해보셨나요?"
         />
         <v-checkbox
-          v-model="pick.q3"
+          v-model="survey.q3"
           color="#ffd501"
           hide-details
           label="반려견이 혼자 있어야 하는 시간이 8시간 이상인가요?"
         />
         <v-checkbox
-          v-model="pick.q4"
+          v-model="survey.q4"
           color="#ffd501"
           hide-details
           label="3세 미만의 유아와 함께 살고있나요?"
         />
         <v-checkbox
-          v-model="pick.q5"
+          v-model="survey.q5"
           color="#ffd501"
           hide-details
           label="반려견을 기를 장소가 공장, 회사 등 사람들의 이동이 많은 곳 / 식당, 사무실 등 영업장 / 양로원 등 복지시설에 해당되나요?"
         />
         <v-checkbox
-          v-model="pick.q6"
+          v-model="survey.q6"
           color="#ffd501"
           hide-details
           label="반려견 입양에 대해 동거인과 합의가 되었나요?"
         />
         <v-checkbox
-          v-model="pick.q7"
+          v-model="survey.q7"
           color="#ffd501"
           hide-details
           label="본인이나 동거인이 우울증 등의 정신 질환이 있나요?"
         />
         <v-checkbox
-          v-model="pick.q8"
+          v-model="survey.q8"
           color="#ffd501"
           hide-details
           label="반려동물을 키우다가 중간에 포기한 경험이 2회 이상 있나요?"
         />
         <v-checkbox
-          v-model="pick.q9"
+          v-model="survey.q9"
           color="#ffd501"
           hide-details
           label="3인 이상의 가족이 실평수 10평 이하의 집에서 살고있나요?"
@@ -137,7 +137,7 @@
           :items="type1"
           item-text="label"
           item-value="index"
-          v-model="pick.q10"
+          v-model="survey.q10"
           placeholder="선택해주세요"
           dense
           hide-details
@@ -157,7 +157,7 @@
           :items="type2"
           item-text="label"
           item-value="index"
-          v-model="pick.q11"
+          v-model="survey.q11"
           placeholder="선택해주세요"
           dense
           hide-details
@@ -181,8 +181,18 @@
 export default {
   name: 'match-page',
   data: () => ({
-    selectedDog: [null, null, null],
     pick: {},
+    survey: {
+      q1: false,
+      q2: false,
+      q3: false,
+      q4: false,
+      q5: false,
+      q6: false,
+      q7: false,
+      q8: false,
+      q9: false,
+    },
     type1: [
       { index: 1, label: '다가구주택(오피스텔/아파트 등)' },
       { index: 2, label: '단독주택' },
@@ -195,193 +205,84 @@ export default {
     ],
     dogs: [
       {
-        dog_id: 'N448548202000333',
-        age: '2018(년생)',
-        weight: '10(Kg)',
-        sex: 'W',
+        kind: '말티즈',
+        profile: '/static/images/dog_m.png',
+      },
+      {
         kind: '진도견',
-        color: '흰색',
-        neuter: 'N',
-        thumnail:
-          'http://www.animal.go.kr/files/shelter/2020/07/202009151909319_s.jpg',
-        profile:
-          'http://www.animal.go.kr/files/shelter/2020/07/202009092009658.jpg',
-        careAddr:
-          '경상남도 합천군 합천읍 옥산로 16 (합천읍/ 까치빌라) 태민동물병원',
-        careNm: '태민동물병원',
-        special: '겁이 많고 경계심이 많아서 조심성이 많은 성격',
-        find_place: '합천읍 충효로',
-        find_date: '20200915',
-        end_date: '20200925',
+        profile: '/static/images/dog_j.png',
       },
       {
-        dog_id: 'N442418202000563',
-        age: '2017(년생)',
-        weight: '4(Kg)',
-        sex: 'M',
+        kind: '포메',
+        profile: '/static/images/dog_pm.png',
+      },
+      {
         kind: '푸들',
-        color: '연갈색',
-        neuter: 'U',
-        thumnail:
-          'http://www.animal.go.kr/files/shelter/2020/07/202009141009390_s.jpg',
-        profile:
-          'http://www.animal.go.kr/files/shelter/2020/07/202009141009390.jpg',
-        careAddr:
-          '강원도 춘천시 신북읍 영서로 3282 (신북읍) (전)102보충대 주차장',
-        careNm: '춘천시 동물보호센터',
-        special: '온순 / 미용됨',
-        find_place: '퇴계주공7차아파트 4단지부근',
-        find_date: '20200914',
-        end_date: '20200924',
+        profile: '/static/images/dog_pd.png',
       },
       {
-        dog_id: 'N448548202000332',
-        age: '2016(년생)',
-        weight: '7(Kg)',
-        sex: 'M',
-        kind: '아메리칸 에스키모',
-        color: '갈색 흰색',
-        neuter: 'N',
-        thumnail:
-          'http://www.animal.go.kr/files/shelter/2020/07/202009151909418_s.jpg',
-        profile:
-          'http://www.animal.go.kr/files/shelter/2020/07/202008172108194.jpg',
-        careAddr:
-          '경상남도 합천군 합천읍 옥산로 16 (합천읍/ 까치빌라) 태민동물병원',
-        careNm: '태민동물병원',
-        special: '사람을 잘따르고 온순하며 밝은성격',
-        find_place: '율곡면 노양3길9-1',
-        find_date: '20200915',
-        end_date: '20200925',
+        kind: '치와와',
+        profile: '/static/images/dog_c.png',
       },
       {
-        dog_id: 'N442418202000563',
-        age: '2017(년생)',
-        weight: '4(Kg)',
-        sex: 'W',
-        kind: '푸들',
-        color: '연갈색',
-        neuter: 'U',
-        thumnail:
-          'http://www.animal.go.kr/files/shelter/2020/07/202009141009390_s.jpg',
-        profile:
-          'http://www.animal.go.kr/files/shelter/2020/07/202008191508641.jpg',
-        careAddr:
-          '강원도 춘천시 신북읍 영서로 3282 (신북읍) (전)102보충대 주차장',
-        careNm: '춘천시 동물보호센터',
-        special: '온순 / 미용됨',
-        find_place: '퇴계주공7차아파트 4단지부근',
-        find_date: '20200914',
-        end_date: '20200924',
+        kind: '닥스훈트',
+        profile: '/static/images/dog_d.png',
       },
       {
-        dog_id: 'N448548202000333',
-        age: '2018(년생)',
-        weight: '10(Kg)',
-        sex: 'W',
-        kind: '진도견',
-        color: '흰색',
-        neuter: 'N',
-        thumnail:
-          'http://www.animal.go.kr/files/shelter/2020/07/202009151909319_s.jpg',
-        profile:
-          'http://www.animal.go.kr/files/shelter/2020/07/202008221608615.jpg',
-        careAddr:
-          '경상남도 합천군 합천읍 옥산로 16 (합천읍/ 까치빌라) 태민동물병원',
-        careNm: '태민동물병원',
-        special: '겁이 많고 경계심이 많아서 조심성이 많은 성격',
-        find_place: '합천읍 충효로',
-        find_date: '20200915',
-        end_date: '20200925',
+        kind: '요크셔테리어',
+        profile: '/static/images/dog_y.png',
       },
       {
-        dog_id: 'N448548202000332',
-        age: '2016(년생)',
-        weight: '7(Kg)',
-        sex: 'M',
-        kind: '아메리칸 에스키모',
-        color: '갈색 흰색',
-        neuter: 'N',
-        thumnail:
-          'http://www.animal.go.kr/files/shelter/2020/07/202009151909418_s.jpg',
-        profile:
-          'http://www.animal.go.kr/files/shelter/2020/07/202008311508255.jpg',
-        careAddr:
-          '경상남도 합천군 합천읍 옥산로 16 (합천읍/ 까치빌라) 태민동물병원',
-        careNm: '태민동물병원',
-        special: '사람을 잘따르고 온순하며 밝은성격',
-        find_place: '율곡면 노양3길9-1',
-        find_date: '20200915',
-        end_date: '20200925',
+        kind: '리트리버',
+        profile: '/static/images/dog_r.png',
       },
       {
-        dog_id: 'N448548202000332',
-        age: '2016(년생)',
-        weight: '7(Kg)',
-        sex: 'M',
-        kind: '아메리칸 에스키모',
-        color: '갈색 흰색',
-        neuter: 'N',
-        thumnail:
-          'http://www.animal.go.kr/files/shelter/2020/07/202009151909418_s.jpg',
-        profile:
-          'http://www.animal.go.kr/files/shelter/2020/07/202009151909418.jpg',
-        careAddr:
-          '경상남도 합천군 합천읍 옥산로 16 (합천읍/ 까치빌라) 태민동물병원',
-        careNm: '태민동물병원',
-        special: '사람을 잘따르고 온순하며 밝은성격',
-        find_place: '율곡면 노양3길9-1',
-        find_date: '20200915',
-        end_date: '20200925',
-      },
-      {
-        dog_id: 'N442418202000563',
-        age: '2017(년생)',
-        weight: '4(Kg)',
-        sex: 'W',
-        kind: '푸들',
-        color: '연갈색',
-        neuter: 'U',
-        thumnail:
-          'http://www.animal.go.kr/files/shelter/2020/07/202009141009390_s.jpg',
-        profile:
-          'http://www.animal.go.kr/files/shelter/2020/07/202009040709503.jpg',
-        careAddr:
-          '강원도 춘천시 신북읍 영서로 3282 (신북읍) (전)102보충대 주차장',
-        careNm: '춘천시 동물보호센터',
-        special: '온순 / 미용됨',
-        find_place: '퇴계주공7차아파트 4단지부근',
-        find_date: '20200914',
-        end_date: '20200924',
-      },
-      {
-        dog_id: 'N448548202000333',
-        age: '2018(년생)',
-        weight: '10(Kg)',
-        sex: 'W',
-        kind: '진도견',
-        color: '흰색',
-        neuter: 'N',
-        thumnail:
-          'http://www.animal.go.kr/files/shelter/2020/07/202009151909319_s.jpg',
-        profile:
-          'http://www.animal.go.kr/files/shelter/2020/07/202009151909319.jpg',
-        careAddr:
-          '경상남도 합천군 합천읍 옥산로 16 (합천읍/ 까치빌라) 태민동물병원',
-        careNm: '태민동물병원',
-        special: '겁이 많고 경계심이 많아서 조심성이 많은 성격',
-        find_place: '합천읍 충효로',
-        find_date: '20200915',
-        end_date: '20200925',
+        kind: '시츄',
+        profile: '/static/images/dog_s.png',
       },
     ],
   }),
   methods: {
     onResultClick() {
-      this.$router.push('/match/result');
+      if (
+        this.pick.p1 == null ||
+        this.pick.p2 == null ||
+        this.pick.p3 == null
+      ) {
+        alert('관심있는 멍멍이 사진을 선택해주세요.');
+        return;
+      }
+      if (!this.survey.q10) {
+        alert('주거 형태를 선택해주세요.');
+        return;
+      }
+      if (!this.survey.q11) {
+        alert('가능한 고정 지출 비용을 선택해주세요.');
+        return;
+      }
+
+      if (this.survey.q5 == false) {
+        this.survey.q5 = 4;
+      } else {
+        this.survey.q5 = 1;
+      }
+
+      this.$router.push({
+        path: '/match/result',
+        query: {
+          pick: Object.assign(this.pick),
+          survey: Object.assign(this.survey),
+        },
+      });
     },
     onSelectDog(num, index) {
-      this.selectedDog[num] = index;
+      if (num == 0) {
+        this.pick.p1 = index;
+      } else if (num == 1) {
+        this.pick.p2 = index;
+      } else {
+        this.pick.p3 = index;
+      }
       this.$forceUpdate();
     },
   },
@@ -391,7 +292,7 @@ export default {
 <style>
 .match-page-container {
   padding: 24px 12px;
-  padding-top: 64px;
+  padding-bottom: 60px;
 }
 
 .match-page-box {
@@ -462,16 +363,16 @@ export default {
 }
 
 .match-page-selectbox {
-  margin-top: 0px;
-  width: 100%;
-  height: 44px;
-  border-radius: 4px;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.29;
-  letter-spacing: -0.39px;
-  text-align: left;
-  color: #1e1e1e;
+  margin-top: 0px !important;
+  width: 100% !important;
+  height: 44px !important;
+  border-radius: 4px !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height: 1.29 !important;
+  letter-spacing: -0.39px !important;
+  text-align: left !important;
+  color: #1e1e1e !important;
 }
 
 .v-application .primary--text {
@@ -481,7 +382,7 @@ export default {
 .match-page-selectbox fieldset {
   border-color: #e1e1e1 !important;
   height: 48px;
-  border-width: 0.1px !important;
+  border-width: 1px !important;
   background: #fff;
 }
 </style>

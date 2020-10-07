@@ -80,6 +80,19 @@
             src="/static/images/loading.gif"
           />
         </div>
+        <div
+          style="
+            margin: 24px 0;
+            margin-top: 48px;
+            font-size: 16px;
+            letter-space: -0.4px;
+            font-weight: 700;
+            text-align: center;
+            color: #585858;
+          "
+        >
+          멍멍이들을 데려오는 중입니다!<br />잠시만 기다려주세요.
+        </div>
       </template>
       <template v-else>
         <div class="d-flex" style="flex-wrap: wrap">
@@ -92,7 +105,7 @@
             <div class="d-flex flex-column flex-grow-1">
               <div
                 class="d-flex flex-shrink-1 main-page-item-image"
-                :style="`background-image:url(${dog.profile})`"
+                :style="`background-image:url(${dog.profile ? dog.profile : '/static/images/empty_dog.png'})`"
               >
                 <!-- <div
                   v-if="scraps.length != 0 && scraps != null && scraps[di]"
@@ -180,6 +193,7 @@ export default {
   methods: {
     async getDogs() {
       let q = this.$route.query;
+      this.data.color = [];
       for (let i in q.color) {
         this.data.color.push(this.colors[q.color[i]].tag);
       }
@@ -262,7 +276,7 @@ export default {
     // }
     // console.log("***", this.selectedColor);
     // this.$forceUpdate();
-    await this.getScraps();
+    // await this.getScraps();
     await this.getDogs();
     for (let i in this.dogs) {
       for (let j in this.scrapDogs) {

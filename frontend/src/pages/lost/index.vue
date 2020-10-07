@@ -1,7 +1,10 @@
 <template>
   <s-first-layout title="잃어버린 멍멍이 찾기">
     <div class="lost-page">
-      <div @click.stop="$refs.image.click">
+      <div class="lost-page-map">
+        <s-map @select="selectLocation" noList />
+      </div>
+      <div @click.stop="$refs.image.click" style="margin-top: 48px">
         <s-button>
           <v-icon color="#fff">photo_camera</v-icon>
           <div style="margin-left: 4px">멍멍이 사진 업로드</div>
@@ -21,9 +24,7 @@
           :style="`background-image:url(${previewImage})`"
         />
       </div>
-      <div class="lost-page-map" style="margin-top: 32px">
-        <s-map @select="selectLocation" noList />
-      </div>
+
       <s-button @click="onConfirmClick" style="margin-top: 32px"
         >입력 완료</s-button
       >
@@ -98,6 +99,14 @@ export default {
       let img_url = this.img_url;
       let shelter_lat = this.selectedLocation.latitude;
       let shelter_lng = this.selectedLocation.longitude;
+      if (!img_url) {
+        alert('강아지 사진을 등록해주세요.');
+        return;
+      }
+      if (!shelter_lat || !shelter_lng) {
+        alert('잃어버린 장소를 선택해주세요.');
+        return;
+      }
       this.$router.push({
         path: '/lost/result',
         query: { img_url, shelter_lat, shelter_lng },
@@ -113,7 +122,7 @@ export default {
 <style>
 .lost-page {
   padding: 0 16px;
-  padding-top: 64px;
+  padding-top: 24px;
   padding-bottom: 80px;
 }
 

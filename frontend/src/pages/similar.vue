@@ -38,26 +38,65 @@
         <div class="d-flex align-center similar-page-section">
           나와 닮은 멍멍이들
         </div>
-        <div class="d-flex" style="flex-wrap: wrap">
+        <template v-if="loading">
+          <div class="d-flex justify-center align-center">
+            <img
+              style="margin-top: 70px; width: 60vw; max-width: 300px"
+              src="/static/images/loading.gif"
+            />
+          </div>
           <div
-            @click="onDetailClick(dog.dog_id)"
-            v-for="(dog, di) in dogs"
-            :key="`dog-${di}`"
-            class="d-flex flex-column flex-grow-1 similar-page-item"
+            style="
+              margin-top: 24px;
+              margin-bottom: 60px;
+              font-size: 16px;
+              letter-space: -0.4px;
+              font-weight: 700;
+              text-align: center;
+              color: #585858;
+            "
           >
-            <div
-              class="d-flex similar-page-item-image"
-              :style="`background-image:url(${dog.profile})`"
-            >
+            나와 닮은 멍멍이를 찾고있어요!<br />최대 1분의 시간이 소요될 수
+            있습니다.
+          </div>
+        </template>
+        <template v-else>
+          <template v-if="dogs.length != 0 && dogs != null">
+            <div class="d-flex" style="flex-wrap: wrap">
               <div
+                @click="onDetailClick(dog.dog_id)"
+                v-for="(dog, di) in dogs"
+                :key="`dog-${di}`"
+                class="d-flex flex-column flex-grow-1 similar-page-item"
+              >
+                <div
+                  class="d-flex similar-page-item-image"
+                  :style="`background-image:url(${dog.profile})`"
+                >
+                  <!-- <div
                 v-if="Math.random() > 0.7"
                 class="d-flex justify-center align-center similar-page-item-scrap"
               >
                 <v-icon color="red">favorite</v-icon>
+              </div> -->
+                </div>
               </div>
             </div>
-          </div>
-        </div>
+          </template>
+          <template v-else>
+            <div class="d-flex flex-column justify-center align-center">
+              <img
+                class="similar-page-empty-image"
+                src="/static/images/question_dog.png"
+                style="margin-top: 24px"
+              />
+              <div class="similar-page-empty-text">
+                나와 닮은 멍멍이 정보가 없어요!<br />
+                다른 사진을 선택해주세요.
+              </div>
+            </div>
+          </template>
+        </template>
       </div>
     </div>
   </s-main-layout>
@@ -75,189 +114,9 @@ export default {
     IdentityPoolId: 'ap-northeast-2:caca59ba-9483-43b5-a923-f9e5c6eb3229',
     previewImage: null,
     location: '',
-    dogs: [
-      {
-        dog_id: 'N448548202000333',
-        age: '2018(년생)',
-        weight: '10(Kg)',
-        sex: 'W',
-        kind: '진도견',
-        color: '흰색',
-        neuter: 'N',
-        thumnail:
-          'http://www.animal.go.kr/files/shelter/2020/07/202009151909319_s.jpg',
-        profile:
-          'http://www.animal.go.kr/files/shelter/2020/07/202009092009658.jpg',
-        careAddr:
-          '경상남도 합천군 합천읍 옥산로 16 (합천읍/ 까치빌라) 태민동물병원',
-        careNm: '태민동물병원',
-        special: '겁이 많고 경계심이 많아서 조심성이 많은 성격',
-        find_place: '합천읍 충효로',
-        find_date: '20200915',
-        end_date: '20200925',
-      },
-      {
-        dog_id: 'N442418202000563',
-        age: '2017(년생)',
-        weight: '4(Kg)',
-        sex: 'M',
-        kind: '푸들',
-        color: '연갈색',
-        neuter: 'U',
-        thumnail:
-          'http://www.animal.go.kr/files/shelter/2020/07/202009141009390_s.jpg',
-        profile:
-          'http://www.animal.go.kr/files/shelter/2020/07/202009141009390.jpg',
-        careAddr:
-          '강원도 춘천시 신북읍 영서로 3282 (신북읍) (전)102보충대 주차장',
-        careNm: '춘천시 동물보호센터',
-        special: '온순 / 미용됨',
-        find_place: '퇴계주공7차아파트 4단지부근',
-        find_date: '20200914',
-        end_date: '20200924',
-      },
-      {
-        dog_id: 'N448548202000332',
-        age: '2016(년생)',
-        weight: '7(Kg)',
-        sex: 'M',
-        kind: '아메리칸 에스키모',
-        color: '갈색 흰색',
-        neuter: 'N',
-        thumnail:
-          'http://www.animal.go.kr/files/shelter/2020/07/202009151909418_s.jpg',
-        profile:
-          'http://www.animal.go.kr/files/shelter/2020/07/202008172108194.jpg',
-        careAddr:
-          '경상남도 합천군 합천읍 옥산로 16 (합천읍/ 까치빌라) 태민동물병원',
-        careNm: '태민동물병원',
-        special: '사람을 잘따르고 온순하며 밝은성격',
-        find_place: '율곡면 노양3길9-1',
-        find_date: '20200915',
-        end_date: '20200925',
-      },
-      {
-        dog_id: 'N442418202000563',
-        age: '2017(년생)',
-        weight: '4(Kg)',
-        sex: 'W',
-        kind: '푸들',
-        color: '연갈색',
-        neuter: 'U',
-        thumnail:
-          'http://www.animal.go.kr/files/shelter/2020/07/202009141009390_s.jpg',
-        profile:
-          'http://www.animal.go.kr/files/shelter/2020/07/202008191508641.jpg',
-        careAddr:
-          '강원도 춘천시 신북읍 영서로 3282 (신북읍) (전)102보충대 주차장',
-        careNm: '춘천시 동물보호센터',
-        special: '온순 / 미용됨',
-        find_place: '퇴계주공7차아파트 4단지부근',
-        find_date: '20200914',
-        end_date: '20200924',
-      },
-      {
-        dog_id: 'N448548202000333',
-        age: '2018(년생)',
-        weight: '10(Kg)',
-        sex: 'W',
-        kind: '진도견',
-        color: '흰색',
-        neuter: 'N',
-        thumnail:
-          'http://www.animal.go.kr/files/shelter/2020/07/202009151909319_s.jpg',
-        profile:
-          'http://www.animal.go.kr/files/shelter/2020/07/202008221608615.jpg',
-        careAddr:
-          '경상남도 합천군 합천읍 옥산로 16 (합천읍/ 까치빌라) 태민동물병원',
-        careNm: '태민동물병원',
-        special: '겁이 많고 경계심이 많아서 조심성이 많은 성격',
-        find_place: '합천읍 충효로',
-        find_date: '20200915',
-        end_date: '20200925',
-      },
-      {
-        dog_id: 'N448548202000332',
-        age: '2016(년생)',
-        weight: '7(Kg)',
-        sex: 'M',
-        kind: '아메리칸 에스키모',
-        color: '갈색 흰색',
-        neuter: 'N',
-        thumnail:
-          'http://www.animal.go.kr/files/shelter/2020/07/202009151909418_s.jpg',
-        profile:
-          'http://www.animal.go.kr/files/shelter/2020/07/202008311508255.jpg',
-        careAddr:
-          '경상남도 합천군 합천읍 옥산로 16 (합천읍/ 까치빌라) 태민동물병원',
-        careNm: '태민동물병원',
-        special: '사람을 잘따르고 온순하며 밝은성격',
-        find_place: '율곡면 노양3길9-1',
-        find_date: '20200915',
-        end_date: '20200925',
-      },
-      {
-        dog_id: 'N448548202000332',
-        age: '2016(년생)',
-        weight: '7(Kg)',
-        sex: 'M',
-        kind: '아메리칸 에스키모',
-        color: '갈색 흰색',
-        neuter: 'N',
-        thumnail:
-          'http://www.animal.go.kr/files/shelter/2020/07/202009151909418_s.jpg',
-        profile:
-          'http://www.animal.go.kr/files/shelter/2020/07/202009151909418.jpg',
-        careAddr:
-          '경상남도 합천군 합천읍 옥산로 16 (합천읍/ 까치빌라) 태민동물병원',
-        careNm: '태민동물병원',
-        special: '사람을 잘따르고 온순하며 밝은성격',
-        find_place: '율곡면 노양3길9-1',
-        find_date: '20200915',
-        end_date: '20200925',
-      },
-      {
-        dog_id: 'N442418202000563',
-        age: '2017(년생)',
-        weight: '4(Kg)',
-        sex: 'W',
-        kind: '푸들',
-        color: '연갈색',
-        neuter: 'U',
-        thumnail:
-          'http://www.animal.go.kr/files/shelter/2020/07/202009141009390_s.jpg',
-        profile:
-          'http://www.animal.go.kr/files/shelter/2020/07/202009040709503.jpg',
-        careAddr:
-          '강원도 춘천시 신북읍 영서로 3282 (신북읍) (전)102보충대 주차장',
-        careNm: '춘천시 동물보호센터',
-        special: '온순 / 미용됨',
-        find_place: '퇴계주공7차아파트 4단지부근',
-        find_date: '20200914',
-        end_date: '20200924',
-      },
-      {
-        dog_id: 'N448548202000333',
-        age: '2018(년생)',
-        weight: '10(Kg)',
-        sex: 'W',
-        kind: '진도견',
-        color: '흰색',
-        neuter: 'N',
-        thumnail:
-          'http://www.animal.go.kr/files/shelter/2020/07/202009151909319_s.jpg',
-        profile:
-          'http://www.animal.go.kr/files/shelter/2020/07/202009151909319.jpg',
-        careAddr:
-          '경상남도 합천군 합천읍 옥산로 16 (합천읍/ 까치빌라) 태민동물병원',
-        careNm: '태민동물병원',
-        special: '겁이 많고 경계심이 많아서 조심성이 많은 성격',
-        find_place: '합천읍 충효로',
-        find_date: '20200915',
-        end_date: '20200925',
-      },
-    ],
+    dogs: [],
     isUploaded: false,
+    loading: true,
   }),
   methods: {
     pickFile(e) {
@@ -284,7 +143,7 @@ export default {
         this.img_url =
           'https://photo-album-dog.s3.ap-northeast-2.amazonaws.com/' +
           encodeURIComponent(photoKey);
-        console.log(photoKey);
+        // console.log(photoKey);
         s3.upload(
           {
             Key: photoKey,
@@ -299,7 +158,7 @@ export default {
               );
             }
             // alert('사진이 성공적으로 업로드 되었습니다.');
-            console.log(this.img_url);
+            // console.log(this.img_url);
           }
         );
       } else {
@@ -312,15 +171,22 @@ export default {
         this.isUploaded = false;
         return;
       }
-
+      this.loading = true;
+      this.postMyimage();
       this.isUploaded = true;
     },
     onDetailClick(id) {
       this.$router.push(`/detail/${id}`);
     },
-  },
-  async created() {
-    // this.getBest(0);
+    async postMyimage() {
+      try {
+        let res = await this.$api.postMyimage({ img_url: this.img_url });
+        this.dogs = res.data.data.slice(0, 9);
+        this.loading = false;
+      } catch (e) {
+        console.error(e);
+      }
+    },
   },
 };
 </script>
@@ -328,7 +194,7 @@ export default {
 <style>
 .my-similar-page {
   padding: 24px 16px;
-  padding-bottom: 40px;
+  padding-bottom: 80px;
 }
 
 .my-similar-page-image-container {
@@ -392,5 +258,18 @@ export default {
   height: 30px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.61);
+}
+
+.similar-page-empty-image {
+  margin-top: 32px;
+  width: 120px;
+  opacity: 0.4;
+}
+
+.similar-page-empty-text {
+  margin: 32px;
+  font-size: 16px;
+  color: #585858;
+  text-align: center;
 }
 </style>

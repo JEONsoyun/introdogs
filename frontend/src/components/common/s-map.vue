@@ -9,7 +9,7 @@
           type="text"
           class="d-flex"
           style="margin-left: 8px;"
-          placeholder="장소를 입력해주세요."
+          placeholder="잃어버린 장소를 입력해주세요."
           @keydown.enter="onPlaceSearch"
         />
         <span
@@ -101,7 +101,7 @@ export default {
     isTourApi: { type: Boolean, default: false },
     noToolbar: { type: Boolean, default: false },
     noList: { type: Boolean, default: false },
-    draggable: { type: Boolean, default: false },
+    draggable: { type: Boolean, default: true },
     dogs: { type: Array, default: () => [] },
   },
   data() {
