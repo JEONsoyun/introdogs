@@ -193,6 +193,7 @@ export default {
   methods: {
     async getDogs() {
       let q = this.$route.query;
+      this.data.color = [];
       for (let i in q.color) {
         this.data.color.push(this.colors[q.color[i]].tag);
       }

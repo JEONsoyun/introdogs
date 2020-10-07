@@ -122,7 +122,7 @@ export default {
 <style>
 .lost-page {
   padding: 0 16px;
-  padding-top: 64px;
+  padding-top: 24px;
   padding-bottom: 80px;
 }
 
