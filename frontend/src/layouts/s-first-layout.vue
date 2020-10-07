@@ -1,32 +1,32 @@
 <template>
   <div class="mobile-layout-container">
-    <div class="mobile-layout">
-      <div class="d-flex flex-column">
-        <div class="d-flex align-center justify-center s-first-layout-header">
-          <img
-            src="/static/images/logo.png"
-            @click="$router.push('/first')"
-            class="s-first-layout-header-logo"
-          />
-        </div>
-        <div class="s-first-layout-content">
-          <div class="s-first-layout-sub-container">
+    <div class="d-flex flex-column mobile-layout" :class="{'s-main-layout': title != ''}">
+      <s-header-yellow
+        @toggleMenu="onToggleEvent($event, 'navigationDrawer')"
+        @toggleMypage="onToggleEvent($event, 'mypageDrawer')"
+      />
+      <s-navigation-drawer
+        @toggleMenu="onToggleEvent($event, 'navigationDrawer')"
+        :drawer="navigationDrawer"
+      />
+      <s-mypage-drawer
+        @toggleMypage="onToggleEvent($event, 'mypageDrawer')"
+        :drawer="mypageDrawer"
+      />
+      <div class="s-main-layout-content">
+        <div class="s-main-layout-header-container">
+          <div class="d-flex justify-center align-center s-main-layout-header" v-if="title != ''">
             <div
-              class="d-flex justify-center align-center s-first-layout-sub"
-              v-if="title != ''"
+              v-if="!noArrow"
+              @click="$router.go(-1)"
+              class="d-flex justify-center align-center s-main-layout-header-arrow"
             >
-              <div
-                v-if="!noArrow"
-                @click="$router.go(-1)"
-                class="d-flex justify-center align-center s-first-layout-sub-arrow"
-              >
-                <v-icon size="28" color="#ffd501">keyboard_arrow_left</v-icon>
-              </div>
-              <div>{{ title }}</div>
+              <v-icon size="28" color="#ffd501">keyboard_arrow_left</v-icon>
             </div>
+            <div>{{title}}</div>
           </div>
-          <slot />
         </div>
+        <slot />
       </div>
     </div>
   </div>
@@ -34,43 +34,36 @@
 
 <script>
 export default {
-  name: 's-first-layout',
+  name: 's-main-layout',
   props: {
     title: { type: String, default: '' },
     noArrow: Boolean,
   },
-  data: () => ({}),
-  methods: {},
+  data: () => ({
+    navigationDrawer: false,
+    mypageDrawer: false,
+  }),
+  methods: {
+    onToggleEvent(drawer, target) {
+      this[target] = drawer;
+    },
+  },
 };
 </script>
 
 <style>
-.s-first-layout {
+.s-main-layout {
   padding-top: 40px;
 }
 
-.s-first-layout-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 10;
-  background: #ffd501;
-  height: 48px;
-}
-
-.s-first-layout-header-logo {
-  padding: 0 16px;
-  height: 22px;
-}
-
-.s-first-layout-content {
+.s-main-layout-content {
+  position: relative;
   padding-top: 48px;
   min-height: 100vh;
   background-color: #fbfbfb;
 }
 
-.s-first-layout-sub-container {
+.s-main-layout-header-container {
   position: fixed;
   top: 48px;
   left: 0;
@@ -78,7 +71,7 @@ export default {
   z-index: 10;
 }
 
-.s-first-layout-sub {
+.s-main-layout-header {
   position: relative;
   height: 40px;
   background: #fff;
@@ -88,7 +81,7 @@ export default {
   border-bottom: solid 1px #e9e9e9;
 }
 
-.s-first-layout-sub-arrow {
+.s-main-layout-header-arrow {
   position: absolute;
   top: 6px;
   left: 10px;

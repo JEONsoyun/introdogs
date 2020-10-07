@@ -250,10 +250,15 @@ export default {
         this.pick.p3 == null
       ) {
         alert('관심있는 멍멍이 사진을 선택해주세요.');
-      } else if (!this.survey.q10) {
+        return;
+      }
+      if (!this.survey.q10) {
         alert('주거 형태를 선택해주세요.');
-      } else if (!this.survey.q11) {
+        return;
+      }
+      if (!this.survey.q11) {
         alert('가능한 고정 지출 비용을 선택해주세요.');
+        return;
       }
 
       if (this.survey.q5 == false) {
@@ -287,7 +292,7 @@ export default {
 <style>
 .match-page-container {
   padding: 24px 12px;
-  padding-top: 64px;
+  padding-bottom: 60px;
 }
 
 .match-page-box {

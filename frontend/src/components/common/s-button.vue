@@ -37,6 +37,7 @@ export default {
   letter-spacing: -0.16px;
   font-size: 16px;
   padding: 0 16px;
+  cursor: pointer;
 }
 
 .s-button__white {

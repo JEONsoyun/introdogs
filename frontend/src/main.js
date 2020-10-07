@@ -54,6 +54,7 @@ Vue.component('s-main-layout', SMainLayout)
 // Component
 import SButton from './components/common/s-button'
 import SHeader from './components/common/s-header'
+import SHeaderYellow from './components/common/s-header-yellow'
 import SMypageDrawer from './components/common/s-mypage-drawer'
 import SNavigationDrawer from './components/common/s-navigation-drawer'
 import SNavigation from './components/common/s-navigation'
@@ -64,6 +65,7 @@ import SMap from './components/common/s-map'
 
 Vue.component('s-button', SButton)
 Vue.component('s-header', SHeader)
+Vue.component('s-header-yellow', SHeaderYellow)
 Vue.component('s-mypage-drawer', SMypageDrawer)
 Vue.component('s-navigation-drawer', SNavigationDrawer)
 Vue.component('s-navigation', SNavigation)

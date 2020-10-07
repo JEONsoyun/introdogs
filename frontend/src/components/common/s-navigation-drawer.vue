@@ -68,7 +68,7 @@
         >
           <v-icon v-if="selectedMenuId == 4" size="24" color="#ffd501" style="margin-right:8px;">pets</v-icon>
           <v-icon v-else size="24" style="margin-right:8px;">pets</v-icon>
-          <div>ABOUT</div>
+          <div>첫 화면으로 가기</div>
         </div>
       </div>
     </div>
@@ -93,7 +93,7 @@ export default {
         { id: 1, path: '/similar' },
         { id: 2, path: '/match' },
         { id: 3, path: '/lost' },
-        { id: 4, path: '/about' },
+        { id: 4, path: '/first' },
       ],
       selectedMenuId: null,
       mDrawer: this.drawer,

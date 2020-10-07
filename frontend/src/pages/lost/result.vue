@@ -11,6 +11,7 @@
         <div
           style="
             margin: 24px 0;
+            margin-top: 48px;
             font-size: 16px;
             letter-space: -0.4px;
             font-weight: 700;

@@ -1,16 +1,16 @@
 <template>
-  <div class="d-flex justify-center align-center px-3 s-header">
-    <v-icon style="width:26px" @click="onMenuClick" color="#ffd501" size="24">menu</v-icon>
+  <div class="d-flex justify-center align-center px-3 s-header-yellow">
+    <v-icon style="width:26px" @click="onMenuClick" color="#fff" size="24">menu</v-icon>
     <div class="d-flex" grow/>
-    <img class="s-header-logo" @click="$router.push('/').catch(()=>{})" src="/static/images/logo.png" />
+    <img class="s-header-yellow-logo" @click="$router.push('/first').catch(()=>{})" src="/static/images/logo.png" />
     <div class="d-flex" grow/>
-    <v-icon style="width:26px" @click="onMypageClick" color="#ffd501" size="30">person</v-icon>
+    <v-icon style="width:26px" @click="onMypageClick" color="#fff" size="30">person</v-icon>
   </div>
 </template>
 
 <script>
 export default {
-  name: 's-header',
+  name: 's-header-yellow',
   methods: {
     onMenuClick() {
       this.$emit("toggleMenu", true)
@@ -27,17 +27,17 @@ export default {
 </script>
 
 <style>
-.s-header {
+.s-header-yellow {
   z-index: 999;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   height: 48px;
-  background: #fff;
+  background: #ffd501;
 }
 
-.s-header-logo {
+.s-header-yellow-logo {
   height: 22px;
   cursor: pointer;
 }

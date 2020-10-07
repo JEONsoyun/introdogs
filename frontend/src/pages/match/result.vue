@@ -10,7 +10,7 @@
         </div>
         <div
           style="
-            margin-top: 24px;
+            margin-top: 48px;
             margin-bottom: 60px;
             font-size: 16px;
             letter-space: -0.4px;
@@ -28,6 +28,7 @@
           <s-dog-profile :data="dog" />
           <s-button @click="onDetailClick(dog.dog_id)" style="margin-top: 24px"
             >더 자세히 보기</s-button
+          >
           >
           <s-button
             @click="$router.push('/')"
@@ -58,6 +59,15 @@
             입양에 대해 조금 더 고려한 후에,<br />
             매칭을 다시 시도해주세요.
           </div>
+          <s-button
+            @click="$router.push('/first')"
+            type="white"
+            style="margin-top: 24px"
+            >첫 화면으로 가기</s-button
+          >
+          <s-button @click="onMainClick" style="margin-top: 12px"
+            >메인으로 가기</s-button
+          >
         </template>
       </template>
     </div>
@@ -74,6 +84,10 @@ export default {
     loading: true,
   }),
   methods: {
+    onMainClick() {
+      this.$store.commit('ISSKIP', true);
+      this.$router.push('/');
+    },
     onDetailClick(id) {
       this.$router.push(`/detail/${id}`);
     },
@@ -109,8 +123,7 @@ export default {
 
 <style>
 .match-result-page {
-  padding: 0 12px;
-  padding-top: 64px;
-  padding-bottom: 80px;
+  padding: 24px 12px;
+  padding-bottom: 60px;
 }
 </style>
