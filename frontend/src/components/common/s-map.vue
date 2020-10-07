@@ -101,7 +101,7 @@ export default {
     isTourApi: { type: Boolean, default: false },
     noToolbar: { type: Boolean, default: false },
     noList: { type: Boolean, default: false },
-    draggable: { type: Boolean, default: false },
+    draggable: { type: Boolean, default: true },
     dogs: { type: Array, default: () => [] },
   },
   data() {
