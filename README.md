@@ -31,7 +31,10 @@
 ## 📚 프로젝트 산출물 
 
 - [프로젝트개발문서](https://docs.google.com/spreadsheets/d/1LEYeqWii-0VhSPL8beeVzDFWaB1xnoXN_eX04GQBbzY/edit#gid=0)
-
+    -  기술 개발 간트 차트
+    -  구현 기능 
+    -  REST API
+    -  ERD Diagram
 ## 기술 스택
  - Vuejs
  - DJango
