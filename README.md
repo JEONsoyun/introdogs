@@ -1,6 +1,6 @@
 ![소](https://user-images.githubusercontent.com/50106311/95412576-383f8a80-0964-11eb-8b50-0587d4bc67e0.png)
 # 소개해듀개🐶
-![PowerPoint 슬라이드 쇼 -  소개해듀개  2020-10-08 오전 11_11_54](https://user-images.githubusercontent.com/50106311/95407593-68812c00-0958-11eb-8823-d648898edb11.png)
+[![PowerPoint 슬라이드 쇼 -  소개해듀개  2020-10-08 오전 11_11_54](https://user-images.githubusercontent.com/50106311/95407593-68812c00-0958-11eb-8823-d648898edb11.png)](https://j3a307.p.ssafy.io)
 
 ## 📎 프로젝트 소개 
 
