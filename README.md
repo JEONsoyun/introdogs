@@ -35,18 +35,14 @@
     -  구현 기능 
     -  REST API
     -  ERD Diagram
-## 기술 스택
- - Vuejs
+
+## 💻 Build With
  - DJango
  - MariaDB
- - JavaScript
  - VueJs
  - AWS
  - NGINX
- - Tensorflow 
- - Keras
- - Pandas
- - 유기동물 API
+ - Visual Studio Code
 
 # ⚙ Getting Started 
 
@@ -55,28 +51,56 @@
 # INSTALLATION
 
 ```
-git clone 
+git clone https://lab.ssafy.com/s03-bigdata-sub3/s03p23a307.git
 ```
  
 # FRONTEND
 
 ```sh
-cd sub2/frontend
+cd frontend
 npm install
-npm run serve
+npm run dev
 ```
 
 # BACKEND
 
 ```sh
 cd backend/introducedog/introducedog
+pip install -r requirements.txt
 python manage.py makemigrations
 python manage.py migrate
 python manage.py initialize
 python manage.py runserver
 ```
 
-# DATA
+# ⚒ 개발 스택 
+
+### 협업툴
+ - GitLab
+ - Jira 
+ - Mattermost
+ - Discord
+ - Postman
+
+### Language 
+ - JavaScript 
+ - Python
+
+### DB
+ - MariaDB
+
+### Library
+ - JWT
+ - Bcrypt
+ - Tensorflow
+ - Keras
+ - Pandas
+ - VueJs
+ - NodeJS
+
+### ETC
+ - [유기동물 데이터](https://www.data.go.kr/data/15001096/openapi.do)
+ 
 
 ## Author 
 
