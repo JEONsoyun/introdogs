@@ -121,3 +121,11 @@ python manage.py runserver
 
  🙎 **Choi Jin**
  - Gitlab :  @choi_jin
+
+### ⛓ 참고 문서 
+- [The Relationship between Personality Match and Pet Satisfaction among Dog Owners (2013)](https://www.researchgate.net/publication/235413585_The_Relationship_between_Personality_Match_and_Pet_Satisfaction_among_Dog_Owners)
+- [Classification by Keras DeepLearning](https://lsjsj92.tistory.com/387)
+- [Stanford Dogs Dataset](https://www.kaggle.com/jessicali9530/stanford-dogs-dataset)
+- [Dog characteristics by species](https://m.blog.naver.com/maelson/220076734719)
+- [Content Based Filtering](https://lsjsj92.tistory.com/565)
+- [BABE (Best Adoption, Best for Each other)](https://mylifemystudy.tistory.com/45)
