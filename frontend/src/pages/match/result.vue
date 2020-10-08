@@ -29,7 +29,6 @@
           <s-button @click="onDetailClick(dog.dog_id)" style="margin-top: 24px"
             >더 자세히 보기</s-button
           >
-          >
           <s-button
             @click="$router.push('/')"
             type="white"
