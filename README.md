@@ -14,6 +14,7 @@
 ## Main Feature🐾
 ### 자신과 잘 맞는 강아지를 매칭
  - 나와 어울리는 멍멍이 매칭
+ ![PowerPoint 슬라이드 쇼 -  소개해듀개  2020-10-08 오전 11_35_46](https://user-images.githubusercontent.com/50106311/95408468-6fa93980-095a-11eb-9148-09dcf88ac5bf.png)
  - 잃어버린 멍멍이 찾기
  - 내 주변 멍멍이 보기 
  - 나와 닯은 멍멍이 찾기
