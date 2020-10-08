@@ -2,6 +2,7 @@
 
 
 ## What is 소개해 듀개 
+![PowerPoint 슬라이드 쇼 -  소개해듀개  2020-10-08 오전 11_11_54](https://user-images.githubusercontent.com/50106311/95407593-68812c00-0958-11eb-8823-d648898edb11.png)
 
 ### 자신에게 맞는 유기견을 소개해 주는 모바일 웹사이트
 
