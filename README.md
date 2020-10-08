@@ -71,28 +71,29 @@ python manage.py runserver
 # ⚒ 개발 스택 
 
 ### 협업툴
- - GitLab
- - Jira 
- - Mattermost
- - Discord
- - Postman
- - Google Chart
+ - [GitLab]()
+ - [Jira]()
+ - [Mattermost]()
+ - [Discord]()
+ - [Postman]()
+ - [Google Chart]()
 
 ### Language 
- - JavaScript 
- - Python
+ - [JavaScript]() 
+ - [Python]()
 
 ### DB
- - MariaDB
+ - [MariaDB]()
+ - [MySQL WorkBench]()
 
 ### Library
- - JWT
- - Bcrypt
- - Tensorflow
- - Keras
- - Pandas
- - VueJs
- - NodeJS
+ - [JWT]()
+ - [Bcrypt]()
+ - [Tensorflow]()
+ - [Keras]()
+ - [Pandas]()
+ - [VueJs]()
+ - [NodeJS]()
 
 ### ETC
  - [유기동물 데이터](https://www.data.go.kr/data/15001096/openapi.do)
