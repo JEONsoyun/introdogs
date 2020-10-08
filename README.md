@@ -33,6 +33,17 @@
 - [프로젝트개발문서](https://docs.google.com/spreadsheets/d/1LEYeqWii-0VhSPL8beeVzDFWaB1xnoXN_eX04GQBbzY/edit#gid=0)
 
 ## 기술 스택
+ - Vuejs
+ - DJango
+ - MariaDB
+ - JavaScript
+ - VueJs
+ - AWS
+ - NGINX
+ - Tensorflow 
+ - Keras
+ - Pandas
+ - 유기동물 API
 
 ## 기술 설명 
 
