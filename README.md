@@ -79,7 +79,7 @@ python manage.py runserver
 
 # ⚒ 개발 스택 
 
-### 협업툴
+### Team Collaboration Tool
  - [GitLab]()
  - [Jira]()
  - [Mattermost]()
